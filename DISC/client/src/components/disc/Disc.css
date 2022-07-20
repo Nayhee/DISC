@@ -1,5 +1,11 @@
+/* #36454f  - dark gray background behind TN Disc logo
+#FF3847 - orange/red
+#75C7FB light blue;
+#233142 dark background;
+*/
+
 .discListPageContainer {
-    width: 72%;
+    width: 75%;
     margin: auto;
 }
 
@@ -151,14 +157,14 @@
 }
 
 .flightNum {
-    background-color: orange;
+    background-color: #75C7FB;
     color: black;
     font-weight: bold;
     padding: .25vw;
     margin: .5vw .1vw .5vw .1vw;
     border-radius: 100%;
     width: 2.25vw;
-    font-size: .85vw;
+    font-size: .87vw;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -193,3 +199,9 @@
     align-content: center;
     margin-bottom: -.75vw;
 }
+
+/* #36454f  - dark gray background behind TN Disc logo
+#FF3847 - orange/red
+#75C7FB light blue;
+#233142 dark background;
+*/

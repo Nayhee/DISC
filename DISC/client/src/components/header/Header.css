@@ -1,4 +1,8 @@
-/* #36454f  - dark gray background behind TN Disc logo*/
+/* #36454f  - dark gray background behind TN Disc logo
+#FF3847 - orange/red
+#75C7FB light blue;
+#233142 dark background;
+*/
 
 .headerAndNav {
     display: flex;
@@ -28,19 +32,20 @@
 }
 
 .navbar {
-    width: 50%;    
+    width: 75%;    
     display: flex;
     background-color: #F0F0F0;
     align-items: center;
-    justify-content: space-evenly;
     margin: auto;
     padding: .75vw 0vw .75vw 0vw;
 } 
     
 .navbar__item {
     display: flex;
-    flex-basis: 5%;
+    flex-basis: 15%;
     list-style-type: none;
+    align-items: center;
+    justify-content: center;
 }
 
 .navbar__link {

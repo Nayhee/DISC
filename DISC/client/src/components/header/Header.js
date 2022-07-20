@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink as RRNavLink } from "react-router-dom";
 import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink} from "reactstrap";
-import { logout } from "../../modules/authManager";
+import { logout } from "../modules/authManager";
 import { Link, useLocation } from "react-router-dom";
 import "./Header.css"
 
@@ -29,13 +29,13 @@ export default function Header({isLoggedIn, userType}) {
                                     </li>
                                 )}
 
-                                {isLoggedIn && (
-                                    <li className="navbar__item">
-                                        <Link className={`navbar__link ${location.pathname === '/discs' ? 'active' : ''}`} to="/discs">Discs</Link>
-                                    </li>
-                                )}
+                               
+                                <li className="navbar__item">
+                                    <Link className={`navbar__link ${location.pathname === '/discs' ? 'active' : ''}`} to="/discs">Discs</Link>
+                                </li>
+                                
 
-                                {isLoggedIn && userType === 1 && (
+                                {isLoggedIn && userType === true && (
                                     <li className="navbar__item">
                                         <Link className={`navbar__link ${location.pathname === '/admin' ? 'active' : ''}`} to="/admin">Admin</Link>
                                     </li>

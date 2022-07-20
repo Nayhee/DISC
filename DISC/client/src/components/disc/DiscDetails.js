@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { getDiscById } from "../../modules/discManager";
+import { getDiscById } from "../modules/discManager";
 import { Button } from "reactstrap";
 import {FormatPrice} from "../Helpers";
 import "./Disc.css"

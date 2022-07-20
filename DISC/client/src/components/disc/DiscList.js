@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getAllDiscs } from "../../modules/discManager";
+import { getAllDiscs } from "../modules/discManager";
 import "./Disc.css";
 import { useNavigate } from "react-router-dom";
 import { DiscCard } from "./DiscCard";
 import { Button } from "reactstrap";
 
-export const DiscList = ({user}) => {
+export default function DiscList({user}) {
     const [discs, setDiscs] = useState([])
     const [isAdmin, setIsAdmin] = useState(false);
 

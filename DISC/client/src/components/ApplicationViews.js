@@ -1,14 +1,14 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import DiscList from "./DiscList";
+import DiscList from "./disc/DiscList";
 import DiscDetails from "./disc/DiscDetails";
-import DiscEditForm from "./DiscForm";
-import DiscForm from "./DiscForm";
-import UserProfileList from "./UserList";
-import Login from "./Login";
-import Register from "./Register";
-import Cart from "./Cart";
-import DiscDetails from "./disc/DiscDetails";
+import DiscEditForm from "./disc/DiscEditForm";
+import DiscForm from "./disc/DiscForm";
+import UserProfileList from "./user/UserList";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import Cart from "./cart/Cart";
+import Home from "../Home";
 
 const ApplicationViews = ( isLoggedIn, user) => {
   return (
