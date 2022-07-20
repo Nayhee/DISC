@@ -98,7 +98,7 @@ namespace DISC.Controllers
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            return _userProfileRepository.GetUserByFirebaseId(firebaseUserId);
         }
 
     }

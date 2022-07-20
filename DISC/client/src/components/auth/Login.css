@@ -1,0 +1,152 @@
+.form--login h1 {
+    font-size: 2.2vw;
+    color: #fffafa;
+    margin: 1vw 1vw -.5vw 1vw;
+    display: flex;
+    justify-content: center;
+}
+.form--login h2 {
+    color: #1d2351;
+    margin: .313vw 0vw .313vw 0vw;
+    font-size: 1.4vw;
+}
+
+.form--login p {
+    color: #fffafa;
+    font-style: italic;
+    text-align: center;
+    opacity: 92%;
+    margin: 0vw 0vw 1.5vw 0vw;
+    font-size: 1.2rem;
+}
+
+.form--login fieldset {
+    min-width: 0;
+    padding: .5vw 0;
+    margin: 0;
+    border: 0;
+}
+
+.form--login {
+    font-family: 'Acme', sans-serif;
+    margin: 4vw 1vw 1.1vw 1vw;
+    display: inline-block;
+    text-align: left;
+    padding: .5vw 1vw .5vw 1vw;
+    border: .3vw solid #1d2351;
+    border-radius: .5vw;
+    z-index: 1;
+    min-height: 15vw;
+    min-width: 25vw;
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-color: #2d8296;
+    opacity: 94%;
+    box-shadow: 0 0 .5vw #3fbdc2, 0 0 1vw #3fbdc2,  0 0 3vw #3fbdc2;
+}
+
+.login-label {
+    font-size: 1.2vw;
+}
+
+.form-control {
+    display: block;
+    width: 94%;
+    height: calc(2.25vw);
+    padding: .35vw;
+    font-size: 1.1vw;
+    font-weight: 400;
+    color: #3fbdc2;
+    background-color: #1d2351;
+    background-clip: padding-box;
+    border: .1vw solid #ced4da;
+    border-radius: .25vw;
+    -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.container--login {
+    text-align: center;
+}
+
+.button--close {
+    position: relative;
+    bottom: -2vw;
+}
+
+.dialog {
+    min-width: 15vw;
+    min-height: 5vw;
+}
+
+.signInButton {
+    display: flex;
+    border: .1vw solid #ced4da;
+    background-color: #1d2351;
+    color: #fffafa;
+    border-radius: .25vw;
+    height: 2.2vw;
+    width: 25%;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.15vw;
+}
+
+.signInButton:hover {
+    text-decoration: none;
+    background:#1d2351;
+    color: #1d2351;
+    border: .2vw solid #1d2351;
+    background-color: #3fbdc2;
+    font-weight: bold;
+    box-shadow: 0 0 .5vw #3fbdc2, 0 0 1vw #3fbdc2;
+}
+
+.link--register {
+    font-size: 1.1vw;
+    color: #0d0f21;
+    font-family: 'Acme', sans-serif;
+}
+
+.link--register a {
+    text-decoration: none;
+    color: #1d2351;
+    font-style: italic;
+    font-size: 1vw;
+    border: .13vw solid #1d2351;
+    border-radius: .25vw;
+    background-color: #3fbdc2;
+    padding: .25vw;
+}
+
+.link--register a:hover {
+    color: #3fbdc2;
+    border: .1vw solid #1d2351;
+    background-color: #1d2351;
+    box-shadow: 0 0 .5vw #3fbdc2, 0 0 1vw #3fbdc2;
+}
+
+.registerButton {
+    display: flex;
+    border: .15vw solid #ced4da;
+    background-color: #1d2351;
+    color: #fffafa;
+    border-radius: .25vw;
+    height: 2.1vw;
+    width: 25%;
+    font-size: 1.1vw;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerButton:hover {
+    text-decoration: none;
+    background:#1d2351;
+    color: #1d2351;
+    border: .15vw solid #1d2351;
+    background-color: #3fbdc2;
+    box-shadow: 0 0 .5vw #3fbdc2, 0 0 1vw #3fbdc2;
+} 

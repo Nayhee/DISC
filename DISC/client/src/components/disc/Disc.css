@@ -1,0 +1,195 @@
+.discListPageContainer {
+    width: 72%;
+    margin: auto;
+}
+
+.add-disc-container {
+    display: flex;
+    flex-direction: column;
+    background-color: 	#F0F0F0;
+    align-items: center;
+    justify-content: center;
+    margin: 1vw;
+}
+
+.disc-list {
+    display: flex;
+    background-color: 	#F0F0F0;
+    align-items: center;
+    justify-content: center;
+}
+
+.image_div img {
+    max-width: 12vw;
+    margin-bottom: .25vw;
+}
+
+
+.discDetailContainer {
+    width: 60%;
+    justify-content: center;
+    margin: auto;
+    margin-top: 1.5vw;
+    display: flex;
+    background-color: lightgrey;
+    border: 2px solid black;
+}
+
+.discDetailLeft {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+}
+
+.discDetailImage img {
+    width: 100%;
+}
+
+.discDetailFlightNums {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border: 1px solid black;
+}
+.speedContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: lightblue;
+    font-weight: bold;
+    width: 25%;
+    height: 3.2vw;
+}
+.speedLabel {
+    margin: .25vw .5vw .1vw .5vw;
+    display: flex;
+    justify-content: center;
+}
+.speedValue {
+    display: flex;
+    justify-content: center;
+    margin: .05vw .5vw .2vw .5vw;
+}
+.glideContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(247, 138, 247);
+    font-weight: bold;
+    width: 25%;
+    height: 3.2vw;
+}
+.glideLabel {
+    margin: .25vw .5vw .1vw .5vw;
+    display: flex;
+    justify-content: center;
+}
+.glideValue {
+    display: flex;
+    justify-content: center;
+    margin: .05vw .5vw .2vw .5vw;
+}
+.turnContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: yellow;
+    font-weight: bold;
+    width: 25%;
+    height: 3.2vw;
+}
+.turnLabel {
+    margin: .25vw .5vw .1vw .5vw;
+    display: flex;
+    justify-content: center;
+}
+.turnValue {
+    display: flex;
+    justify-content: center;
+    margin: .05vw .5vw .2vw .5vw;
+}
+.fadeContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: lightgreen;
+    font-weight: bold;
+    width: 25%;
+    height: 3.2vw;
+}
+.fadeLabel {
+    margin: .25vw .5vw .1vw .5vw;
+    display: flex;
+    justify-content: center;
+}
+.fadeValue {
+    display: flex;
+    justify-content: center;
+    margin: .05vw .5vw .2vw .5vw;
+}
+
+
+.discDetailRight {
+    width: 65%;
+    padding: 1vw 3vw 2vw 3vw;
+    align-self: center;
+}
+
+.discDetailDiscName {
+    margin-bottom: 2vw;
+}
+.discDetailPrice {
+    font-size: .9vw;
+}
+.discDetailWeight {
+    font-size: .9vw;
+}
+.discDetailDescription {
+    font-size: .9vw;
+}
+
+.flightNumsContainer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.flightNum {
+    background-color: orange;
+    color: black;
+    font-weight: bold;
+    padding: .25vw;
+    margin: .5vw .1vw .5vw .1vw;
+    border-radius: 100%;
+    width: 2.25vw;
+    font-size: .85vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.DetailsButtonDiv {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+.DetailsButton {
+    background-color: black;
+    color: white;
+    border: 2pxw solid black;
+    border-radius: 12px;
+    font-size: .75vw;
+}
+
+.card-disc {
+    /* margin: .25vw; */
+    border: 1px solid black;
+}
+
+.card-disc-content {
+    margin: 1vw;
+}
+
+.card-disc-name {
+    font-size: 1.2vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: -.75vw;
+}

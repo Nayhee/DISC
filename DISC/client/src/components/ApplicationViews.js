@@ -1,12 +1,14 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import DiscList from "./DiscList";
+import DiscDetails from "./disc/DiscDetails";
 import DiscEditForm from "./DiscForm";
 import DiscForm from "./DiscForm";
-import UserList from "./UserList";
+import UserProfileList from "./UserList";
 import Login from "./Login";
 import Register from "./Register";
 import Cart from "./Cart";
+import DiscDetails from "./disc/DiscDetails";
 
 const ApplicationViews = ( isLoggedIn, user) => {
   return (
@@ -16,12 +18,12 @@ const ApplicationViews = ( isLoggedIn, user) => {
         />
         <Route path="discs">
           <Route index element={<DiscList user={user} />} />
-          <Route path="add" element={<DiscForm user={user} />} />
-          <Route path=":id" element={<DiscDetail user={user} />} />
+          <Route path="add" element={<DiscForm />} />
+          <Route path=":id" element={<DiscDetails user={user} />} />
           <Route path="edit/:id" element={<DiscEditForm user={user} />} />
         </Route>
-        <Route path="users">
-          <Route index element={<UserList/>} />
+        <Route path="userProfiles">
+          <Route index element={<UserProfileList/>} />
         </Route>
       </Route>
       <Route path="cart" element={<Cart user={user} />} />
