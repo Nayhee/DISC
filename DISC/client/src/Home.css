@@ -1,0 +1,86 @@
+.home_container {
+    width: 100%;
+    background-color: #F0F0F0;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    width: 72%;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.home_pic {
+    margin: .5vw;
+    align-content: center;
+    justify-content: center;
+}
+
+.imgHome {
+    display: flex;
+    flex-direction: column;
+    background-color: #F0F0F0;
+    width: 100%;
+    z-index: -1;
+}
+
+.textOnPic {
+    color: white;
+    position: relative;
+    left: 42vw;
+    top: -26.25vw;
+    font-size: 2.5vw;
+    font-weight: bold;
+}
+.buttonOnPic {
+    position: relative;
+    left: 50vw;
+    top: -7.5vw;
+    font-size: 1.5vw;
+    padding: .75vw;
+    font-weight: bold;
+    background-color: #233142;
+    color: #7BD4FF;
+    border: none;
+    border-radius: 8%;
+}
+.buttonOnPic:hover {
+    background-color:#7BD4FF;
+    color: black;
+}
+
+.homeAboutAndWhy {
+    display: flex;
+    width: 90%;
+    color: black;
+    background-color: #F0F0F0;
+    margin-top: -5vw;
+    line-height: 1.5;
+}
+
+.home_about {
+    width: 50%;
+    margin-top: 1vw;
+    padding: 0vw .5vw .5vw .5vw;
+}
+
+.homeAboutAndWhy h2 {
+    font-size: 1.3vw;
+    background-color: #7BD4FF;
+    padding: .25vw;
+}
+.homeAboutAndWhy p {
+    font-size: 1vw;  
+    padding: .25vw;
+}
+.homeAboutAndWhy img {
+    width: 100%;
+}
+
+.home_why {
+    width: 50%;
+    margin-top: 1vw;
+    padding: 0vw .5vw .5vw .5vw;
+}
