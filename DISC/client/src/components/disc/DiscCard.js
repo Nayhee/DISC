@@ -27,7 +27,7 @@ export const DiscCard = ({ disc }) => {
           
           <div className="DetailsButtonsContainer">
             <Link className="DetailsButtonDiv" to={`./${disc.id}`}>
-                <Button color="secondary" className="DetailsButton">View Details</Button>
+                <Button color="primary" className="DetailsButton">View Details</Button>
             </Link>
           </div>
 

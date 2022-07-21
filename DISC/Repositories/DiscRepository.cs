@@ -70,8 +70,8 @@ namespace DISC.Repositories
                                         t.Id as TagId, t.Name as TagName
                                         FROM Disc d 
                                         JOIN Brand b on b.Id=d.BrandId
-                                        JOIN DiscTag dt on dt.DiscId=d.Id
-                                        JOIN Tag t on t.Id=dt.TagId
+                                        LEFT JOIN DiscTag dt on dt.DiscId=d.Id
+                                        LEFT JOIN Tag t on t.Id=dt.TagId
                                         WHERE d.Id=@id
                     ";
                     DbUtils.AddParameter(cmd, "@id", id);

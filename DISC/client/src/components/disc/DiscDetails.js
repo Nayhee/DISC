@@ -21,6 +21,7 @@ export default function DiscDetails({user}) {
         return null;
       }
 
+
       
       let formattedPrice = FormatPrice(disc.price);
 
@@ -31,7 +32,7 @@ export default function DiscDetails({user}) {
 
       let tags = disc?.tags;
     
-
+      console.log(disc);
       return (
           <div className="discDetailContainer">
               
@@ -64,7 +65,7 @@ export default function DiscDetails({user}) {
               </div>
               
               <div className="discDetailRight">
-                  <h1 className="discDetailDiscName">{disc.displayName}</h1>
+                  <h1 className="discDetailDiscName">{disc.brand?.name} {disc.PlasticName}</h1>
                   <p className="discDetailPrice">Price: ${formattedPrice}</p>
                   <p className="discDetailWeight">Weight: {disc.weight}g</p>
                   {tags?.map(tag =>

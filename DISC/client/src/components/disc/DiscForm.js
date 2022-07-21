@@ -11,7 +11,7 @@ export default function DiscForm() {
         description: "",
         weight: 0,
         brandId: 0,
-        forSale: 1,
+        forSale: true,
         condition: "",
         speed: 0,
         glide: 0,

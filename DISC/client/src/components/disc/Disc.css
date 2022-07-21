@@ -172,14 +172,14 @@
 }
 
 .flightNum {
-    background-color: #75C7FB;
+    background-color: orange;
     color: black;
     font-weight: bold;
     padding: .25vw;
     margin: .5vw .1vw .5vw .1vw;
     border-radius: 100%;
-    width: 2.25vw;
-    font-size: .87vw;
+    width: 2vw;
+    font-size: .8vw;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -212,7 +212,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    margin-bottom: -.75vw;
+    margin-bottom: -.5vw;
 }
 
 

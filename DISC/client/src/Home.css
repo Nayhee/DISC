@@ -43,18 +43,32 @@
     color: white;
     padding: 1vw;
     font-weight: bold;
-    border: .2vw solid;
+    border: .25vw solid;
     border-radius: 8%;
     border-image: 
     linear-gradient(
         #ff512f,    
         #dd2476,
         #1c64ff) 1;
-        
-    }
+    animation: 
+        rotate 4s ease-in infinite;        
+}
+
+
     .buttonOnPic:hover {
     color: #7BD4FF;
     box-shadow: 0 0 .5vw white, 0 0 1vw white;
+}
+
+@keyframes rotate {
+    50%{
+        border-image:
+        linear-gradient(
+            360deg,
+            #ff512f, 
+            #dd2476,
+            #1c64ff) 1;
+    }
 }
 
 .homeAboutAndWhy {

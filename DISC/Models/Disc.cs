@@ -41,13 +41,6 @@ namespace DISC.Models
 
         public Brand Brand { get; set; }
 
-        public string DisplayName
-        {
-            get
-            {
-                return $"{Brand.Name} {Plastic} {Name}";
-            }
-        }
         public string PlasticName
         {
             get
