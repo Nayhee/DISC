@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom"
 import { addDisc, getAllBrands } from "../modules/discManager";
 import './Disc.css'
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Col, Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
 export default function DiscForm() {
 
@@ -56,145 +56,192 @@ export default function DiscForm() {
     }
 
     return (
-        <Form>
-          <FormGroup>
-            <Label for="name">Name</Label>
-            <Input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="name"
-              value={disc.name}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="description">Description</Label>
-            <Input
-              type="text"
-              name="description"
-              id="description"
-              placeholder="description"
-              value={disc.description}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="condition">Condition</Label>
-            <select
-              value={disc.condition}
-              name="condition"
-              id="condition"
-              onChange={handleInputChange}
-            >
-              <option value="">Select Condition</option>
-              <option key="new" value="New">New</option>
-              <option key="used" value="Used">Used</option>
-            </select>
-          </FormGroup>
-    
-          <FormGroup>
-            <Label for="brandId">Brand</Label> <br></br>
-            <select
-              value={disc.brandId}
-              name="brandId"
-              id="brandId"
-              onChange={handleIntegerChange}
-            >
-              <option value="0">Select Brand</option>
-              {brands.map((b) => (
-                <option key={b.id} value={b.id}>
-                  {b.name}
-                </option>
-              ))}
-            </select>
-          </FormGroup>
-    
-          <FormGroup>
-            <Label for="imageUrl">Image Url</Label>
-            <Input
-              type="text"
-              name="imageUrl"
-              id="imageUrl"
-              value={disc.imageUrl}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
-    
-          <FormGroup>
-            <Label for="plastic">Plastic</Label>
-            <Input
-              type="text"
-              name="plastic"
-              id="plastic"
-              value={disc.plastic}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="weight">Weight</Label>
-            <Input
-              type="text"
-              name="weight"
-              id="weight"
-              value={disc.weight}
-              onChange={handleIntegerChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="price">Price</Label>
-            <Input
-              type="text"
-              name="price"
-              id="price"
-              value={disc.price}
-              onChange={handleIntegerChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="speed">Speed</Label>
-            <Input
-              type="text"
-              name="speed"
-              id="speed"
-              value={disc.speed}
-              onChange={handleIntegerChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="glide">Glide</Label>
-            <Input
-              type="text"
-              name="glide"
-              id="glide"
-              value={disc.glide}
-              onChange={handleIntegerChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="turn">Turn</Label>
-            <Input
-              type="text"
-              name="turn"
-              id="turn"
-              value={disc.turn}
-              onChange={handleIntegerChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="fade">Fade</Label>
-            <Input
-              type="text"
-              name="fade"
-              id="fade"
-              value={disc.fade}
-              onChange={handleIntegerChange}
-            />
-          </FormGroup>
-          <Button className="btn btn-primary" onClick={handleClickSaveDisc}>
-            Submit
-          </Button>
-        </Form>
+        <div className="formContainer">
+          <Form className="discForm">
+            <h3>Add Disc</h3>
+            <FormGroup>
+              <Label for="name">Name</Label>
+              <Col sm={15}>
+                  <Input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="name"
+                    value={disc.name}
+                    onChange={handleInputChange}
+                  />
+
+              </Col>
+            </FormGroup>
+            <FormGroup>
+              <Label for="description">Description</Label>
+              <Col sm={15}>
+                <Input
+                  type="text"
+                  name="description"
+                  id="description"
+                  placeholder="description"
+                  value={disc.description}
+                  onChange={handleInputChange}
+                />
+
+              </Col>
+
+            </FormGroup>
+            <FormGroup>
+              <Label for="condition">Condition</Label>
+              <Col sm={15}>
+                <select
+                  value={disc.condition}
+                  name="condition"
+                  id="condition"
+                  onChange={handleInputChange}
+                >
+                  <option value="">Select Condition</option>
+                  <option key="new" value="New">New</option>
+                  <option key="used" value="Used">Used</option>
+                </select>
+              </Col>
+
+            </FormGroup>
+      
+            <FormGroup>
+              <Label for="brandId">Brand</Label> <br></br>
+              <Col sm={15}>
+                <select
+                  value={disc.brandId}
+                  name="brandId"
+                  id="brandId"
+                  onChange={handleIntegerChange}
+                >
+                  <option value="0">Select Brand</option>
+                  {brands.map((b) => (
+                    <option key={b.id} value={b.id}>
+                      {b.name}
+                    </option>
+                  ))}
+                </select>
+              </Col>
+
+            </FormGroup>
+      
+            <FormGroup>
+              <Label for="imageUrl">Image Url</Label>
+              <Col sm={15}>
+                <Input
+                  type="text"
+                  name="imageUrl"
+                  id="imageUrl"
+                  value={disc.imageUrl}
+                  onChange={handleInputChange}
+                />
+              </Col>
+
+            </FormGroup>
+      
+            <FormGroup>
+              <Label for="plastic">Plastic</Label>
+              <Col sm={15}>
+                <Input
+                  type="text"
+                  name="plastic"
+                  id="plastic"
+                  value={disc.plastic}
+                  onChange={handleInputChange}
+                />
+
+              </Col>
+
+            </FormGroup>
+            <FormGroup>
+              <Label for="weight">Weight</Label>
+              <Col sm={15}>
+                <Input
+                  type="text"
+                  name="weight"
+                  id="weight"
+                  value={disc.weight}
+                  onChange={handleIntegerChange}
+                />
+
+              </Col>
+
+            </FormGroup>
+            <FormGroup>
+              <Label for="price">Price</Label>
+              <Col sm={15}>
+                <Input
+                  type="text"
+                  name="price"
+                  id="price"
+                  value={disc.price}
+                  onChange={handleIntegerChange}
+                />
+
+              </Col>
+
+            </FormGroup>
+            <FormGroup>
+              <Label for="speed">Speed</Label>
+              <Col sm={15}>
+                <Input
+                  type="text"
+                  name="speed"
+                  id="speed"
+                  value={disc.speed}
+                  onChange={handleIntegerChange}
+                />
+
+              </Col>
+
+            </FormGroup>
+            <FormGroup>
+              <Label for="glide">Glide</Label>
+              <Col sm={15}>
+                <Input
+                  type="text"
+                  name="glide"
+                  id="glide"
+                  value={disc.glide}
+                  onChange={handleIntegerChange}
+                />
+
+              </Col>
+
+            </FormGroup>
+            <FormGroup>
+              <Label for="turn">Turn</Label>
+              <Col sm={15}>
+                <Input
+                  type="text"
+                  name="turn"
+                  id="turn"
+                  value={disc.turn}
+                  onChange={handleIntegerChange}
+                />
+
+              </Col>
+
+            </FormGroup>
+            <FormGroup>
+              <Label for="fade">Fade</Label>
+              <Col sm={15}>
+                <Input
+                  type="text"
+                  name="fade"
+                  id="fade"
+                  value={disc.fade}
+                  onChange={handleIntegerChange}
+                />
+
+              </Col>
+
+            </FormGroup>
+            <Button className="btn btn-primary" onClick={handleClickSaveDisc}>
+              Submit
+            </Button>
+          </Form>
+        </div>
       );
 
 }

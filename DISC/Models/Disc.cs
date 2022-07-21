@@ -40,25 +40,21 @@ namespace DISC.Models
         public List<Tag> Tags { get; set; } = new List<Tag>();
 
         public Brand Brand { get; set; }
-        public string NamePlastic
+
+        public string DisplayName
         {
             get
             {
-                return $"{Name} - {Plastic}";
+                return $"{Brand.Name} {Plastic} {Name}";
+            }
+        }
+        public string PlasticName
+        {
+            get
+            {
+                return $"{Plastic} {Name}";
             }
         }
 
-        public string DisplayTags
-        {
-            get
-            {
-                var str = "";
-                foreach (var tag in Tags)
-                {
-                    str += $"{tag.Name}  |  ";
-                }
-                return str;
-            }
-        }
     }
 }

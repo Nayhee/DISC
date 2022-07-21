@@ -11,9 +11,9 @@ export default function Home() {
                 <div className="home">
 
                     <div className="home_pic">
-                        <img className="imgHome" src="images/eagle1.jpg"/>
+                        <img className="imgHome" src="images/headerDISCS.png"/>
 
-                        {/* <p className="textOnPic">Find the Disc for You</p> */}
+                        {/* <p className="textOnPic">Find Your Game</p> */}
                         <Link to={`/discs`}>
                             <button className="buttonOnPic">Shop Discs</button>
                         </Link>
@@ -29,8 +29,8 @@ export default function Home() {
                         </div>
 
                         <div className="home_why">
-                            <h2>Why use Tennessee Discs?</h2>
-                            <p>Why buy from Tennessee Discs instead of another retailer? It's a question we get a lot and the answer is simple. Tennessee Discs helps grow the game by donating 10% of every disc we sell to the Disc Golf Foundation, supporting local disc golf communities around the country.</p>
+                            <h2>Why shop at Tennessee Discs?</h2>
+                            <p>Why buy from Tennessee Discs instead of another retailer? It's a question we get a lot and the answer is simple. Tennessee Discs helps grow the game by donating 10% of the profit from each disc sold to the Disc Golf Foundation, supporting local disc golf communities all throughout the country.</p>
                             <img src="images/kids6.jpg"/>
                         </div>
 

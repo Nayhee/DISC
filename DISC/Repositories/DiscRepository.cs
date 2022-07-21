@@ -81,8 +81,6 @@ namespace DISC.Repositories
                         Disc disc = null;
                         while (reader.Read())
                         {
-                            int discId = DbUtils.GetInt(reader, "Id");
-
                             if (disc == null)
                             {
                                 disc = new Disc()

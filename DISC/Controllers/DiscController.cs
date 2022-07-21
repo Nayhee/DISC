@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using DISC.Models;
 using DISC.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DISC.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DiscController : ControllerBase

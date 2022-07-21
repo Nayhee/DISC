@@ -10,7 +10,8 @@ import Register from "./auth/Register";
 import Cart from "./cart/Cart";
 import Home from "../Home";
 
-const ApplicationViews = ( isLoggedIn, user) => {
+export default function ApplicationViews({isLoggedIn, user}) {
+  
   return (
     <Routes>
       <Route path="/" >
@@ -35,5 +36,3 @@ const ApplicationViews = ( isLoggedIn, user) => {
     </Routes>
   );
 };
-
-export default ApplicationViews;

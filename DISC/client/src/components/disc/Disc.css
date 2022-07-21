@@ -4,8 +4,19 @@
 #233142 dark background;
 */
 
+.formContainer {
+    margin: 2% 32% 0% 32%;
+}
+.formContainer h3 {
+    margin: 0vw 0vw 1vw 0vw;
+}
+.discForm {
+    border: 1px solid black;
+    padding: 1vw;
+}
+
 .discListPageContainer {
-    width: 75%;
+    width: 82%;
     margin: auto;
 }
 
@@ -32,17 +43,17 @@
 
 
 .discDetailContainer {
-    width: 60%;
+    width: 65%;
     justify-content: center;
     margin: auto;
     margin-top: 1.5vw;
     display: flex;
-    background-color: lightgrey;
+    /* background-color: lightgrey; */
     border: 2px solid black;
 }
 
 .discDetailLeft {
-    width: 35%;
+    width: 40%;
     display: flex;
     flex-direction: column;
 }
@@ -56,6 +67,7 @@
     justify-content: center;
     align-content: center;
     border: 1px solid black;
+    font-size: .9vw;
 }
 .speedContainer {
     display: flex;
@@ -132,7 +144,7 @@
 
 
 .discDetailRight {
-    width: 65%;
+    width: 60%;
     padding: 1vw 3vw 2vw 3vw;
     align-self: center;
 }
@@ -141,13 +153,16 @@
     margin-bottom: 2vw;
 }
 .discDetailPrice {
-    font-size: .9vw;
+    font-size: 1.1vw;
 }
 .discDetailWeight {
-    font-size: .9vw;
+    font-size: 1vw;
 }
 .discDetailDescription {
-    font-size: .9vw;
+    font-size: 1vw;
+}
+.discDetailCondition {
+    font-size: 1vw;
 }
 
 .flightNumsContainer {
@@ -199,6 +214,24 @@
     align-content: center;
     margin-bottom: -.75vw;
 }
+
+
+.discDetailButton {
+    margin-right: 1vw;
+}
+
+.discDetailButtons {
+    display: flex;
+    align-items: center;
+}
+
+.tag {
+    margin-right: .25vw;
+    margin-bottom: 1vw;
+}
+
+
+
 
 /* #36454f  - dark gray background behind TN Disc logo
 #FF3847 - orange/red

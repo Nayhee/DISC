@@ -1,14 +1,16 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { getDiscById } from "../modules/discManager";
-import { Button } from "reactstrap";
+import { getDiscById, deleteDisc, getAllDiscs } from "../modules/discManager";
+import { Button, Badge } from "reactstrap";
 import {FormatPrice} from "../Helpers";
 import "./Disc.css"
+import { useNavigate } from "react-router-dom";
 
 
 export default function DiscDetails({user}) {
       const [disc, setDisc] = useState();
       const {id} = useParams();
+      const navigate = useNavigate();
       
       useEffect(() => {
         getDiscById(id).then(setDisc);
@@ -19,7 +21,16 @@ export default function DiscDetails({user}) {
         return null;
       }
 
+      
       let formattedPrice = FormatPrice(disc.price);
+
+      const handleDeleteDisc = (id) => {
+        deleteDisc(id)
+        .then(() => Navigate("./discs"))
+      }
+
+      let tags = disc?.tags;
+    
 
       return (
           <div className="discDetailContainer">
@@ -53,14 +64,32 @@ export default function DiscDetails({user}) {
               </div>
               
               <div className="discDetailRight">
-                  <h1 className="discDetailDiscName">{disc.namePlastic}</h1>
-                  <p className="discDetailPrice">${formattedPrice}</p>
+                  <h1 className="discDetailDiscName">{disc.displayName}</h1>
+                  <p className="discDetailPrice">Price: ${formattedPrice}</p>
                   <p className="discDetailWeight">Weight: {disc.weight}g</p>
+                  {tags?.map(tag =>
+                    <Badge color="info" key={tag.id} className="tag">{tag.name}</Badge>)}
                   <p className="discDetailDescription">{disc.description}</p>
 
-                  <Button className="AddToCartButton">
-                        Add To Cart   
-                  </Button>
+                  
+                    <div className="discDetailButtons">
+
+                        <Button color="primary" className="discDetailButton">Add To Cart</Button>
+
+                        {user?.isAdmin ? 
+                            <div className="discDetailButton">
+                                <i className="fa-solid fa-pen-to-square fa-xl"></i> 
+                            </div>
+                            : ""
+                            }
+                        {user?.isAdmin ? 
+                            <div className="discDetailButton">
+                                <i className="fa-solid fa-trash fa-xl"></i>  
+                            </div>
+                            : ""
+                            }
+
+                    </div>
 
               </div>
 

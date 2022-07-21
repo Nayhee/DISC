@@ -6,7 +6,7 @@
 .home {
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 82%;
     margin: auto;
     align-items: center;
     justify-content: center;
@@ -29,31 +29,37 @@
 .textOnPic {
     color: white;
     position: relative;
-    left: 42vw;
-    top: -26.25vw;
-    font-size: 2.5vw;
+    left: 5vw;
+    top: -26.5vw;
+    font-size: 2.75vw;
     font-weight: bold;
 }
 .buttonOnPic {
     position: relative;
-    left: 50vw;
-    top: -7.5vw;
+    left: 72%;
+    top: -8.5vw;
     font-size: 1.5vw;
-    padding: .75vw;
-    font-weight: bold;
     background-color: #233142;
-    color: #7BD4FF;
-    border: none;
+    color: white;
+    padding: 1vw;
+    font-weight: bold;
+    border: .2vw solid;
     border-radius: 8%;
-}
-.buttonOnPic:hover {
-    background-color:#7BD4FF;
-    color: black;
+    border-image: 
+    linear-gradient(
+        #ff512f,    
+        #dd2476,
+        #1c64ff) 1;
+        
+    }
+    .buttonOnPic:hover {
+    color: #7BD4FF;
+    box-shadow: 0 0 .5vw white, 0 0 1vw white, 0 0 2vw white;
 }
 
 .homeAboutAndWhy {
     display: flex;
-    width: 90%;
+    width: 100%;
     color: black;
     background-color: #F0F0F0;
     margin-top: -5vw;

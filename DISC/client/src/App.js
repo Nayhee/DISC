@@ -23,9 +23,9 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  // if (isLoggedIn === null || user === null) {
-  //   return <Spinner className="app-spinner dark" />;
-  // }
+  if (isLoggedIn === null ) {
+    return <Spinner className="app-spinner dark" />;
+  }
 
   return (
     <Router>

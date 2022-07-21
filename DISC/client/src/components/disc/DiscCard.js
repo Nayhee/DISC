@@ -14,7 +14,7 @@ export const DiscCard = ({ disc }) => {
           </div>
 
           <h2><span className="card-disc-name">
-            {disc.name}
+            {disc.plasticName}
           </span></h2>
 
           <div className="flightNumsContainer">
@@ -26,8 +26,8 @@ export const DiscCard = ({ disc }) => {
 
           
           <div className="DetailsButtonsContainer">
-            <Link className="DetailsButtonDiv" to={`discs/${disc.id}`}>
-                <Button className="DetailsButton">View Details</Button>
+            <Link className="DetailsButtonDiv" to={`./${disc.id}`}>
+                <Button color="secondary" className="DetailsButton">View Details</Button>
             </Link>
           </div>
 
