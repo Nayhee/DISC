@@ -54,7 +54,7 @@
     }
     .buttonOnPic:hover {
     color: #7BD4FF;
-    box-shadow: 0 0 .5vw white, 0 0 1vw white, 0 0 2vw white;
+    box-shadow: 0 0 .5vw white, 0 0 1vw white;
 }
 
 .homeAboutAndWhy {

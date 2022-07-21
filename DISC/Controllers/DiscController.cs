@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DISC.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DiscController : ControllerBase

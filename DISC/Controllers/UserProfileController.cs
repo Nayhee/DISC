@@ -32,6 +32,7 @@ namespace DISC.Controllers
             {
                 return NotFound();
             }
+            userProfile.FirebaseUserId = "ENCRYTPED";
             return Ok(userProfile);
         }
 
@@ -39,8 +40,12 @@ namespace DISC.Controllers
         [HttpGet]
         public IActionResult GetAllUsers()
         {
-            return Ok(_userProfileRepository.GetAllUsers());
-
+            var users = _userProfileRepository.GetAllUsers();
+            foreach(UserProfile user in users)
+            {
+                user.FirebaseUserId = "ENCRYPTED";
+            }
+            return Ok(users);
         }
 
 
