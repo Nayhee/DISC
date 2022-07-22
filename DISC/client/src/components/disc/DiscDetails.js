@@ -65,7 +65,7 @@ export default function DiscDetails({user}) {
               </div>
               
               <div className="discDetailRight">
-                  <h1 className="discDetailDiscName">{disc.brand?.name} {disc.PlasticName}</h1>
+                  <h1 className="discDetailDiscName">{disc.brand?.name} {disc?.plasticName}</h1>
                   <p className="discDetailPrice">Price: ${formattedPrice}</p>
                   <p className="discDetailWeight">Weight: {disc.weight}g</p>
                   {tags?.map(tag =>
