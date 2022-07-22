@@ -21,9 +21,9 @@ export default function ApplicationViews({isLoggedIn, user}) {
           <Route index element={<DiscList user={user} />} />
           <Route path="add" element={<DiscForm />} />
           <Route path=":id" element={<DiscDetails user={user} />} />
-          <Route path="edit/:id" element={<DiscEditForm user={user} />} />
+          <Route path="edit/:discId" element={<DiscEditForm />} />
         </Route>
-        <Route path="userProfiles">
+        <Route path="admin">
           <Route index element={<UserProfileList/>} />
         </Route>
       </Route>

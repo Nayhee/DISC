@@ -192,12 +192,13 @@ namespace DISC.Repositories
                     DbUtils.AddParameter(cmd, "@weight", disc.Weight);
                     DbUtils.AddParameter(cmd, "@description", disc.Description);
                     DbUtils.AddParameter(cmd, "@forSale", disc.ForSale);
+                    DbUtils.AddParameter(cmd, "@id", disc.Id);
 
                     cmd.ExecuteNonQuery();
                 }
             }
         }
-        public void DeleteDisc(int discId)
+        public void DeleteDisc(int id)
         {
             using (var conn = Connection)
             {
@@ -205,7 +206,7 @@ namespace DISC.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @" DELETE FROM Disc WHERE Id=@id";
-                    DbUtils.AddParameter(cmd, "@id", discId);
+                    DbUtils.AddParameter(cmd, "@id", id);
                     cmd.ExecuteNonQuery();
                 }
             }

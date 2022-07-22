@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
 
-export default function DiscEditForm({user}) {
+export default function DiscEditForm() {
     
     const [disc, setDisc] = useState({ 
         name: "",
@@ -21,7 +21,7 @@ export default function DiscEditForm({user}) {
         price: 0,
         imageUrl: "",
     })
-    const [isLoading, setIsLoading] = useState(true);
+
     const [brands, setBrands] = useState([]);
 
     const {discId} = useParams();
@@ -31,7 +31,6 @@ export default function DiscEditForm({user}) {
         getDiscById(discId)
         .then(disc => {
             setDisc(disc);
-            setIsLoading(false);
         })
     }, [discId])
 
@@ -56,7 +55,8 @@ export default function DiscEditForm({user}) {
     }
 
     const handleEditDisc = () => {
-        if (disc.name !== "" && disc.description !== "" && disc.condition !== "" && disc.plastic !== "" && disc.imageUrl !== "" && disc.weight !== 0 && disc.brandId !== 0 && disc.speed !== 0 && disc.glide !== 0 && disc.turn !== 0 && disc.fade !== 0 && disc.price !== 0) {
+        if (disc.name !== "" && disc.description !== "" && disc.condition !== "" && disc.plastic !== "" && disc.imageUrl !== "" && disc.weight !== 0 && disc.brandId !== 0 && disc.speed !== 0 && disc.glide !== 0 && disc.price !== 0) {
+            console.log(disc);
             updateDisc(disc).then(() => {
                 navigate(`/discs`);
             });
@@ -68,7 +68,7 @@ export default function DiscEditForm({user}) {
     return (
         <div className="formContainer">
           <Form className="discForm">
-            <h3>Update {disc?.name} - ID #{disc?.id}</h3>
+            <h3>Update {disc?.name}</h3>
             <FormGroup>
               <Label for="name">Name</Label>
               <Col sm={15}>
@@ -91,7 +91,6 @@ export default function DiscEditForm({user}) {
                   type="text"
                   name="description"
                   required
-                  autoFocus
                   id="description"
                   value={disc?.description}
                   onChange={handleInputChange}
@@ -144,7 +143,6 @@ export default function DiscEditForm({user}) {
                   type="text"
                   name="imageUrl"
                   required
-                  autoFocus
                   id="imageUrl"
                   value={disc?.imageUrl}
                   onChange={handleInputChange}
@@ -160,7 +158,6 @@ export default function DiscEditForm({user}) {
                   type="text"
                   name="plastic"
                   required
-                  autoFocus
                   id="plastic"
                   value={disc?.plastic}
                   onChange={handleInputChange}
@@ -176,7 +173,6 @@ export default function DiscEditForm({user}) {
                   type="text"
                   name="weight"
                   required
-                  autoFocus
                   id="weight"
                   value={disc?.weight}
                   onChange={handleIntegerChange}
@@ -192,7 +188,6 @@ export default function DiscEditForm({user}) {
                   type="text"
                   name="price"
                   required
-                  autoFocus
                   id="price"
                   value={disc?.price}
                   onChange={handleIntegerChange}
@@ -208,7 +203,6 @@ export default function DiscEditForm({user}) {
                   type="text"
                   name="speed"
                   required
-                  autoFocus
                   id="speed"
                   value={disc?.speed}
                   onChange={handleIntegerChange}
@@ -224,7 +218,6 @@ export default function DiscEditForm({user}) {
                   type="text"
                   name="glide"
                   required
-                  autoFocus
                   id="glide"
                   value={disc?.glide}
                   onChange={handleIntegerChange}
@@ -240,7 +233,6 @@ export default function DiscEditForm({user}) {
                   type="text"
                   name="turn"
                   required
-                  autoFocus
                   id="turn"
                   value={disc?.turn}
                   onChange={handleIntegerChange}
@@ -256,7 +248,6 @@ export default function DiscEditForm({user}) {
                   type="text"
                   name="fade"
                   required
-                  autoFocus
                   id="fade"
                   value={disc?.fade}
                   onChange={handleIntegerChange}

@@ -1,16 +1,17 @@
 import { Navigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { getDiscById, deleteDisc, getAllDiscs } from "../modules/discManager";
+import { getDiscById, deleteDisc} from "../modules/discManager";
 import { Button, Badge } from "reactstrap";
 import {FormatPrice} from "../Helpers";
 import "./Disc.css"
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export default function DiscDetails({user}) {
       const [disc, setDisc] = useState();
       const {id} = useParams();
-      const navigate = useNavigate();
+      const Navigate = useNavigate();
       
       useEffect(() => {
         getDiscById(id).then(setDisc);
@@ -27,12 +28,11 @@ export default function DiscDetails({user}) {
 
       const handleDeleteDisc = (id) => {
         deleteDisc(id)
-        .then(() => Navigate("./discs"))
+        .then(() => Navigate("/discs"))
       }
 
       let tags = disc?.tags;
     
-      console.log(disc);
       return (
           <div className="discDetailContainer">
               
@@ -79,13 +79,15 @@ export default function DiscDetails({user}) {
 
                         {user?.isAdmin ? 
                             <div className="discDetailButton">
-                                <i className="fa-solid fa-pen-to-square fa-xl"></i> 
+                                 <Link to={`/discs/edit/${disc.id}`}>
+                                    <i className="fa-solid fa-pen-to-square fa-xl"></i> 
+                                </Link>
                             </div>
                             : ""
                             }
                         {user?.isAdmin ? 
-                            <div className="discDetailButton">
-                                <i className="fa-solid fa-trash fa-xl"></i>  
+                            <div type="button">
+                                <i onClick={() => handleDeleteDisc(id)} className="fa-solid fa-trash fa-xl"></i>  
                             </div>
                             : ""
                             }

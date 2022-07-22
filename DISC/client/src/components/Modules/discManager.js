@@ -23,18 +23,18 @@ export const getAllDiscs = () => {
   export const deleteDisc = (id) => {
     return fetch(`${baseUrl}/${id}`, {
         method: "DELETE"
-    }).then(result => result.json())
-}
+    })
+};
 
-export const updateDisc  = (editedDisc) => {
+export const updateDisc = (editedDisc) => {
     return fetch(`${baseUrl}/${editedDisc.id}`, {
-        method: "PATCH",
+        method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(editedDisc)
-    }).then(data => data.json());
-}
+        body: JSON.stringify(editedDisc),
+    });
+};
 
 
 
