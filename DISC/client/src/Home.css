@@ -1,3 +1,26 @@
+.textOnPicContainer {
+    position: relative;
+    left: 55vw;
+    top: 5vw;
+    width: 22vw;
+}
+.textOnPicHeader {
+    position: relative;
+    left: 6vw;
+    top: -26vw;
+    color: white;
+    font-weight: bold;
+    font-size: 3.8vw;
+}
+.textOnPic {
+    color: white;
+    position: relative;
+    left: 6vw;
+    top: -26vw;
+    font-size: 1.16vw;
+    width: 80%;
+}
+
 .home_container {
     width: 100%;
     background-color: #F0F0F0;
@@ -26,24 +49,17 @@
     z-index: -1;
 }
 
-.textOnPic {
-    color: white;
-    position: relative;
-    left: 5vw;
-    top: -26.5vw;
-    font-size: 2.75vw;
-    font-weight: bold;
-}
+
 .buttonOnPic {
     position: relative;
-    left: 72%;
-    top: -8.5vw;
-    font-size: 1.5vw;
+    left: 76%;
+    top: -21.5vw;
+    font-size: 1vw;
     background-color: #233142;
     color: white;
-    padding: 1vw;
+    padding: .35vw;
     font-weight: bold;
-    border: .25vw solid;
+    border: .15vw solid;
     border-radius: 8%;
     border-image: 
     linear-gradient(
@@ -76,7 +92,7 @@
     width: 100%;
     color: black;
     background-color: #F0F0F0;
-    margin-top: -5vw;
+    margin-top: -17vw;
     line-height: 1.5;
 }
 

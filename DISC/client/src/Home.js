@@ -11,11 +11,14 @@ export default function Home() {
                 <div className="home">
 
                     <div className="home_pic">
-                        <img className="imgHome" src="images/headerDISCS.png"/>
+                        <img className="imgHome" src="images/RickyRoomOnSide.png"/>
+                        <div className="textOnPicContainer">
+                            <h1 className="textOnPicHeader">Ricky<br></br>Wysocki</h1>
+                            <p className="textOnPic">Limited Edition Tour Series 3 Pack</p>
 
-                        {/* <p className="textOnPic">Find Your Game</p> */}
+                        </div>
                         <Link to={`/discs`}>
-                            <button className="buttonOnPic">Shop Discs</button>
+                            <button className="buttonOnPic">Shop Now</button>
                         </Link>
                     </div>
 
