@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getAllUsers } from "../modules/userProfileManager";
-import { useNavigate } from "react-router-dom";
+import { getAllUsers, deleteUser } from "../modules/userProfileManager";
+import { useNavigate, Link } from "react-router-dom";
 import { Button, Table } from "reactstrap";
 import "./User.css"
 
@@ -16,9 +16,13 @@ export default function UserList() {
 
     useEffect (() => {
         getUsers();
-    }, [])
+    }, [users])
 
-    console.log(users);
+    const handleDeleteUser = (id) => {
+        deleteUser(id)
+        .then(() => Navigate("/users"))
+      }
+
 
     return (
         <div className="userListContainer">
@@ -29,15 +33,31 @@ export default function UserList() {
                         <th>Name</th>
                         <th>Email</th>
                         <th>UserType</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {users?.map(user => 
-                        <tr>
+                        <tr key={user.id}>
                             <td>{user.id}</td>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
-                            <td>{user.isAdmin == true ? 'Admin' : 'User'}</td>
+                            <td>
+                                {user.isAdmin == true ? 'Admin' : 'User'}
+                            </td>
+                            <td>
+                                <div className="discDetailButtons">
+                                    <div className="discDetailButton">
+                                        <Link to={`/users/edit/${user.id}`}>
+                                            <i className="fa-solid fa-pen-to-square fa-xl"></i> 
+                                        </Link>
+
+                                    </div>
+                                    <div type="button">
+                                        <i onClick={() => handleDeleteUser(user.id)} className="fa-solid fa-trash fa-xl"></i>  
+                                    </div>
+                                </div>
+                            </td>
                         </tr>)}
                 </tbody>
             </Table>

@@ -49,7 +49,8 @@ export const login = (email, pw) => {
 
 
 export const logout = () => {
-  firebase.auth().signOut()
+  sessionStorage.clear();
+  firebase.auth().signOut();
 };
 
 

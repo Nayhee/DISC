@@ -32,7 +32,7 @@ namespace DISC
             services.AddTransient<IDiscRepository, DiscRepository>();
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IImageRepository, ImageRepository>();
-            //services.AddTransient<ICartRepository, CartRepository>();
+            services.AddTransient<ICartRepository, CartRepository>();
             //services.AddTransient<ICartDiscRepository, CartDiscRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -1,8 +1,42 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import React, {useEffect, useState} from "react";
+import { addCart, getUsersCurrentCart } from "./components/modules/cartManager";
 
-export default function Home() {
+export default function Home({user}) {
+
+    const [userInStorage, setUserInStorage] = useState(sessionStorage.getItem("disc_user") !== null)
+    const [cartCreated, setCartCreated] = useState(false);
+    
+    const CreateCart = () => {
+        let Cart = {userProfileId: user.id};
+        addCart(Cart).then(() => setCartCreated(true));
+    }
+    
+    const sendUserToStorage = () => {
+        let userToSend = user;
+        sessionStorage.setItem("disc_user", JSON.stringify(userToSend));
+        setUserInStorage(true);
+    }
+
+    useEffect(() => {
+        if (user!== null && cartCreated == false && !userInStorage) {
+            CreateCart();
+            // sendUserToStorage();
+        }
+    })
+
+
+    useEffect(() => {
+        if(cartCreated && !userInStorage) {
+            sendUserToStorage();
+        }
+    })
+    
+    
+
+    // console.log(user);
+
 
     return (
         <>

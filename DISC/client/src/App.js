@@ -5,6 +5,7 @@ import Header from "./components/header/Header";
 import ApplicationViews from "./components/ApplicationViews";
 import { onLoginStatusChange } from  "./components/modules/authManager"
 import { getLoggedInUser } from "./components/modules/userProfileManager.js";
+import Cart from "./components/cart/Cart";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);

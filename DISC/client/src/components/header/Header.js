@@ -6,9 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./Header.css"
 
 export default function Header({isLoggedIn, userType}) {
-    const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
-
+    
     const location = useLocation();
 
     return (
@@ -30,28 +28,25 @@ export default function Header({isLoggedIn, userType}) {
                                 )}
 
                                
-                                <li className="navbar__item">
-                                    <Link className={`navbar__link ${location.pathname === '/discs' ? 'active' : ''}`} to="/discs">Discs</Link>
-                                </li>
+                                {isLoggedIn && (
+                                    <li className="navbar__item">
+                                        <Link className={`navbar__link ${location.pathname === '/discs' ? 'active' : ''}`} to="/discs">Discs</Link>
+                                    </li>
+                                )}
                                 
 
                                 {isLoggedIn && userType === true && (
                                     <li className="navbar__item">
-                                        <Link className={`navbar__link ${location.pathname === '/admin' ? 'active' : ''}`} to="/admin">Admin</Link>
+                                        <Link className={`navbar__link ${location.pathname === '/users' ? 'active' : ''}`} to="/users">Admin</Link>
                                     </li>
                                 )}
 
                                 {isLoggedIn && (
                                     <li className="navbar__item">
-                                        <Link className={`navbar__link ${location.pathname === '/cart' ? 'active' : ''}`} to="/cart">Cart</Link>
+                                        <Link className={`navbar__link ${location.pathname === '/learn' ? 'active' : ''}`} to="/learn">Learn</Link>
                                     </li>
                                 )}
 
-                                
-                                <li className="navbar__item">
-                                    <Link className={`navbar__link ${location.pathname === '/learn' ? 'active' : ''}`} to="/learn">Learn</Link>
-                                </li>
-                                
 
                                 {isLoggedIn && (
                                     <li className="navbar__item">
@@ -68,6 +63,12 @@ export default function Header({isLoggedIn, userType}) {
                                             <Link className="navbar__link" to="/register">Register</Link>
                                         </li>
                                     </>
+                                )}
+
+                                {isLoggedIn && (
+                                    <li className="navbar__item">
+                                        <Link className="navbar__link" to="/cart"><i className="fa-solid fa-cart-shopping fa-xl"></i></Link>
+                                    </li>
                                 )}
                                     
                             </ul>

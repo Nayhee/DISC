@@ -107,7 +107,6 @@ namespace DISC.Controllers
             return _userProfileRepository.GetUserByFirebaseId(firebaseUserId);
         }
 
-
        
 
     }

@@ -12,7 +12,9 @@ export default function DiscDetails({user}) {
       const [disc, setDisc] = useState();
       const {id} = useParams();
       const Navigate = useNavigate();
-      
+
+      console.log(user);
+
       useEffect(() => {
         getDiscById(id).then(setDisc);
       }, [id])
@@ -20,6 +22,9 @@ export default function DiscDetails({user}) {
       if(!disc)
       {
         return null;
+      }
+
+      const addToCart = () => {
       }
 
 
@@ -75,7 +80,7 @@ export default function DiscDetails({user}) {
                   
                     <div className="discDetailButtons">
 
-                        <Button color="primary" className="discDetailButton">Add To Cart</Button>
+                        <Button color="primary" className="discDetailButton" onClick={(() => addToCart())}>Add To Cart</Button>
 
                         {user?.isAdmin ? 
                             <div className="discDetailButton">

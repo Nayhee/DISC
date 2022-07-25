@@ -22,14 +22,20 @@ export const getLoggedInUser = () => {
   );
 };
 
-export const updateProfile = (profile) => {
+export const updateUser = (user) => {
   return fetch(`${baseUrl}/Edit`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(profile),
+    body: JSON.stringify(user),
   });
+};
+
+export const deleteUser = (id) => {
+  return fetch(`${baseUrl}/${id}`, {
+      method: "DELETE"
+  })
 };
 
 

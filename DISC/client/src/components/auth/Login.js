@@ -3,6 +3,8 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../modules/authManager";
 import "./Login.css";
+import { getLoggedInUser } from "../modules/userProfileManager";
+import { addCart, getUsersCurrentCart } from "../modules/cartManager";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ export default function Login() {
   const loginSubmit = (e) => {
     e.preventDefault();
     login(email, password)
-      .then(() => navigate("/"))
+    .then(() => navigate("/"))
       .catch(() => alert("Invalid Email/Password"));
   };
 
