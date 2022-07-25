@@ -33,12 +33,15 @@
     display: flex;
     background-color: 	#F0F0F0;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
 .image_div img {
-    max-width: 12vw;
+    width: 100%;
     margin-bottom: .25vw;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -178,8 +181,8 @@
     padding: .25vw;
     margin: .5vw .1vw .5vw .1vw;
     border-radius: 100%;
-    width: 2vw;
-    font-size: .8vw;
+    width: 2.5vw;
+    font-size: 1.05vw;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -195,12 +198,16 @@
     color: white;
     border: 2pxw solid black;
     border-radius: 12px;
-    font-size: .75vw;
+    width: 55%;
 }
 
 .card-disc {
-    /* margin: .25vw; */
     border: 1px solid black;
+    box-shadow: 0 .4vw .8vw 0 rgba(0,0,0,0.6);
+    border-radius: .5vw; 
+    margin: 0vw .25vw .5vw .25vw;
+    width: 20%;
+    z-index: 1;
 }
 
 .card-disc-content {
@@ -208,7 +215,7 @@
 }
 
 .card-disc-name {
-    font-size: 1.2vw;
+    font-size: 1.5vw;
     display: flex;
     justify-content: center;
     align-content: center;

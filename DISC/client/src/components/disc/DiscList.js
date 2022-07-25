@@ -27,7 +27,7 @@ export default function DiscList({user}) {
                 <div className="discListPageContainer">
                     <section className="add-disc-container"> 
                         <h2>All Discs</h2>
-                        <Button color="primary" type="button"
+                        <Button color="success" type="button"
                             onClick={() => {navigate("./add")}}>
                                 Add Disc
                             </Button>

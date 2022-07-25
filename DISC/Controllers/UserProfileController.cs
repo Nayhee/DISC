@@ -11,6 +11,7 @@ namespace DISC.Controllers
     public class UserProfileController : ControllerBase
     {
         private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IImageRepository _imageRepository;
         public UserProfileController(IUserProfileRepository userProfileRepository)
         {
             _userProfileRepository = userProfileRepository;
@@ -105,6 +106,9 @@ namespace DISC.Controllers
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return _userProfileRepository.GetUserByFirebaseId(firebaseUserId);
         }
+
+
+       
 
     }
 }

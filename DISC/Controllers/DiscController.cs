@@ -11,9 +11,11 @@ namespace DISC.Controllers
     public class DiscController : ControllerBase
     {
         private readonly IDiscRepository _discRepository;
-        public DiscController(IDiscRepository discRepository)
+        private readonly IImageRepository _imageRepository;
+        public DiscController(IDiscRepository discRepository, IImageRepository imageRepository)
         {
             _discRepository = discRepository;
+            _imageRepository = imageRepository;
         }
 
         [HttpGet]
@@ -68,5 +70,17 @@ namespace DISC.Controllers
         {
             return Ok(_discRepository.GetAllBrands());
         }
+
+
+        //public ActionResult Image(int id)
+        //{
+        //    var stream = _imageRepository.GetImageStreamById(id);
+        //    if (stream != null)
+        //    {
+        //        return File(stream, "image/png", $"image_{id}.jpg");
+        //    }
+
+        //    return NotFound();
+        //}
     }
 }
