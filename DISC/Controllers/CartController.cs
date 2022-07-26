@@ -21,10 +21,9 @@ namespace DISC.Controllers
         [HttpPost]
         public IActionResult Post(Cart cart)
         {
-            Console.WriteLine(cart);
             cart.DateCreated = DateTime.Now;
             _cartRepository.AddCart(cart);
-            return CreatedAtAction("Get", new { id = cart.Id }, cart);
+            return NoContent();
         }
 
         [HttpGet("{userId}")]
@@ -37,5 +36,7 @@ namespace DISC.Controllers
             }
             return Ok(Cart);
         }
+
+        
     }
 }

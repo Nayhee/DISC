@@ -10,6 +10,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Cart from "./cart/Cart";
 import Home from "../Home";
+import Checkout from "./cart/Checkout";
 
 export default function ApplicationViews({isLoggedIn, user}) {
   
@@ -29,7 +30,11 @@ export default function ApplicationViews({isLoggedIn, user}) {
           <Route path="edit/:userId" element={<UserEditForm />} />
         </Route>
       </Route>
-      <Route path="cart" element={<Cart />} />
+
+      <Route path="cart">
+        <Route index element={<Cart user={user} />} />
+        <Route path="checkout/:cartId" element={<Checkout user={user} />} />
+      </Route> 
       
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />

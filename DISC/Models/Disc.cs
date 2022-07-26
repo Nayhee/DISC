@@ -41,6 +41,8 @@ namespace DISC.Models
 
         public Brand Brand { get; set; }
 
+        public int CartDiscId { get; set; }
+
         public string PlasticName
         {
             get

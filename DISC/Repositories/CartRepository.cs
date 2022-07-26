@@ -50,7 +50,7 @@ namespace DISC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT TOP 1 c.Id, c.DateCreated FROM Cart c WHERE c.UserProfileId=@userId ORDER BY c.DateCreated DESC";
+                    cmd.CommandText = @"SELECT TOP 1 c.Id, c.UserProfileId, c.DateCreated FROM Cart c WHERE c.UserProfileId=@userId ORDER BY c.DateCreated DESC";
                     cmd.Parameters.AddWithValue("@userId", userId);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -59,6 +59,7 @@ namespace DISC.Repositories
                             Cart cart = new Cart()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
+                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
                                 DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
                             };
                             cart.Discs = GetACartsDiscs(cart.Id);
@@ -81,9 +82,11 @@ namespace DISC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @" SELECT * FROM disc d  
-                                        JOIN CartDisc cd on cd.DiscId=d.Id
-                                        JOIN Cart c on c.Id=cd.CartId
+                    cmd.CommandText = @" SELECT cd.Id as CartDiscId, c.Id as CartId, d.*, b.Name as BrandName 
+                                        FROM disc d  
+                                        JOIN Brand b on b.Id=d.BrandId
+                                        LEFT JOIN CartDisc cd on cd.DiscId=d.Id
+                                        LEFT JOIN Cart c on c.Id=cd.CartId
                                         where c.Id=@id;
                     ";
                     cmd.Parameters.AddWithValue("@id", cartId);
@@ -95,6 +98,7 @@ namespace DISC.Repositories
                         {
                             Disc disc = new Disc
                             {
+                                CartDiscId = DbUtils.GetInt(reader,"CartDiscId"),
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Name = DbUtils.GetString(reader, "Name"),
                                 BrandId = DbUtils.GetInt(reader, "BrandId"),
@@ -123,59 +127,122 @@ namespace DISC.Repositories
             }
         }
 
-        public Cart GetCartById(int cartId)
+        public int GetCartDiscId(int cartId, int discId)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT c.*, u.id as UsersId, u.Name
-                                        FROM Cart c 
-                                        JOIN UserProfile u on u.Id=c.UserId
-                                        WHERE c.Id=@id
+                    cmd.CommandText = @" SELECT Id AS CartDiscId 
+                                            FROM CartDisc
+                                            WHERE CartId=@cartId AND DiscId=@discId;
                     ";
-                    cmd.Parameters.AddWithValue("@id", cartId);
+                    DbUtils.AddParameter(cmd, "@cartId", cartId);
+                    DbUtils.AddParameter(cmd, "@discId", discId);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
+                        var num = 0;
                         if (reader.Read())
                         {
-                            Cart cart = new Cart
-                            {
-                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                UserProfileId = reader.GetInt32(reader.GetOrdinal("UserId")),
-                                UserProfile = new UserProfile
-                                {
-                                    Id = reader.GetInt32(reader.GetOrdinal("UsersId")),
-                                    Name = reader.GetString(reader.GetOrdinal("Name")),
-                                }
-                            };
-                            cart.Discs = GetACartsDiscs(cart.Id);
-                            return cart;
+                            num = DbUtils.GetInt(reader, "CartDiscId");
                         }
-                        else
-                        {
-                            return null;
-                        }
+                        return num;
                     }
                 }
             }
         }
 
+        //public Cart GetCartById(int cartId)
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"SELECT c.*, u.id as UsersId, u.Name
+        //                                FROM Cart c 
+        //                                JOIN UserProfile u on u.Id=c.UserId
+        //                                WHERE c.Id=@id
+        //            ";
+        //            cmd.Parameters.AddWithValue("@id", cartId);
 
-        public void DeleteCart(int cartId)
+        //            using (SqlDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                if (reader.Read())
+        //                {
+        //                    Cart cart = new Cart
+        //                    {
+        //                        Id = reader.GetInt32(reader.GetOrdinal("Id")),
+        //                        UserProfileId = reader.GetInt32(reader.GetOrdinal("UserId")),
+        //                        UserProfile = new UserProfile
+        //                        {
+        //                            Id = reader.GetInt32(reader.GetOrdinal("UsersId")),
+        //                            Name = reader.GetString(reader.GetOrdinal("Name")),
+        //                        }
+        //                    };
+        //                    cart.Discs = GetACartsDiscs(cart.Id);
+        //                    return cart;
+        //                }
+        //                else
+        //                {
+        //                    return null;
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+
+        public void AddDiscToCart(CartDisc cartDisc)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @" DELETE FROM Cart WHERE Id = @id";
-                    cmd.Parameters.AddWithValue("@id", cartId);
+                    cmd.CommandText = @" INSERT INTO CartDisc (CartId, DiscId, UserProfileId)
+                                          VALUES (@cartId, @discId, @userId);";
+                    DbUtils.AddParameter(cmd, "@cartId", cartDisc.CartId);
+                    DbUtils.AddParameter(cmd, "@discId", cartDisc.DiscId);
+                    DbUtils.AddParameter(cmd, "@userId", cartDisc.UserProfileId);
+
+                    cmd.ExecuteScalar();
+
                 }
             }
         }
+
+        public void RemoveDiscFromCart(int cartDiscId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @" DELETE FROM CartDisc WHERE Id=@id;
+                    ";
+                    DbUtils.AddParameter(cmd, "@id", cartDiscId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+
+
+        //public void DeleteCart(int cartId)
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @" DELETE FROM Cart WHERE Id = @id";
+        //            cmd.Parameters.AddWithValue("@id", cartId);
+        //        }
+        //    }
+        //}
 
     }
 

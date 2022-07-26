@@ -1,44 +1,56 @@
 import { Navigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { getDiscById, deleteDisc} from "../modules/discManager";
+import { getDiscById, deleteDisc, addDisc} from "../modules/discManager";
 import { Button, Badge } from "reactstrap";
 import {FormatPrice} from "../Helpers";
 import "./Disc.css"
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { getUsersCurrentCart, addDiscToCart } from "../modules/cartManager";
 
 
 export default function DiscDetails({user}) {
-      const [disc, setDisc] = useState();
-      const {id} = useParams();
-      const Navigate = useNavigate();
-
-      console.log(user);
-
-      useEffect(() => {
-        getDiscById(id).then(setDisc);
-      }, [id])
-
-      if(!disc)
-      {
-        return null;
-      }
-
-      const addToCart = () => {
-      }
-
-
       
-      let formattedPrice = FormatPrice(disc.price);
+    const [disc, setDisc] = useState();
+    const [cartId, setCartId] = useState();
+    const {id} = useParams();
+    const Navigate = useNavigate();
+ 
+    useEffect(() => {
+        getDiscById(id).then(setDisc);
+    }, [id])
+        
+    useEffect(() => {
+        if(user !== null) {
+            getUsersCurrentCart(user.id).then((cart) => setCartId(cart.id));
+        } 
+    }, [])
+        
+    if(!disc) {
+        return null;
+    }
+        
+    const addToCart = () => {
+        if(id !== null && cartId !== null && user !== null ) {
+            let cartDisc = {
+                cartId: cartId,
+                discId: id,
+                userProfileId: user.id
+            };
+            addDiscToCart(cartDisc).then(alert("Successfully Added to Cart!"));
+        }
+    }
+      
+    let formattedPrice = FormatPrice(disc.price);
 
-      const handleDeleteDisc = (id) => {
-        deleteDisc(id)
-        .then(() => Navigate("/discs"))
-      }
+    const handleDeleteDisc = (id) => {
+       deleteDisc(id)
+       .then(() => Navigate("/discs"))
+    }
 
-      let tags = disc?.tags;
-    
-      return (
+    let tags = disc?.tags;
+
+    return (
           <div className="discDetailContainer">
               
               <div className="discDetailLeft">
@@ -80,7 +92,7 @@ export default function DiscDetails({user}) {
                   
                     <div className="discDetailButtons">
 
-                        <Button color="primary" className="discDetailButton" onClick={(() => addToCart())}>Add To Cart</Button>
+                        <Button color="primary" className="discDetailButton" onClick={(() => addToCart())}>Add To Cart </Button>
 
                         {user?.isAdmin ? 
                             <div className="discDetailButton">

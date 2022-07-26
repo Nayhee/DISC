@@ -9,9 +9,13 @@ namespace DISC.Repositories
         SqlConnection Connection { get; }
 
         void AddCart(Cart cart);
-        void DeleteCart(int cartId);
+        //void DeleteCart(int cartId);
         List<Disc> GetACartsDiscs(int cartId);
-        Cart GetCartById(int cartId);
+        int GetCartDiscId(int cartId, int discId);
+        //Cart GetCartById(int cartId);
         Cart GetUsersCurrentCart(int userId);
+
+        void AddDiscToCart(CartDisc cartDisc);
+        void RemoveDiscFromCart(int cartDiscId);
     }
 }

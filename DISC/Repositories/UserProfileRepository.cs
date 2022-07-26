@@ -32,6 +32,7 @@ namespace DISC.Repositories
                             Id = DbUtils.GetInt(reader, "Id"),
                             FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
                             Name = DbUtils.GetString(reader, "Name"),
+                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
                             Email = DbUtils.GetString(reader, "Email"),
                             IsAdmin = DbUtils.GetBool(reader, "IsAdmin"),
 
@@ -65,6 +66,7 @@ namespace DISC.Repositories
                             Id = DbUtils.GetInt(reader, "Id"),
                             FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
                             Name = DbUtils.GetString(reader, "Name"),
+                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
                             Email = DbUtils.GetString(reader, "Email"),
                             IsAdmin = DbUtils.GetBool(reader, "IsAdmin"),
                         };
@@ -95,6 +97,7 @@ namespace DISC.Repositories
                             Id = DbUtils.GetInt(reader, "Id"),
                             FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
                             Name = DbUtils.GetString(reader, "Name"),
+                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
                             Email = DbUtils.GetString(reader, "Email"),
                             IsAdmin = DbUtils.GetBool(reader, "IsAdmin"),
                         };
@@ -114,10 +117,11 @@ namespace DISC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO UserProfile (Name, Email, IsAdmin, FirebaseUserId)
+                    cmd.CommandText = @"INSERT INTO UserProfile (Name, DisplayName, Email, IsAdmin, FirebaseUserId)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@Name, @Email, @IsAdmin, @FirebaseUserId)";
+                                        VALUES (@Name, @DisplayName, @Email, @IsAdmin, @FirebaseUserId)";
                     DbUtils.AddParameter(cmd, "@Name", userProfile.Name);
+                    DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
                     DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
                     DbUtils.AddParameter(cmd, "@IsAdmin", userProfile.IsAdmin);
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
@@ -140,10 +144,12 @@ namespace DISC.Repositories
                             SET 
                                 Name = @name,
                                 Email = @email,
+                                DisplayName = @displayName,
                                 IsAdmin = @isAdmin
                             WHERE Id = @id";
 
                     cmd.Parameters.AddWithValue("@name", profile.Name);
+                    cmd.Parameters.AddWithValue("@displayName", profile.DisplayName);
                     cmd.Parameters.AddWithValue("@email", profile.Email);
                     cmd.Parameters.AddWithValue("@isAdmin", profile.IsAdmin);
                     cmd.Parameters.AddWithValue("@id", profile.Id);

@@ -12,6 +12,8 @@ namespace DISC.Models
         [MaxLength(35)]
         public string Name { get; set; }
 
+        public string DisplayName { get; set; }
+
         [Required]
         [EmailAddress]
         public string Email { get; set; }
