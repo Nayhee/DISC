@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { React, useState, useEffect } from "react";
 import { NavLink as RRNavLink } from "react-router-dom";
 import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink} from "reactstrap";
 import { logout } from "../modules/authManager";
@@ -8,6 +8,14 @@ import "./Header.css"
 export default function Header({isLoggedIn, userType}) {
     
     const location = useLocation();
+
+    // const [user, setUser] = useState();
+    // const [isCartEmpty, setIsCartEmpty] = useState(true);
+
+    // if(sessionStorage.getItem("disc_user") !== null) {
+    //     setUser(JSON.parse(sessionStorage.getItem('disc_user')));
+    //     console.log(user);
+    // }
 
     return (
                 <>

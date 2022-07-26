@@ -29,7 +29,7 @@ export default function ApplicationViews({isLoggedIn, user}) {
           <Route path="edit/:userId" element={<UserEditForm />} />
         </Route>
       </Route>
-      <Route path="cart" element={<Cart user={user} />} />
+      <Route path="cart" element={<Cart />} />
       
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
