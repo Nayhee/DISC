@@ -1,0 +1,13 @@
+.orderContainer {
+    /* margin: 2% 25% 0% 25%; */
+    width: 55%;
+    margin: auto;
+    margin-top: 2%;
+}
+
+
+
+
+.orderError {
+    margin: 3vw 0vw 0vw 20vw;
+}

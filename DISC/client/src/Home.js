@@ -52,7 +52,7 @@ export default function Home({user}) {
 
                         </div>
                         <Link to={`/discs`}>
-                            <button className="buttonOnPic">Shop Now</button>
+                            <button className="buttonOnPic">Get Yours</button>
                         </Link>
                     </div>
 

@@ -18,6 +18,10 @@ namespace DISC.Models
         public string ShippingCity { get; set; }
         public string ShippingState { get; set; }
         public string ShippingZip { get; set; }
+        public string ShippingFirstName { get; set; }
+        public string ShippingLastName { get; set; }
+
+        public string ShippingCountry { get; set; }
         public bool IsPaymentReceived { get; set; }
 
         public List<Disc> Discs { get; set; }
@@ -30,17 +34,17 @@ namespace DISC.Models
             }
         }
 
-        public decimal OrderTotal
-        {
-            get
-            {
-                var sum = 0;
-                foreach (var disc in Discs)
-                {
-                    sum += disc.Price;
-                }
-                return sum;
-            }
-        }
+        //public decimal OrderTotal
+        //{
+        //    get
+        //    {
+        //        var sum = 0;
+        //        foreach (var disc in Discs)
+        //        {
+        //            sum += disc.Price;
+        //        }
+        //        return sum;
+        //    }
+        //}
     }
 }

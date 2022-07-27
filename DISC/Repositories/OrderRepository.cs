@@ -30,9 +30,9 @@ namespace DISC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @" INSERT INTO Orders (UserId, CartId, Date, Total, ShippingAddress, Shipping City, ShippingState, ShippingZip, IsPaymentReceived )
+                    cmd.CommandText = @" INSERT INTO Orders (UserId, CartId, Date, Total, ShippingFirstName, ShippingLastName, ShippingCountry, ShippingAddress, ShippingCity, ShippingState, ShippingZip, IsPaymentReceived )
                                             OUTPUT INSERTED.ID                                          
-                                            VALUES (@userId, @cartId, @date, @total, @shippingAddress, @shippingCity, @shippingZip, @isPaymentReceived)";
+                                            VALUES (@userId, @cartId, @date, @total, @shippingFirstName, @shippingLastName, @shippingCountry, @shippingAddress, @shippingCity, @shippingZip, @isPaymentReceived)";
                     DbUtils.AddParameter(cmd, "@userId", order.UserId);
                     DbUtils.AddParameter(cmd, "@cartId", order.CartId);
                     DbUtils.AddParameter(cmd, "@date", order.Date);
@@ -40,6 +40,9 @@ namespace DISC.Repositories
                     DbUtils.AddParameter(cmd, "@shippingAddress", order.ShippingAddress);
                     DbUtils.AddParameter(cmd, "@shippingCity", order.ShippingCity);
                     DbUtils.AddParameter(cmd, "@shippingZip", order.ShippingZip);
+                    DbUtils.AddParameter(cmd, "@shippingFirstName", order.ShippingFirstName);
+                    DbUtils.AddParameter(cmd, "@shippingLastName", order.ShippingLastName);
+                    DbUtils.AddParameter(cmd, "@shippingCountry", order.ShippingCountry);
                     DbUtils.AddParameter(cmd, "@isPaymentReceived", order.IsPaymentReceived);
 
                     int id = (int)cmd.ExecuteScalar();

@@ -93,8 +93,8 @@ export default function Cart({user}) {
 
                  <div className="cartTotal">
                     <h4>Total: ${total}</h4>
-                    <Link className="checkoutButtonDiv" to={`./checkout/${cart.id}`}>
-                        <Button color="primary" className="DetailsButton">Checkout </Button>
+                    <Link className="checkoutButtonDiv" to={`./order/${cart.id}`}>
+                        {cart.discs.length > 1 ? <Button color="primary" className="DetailsButton">Checkout </Button> : ""}
                     </Link>
                  </div>
              </div>
