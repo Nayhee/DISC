@@ -1,5 +1,6 @@
 ﻿using DISC.Models;
 using Microsoft.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace DISC.Repositories
 {
@@ -8,5 +9,7 @@ namespace DISC.Repositories
         SqlConnection Connection { get; }
 
         void AddOrder(Order order);
+
+        List<Order> GetAllOrders();
     }
 }

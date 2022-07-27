@@ -9,19 +9,9 @@ export default function Header({isLoggedIn, userType}) {
     
     const location = useLocation();
 
-    // const [user, setUser] = useState();
-    // const [isCartEmpty, setIsCartEmpty] = useState(true);
-
-    // if(sessionStorage.getItem("disc_user") !== null) {
-    //     setUser(JSON.parse(sessionStorage.getItem('disc_user')));
-    //     console.log(user);
-    // }
-
     return (
                 <>
-                    
                     <div className="headerAndNav">
-
                         <div className="nav_logo_container">
                             <img className="nav_logo" src="Images/tnLOGO.png"/>
                         </div>
@@ -34,7 +24,6 @@ export default function Header({isLoggedIn, userType}) {
                                         <Link className="navbar__link" to="/"><i className="fa-solid fa-house-chimney fa-xl"></i></Link>
                                     </li>
                                 )}
-
                                
                                 {isLoggedIn && (
                                     <li className="navbar__item">
@@ -45,7 +34,7 @@ export default function Header({isLoggedIn, userType}) {
 
                                 {isLoggedIn && userType === true && (
                                     <li className="navbar__item">
-                                        <Link className={`navbar__link ${location.pathname === '/users' ? 'active' : ''}`} to="/users">Admin</Link>
+                                        <Link className={`navbar__link ${location.pathname === '/admin' ? 'active' : ''}`} to="/admin">Admin</Link>
                                     </li>
                                 )}
 
@@ -77,13 +66,10 @@ export default function Header({isLoggedIn, userType}) {
                                     <li className="navbar__item">
                                         <Link className="navbar__link" to="/cart"><i className="fa-solid fa-cart-shopping fa-xl"></i></Link>
                                     </li>
-                                )}
-                                    
+                                )}      
                             </ul>
                         </div>
-
                     </div>
-                    
                 </>
             )
 }

@@ -18,16 +18,24 @@ namespace DISC.Controllers
             _orderRepository = orderRepository;
         }
 
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_orderRepository.GetAllOrders());
+        }
+
 
         [HttpPost]
         public IActionResult AddOrder(Order order)
         {
-            order.Date = DateTime.Now;
+            order.OrderDate = DateTime.Now;
             order.IsPaymentReceived = false;
             _orderRepository.AddOrder(order);
-            //return NoContent();
-            return CreatedAtAction("Get", new { id = order.Id }, order);
+            return NoContent();
+            //return CreatedAtAction("Get", new { id = order.Id }, order);
         }
+
+
 
       
     }

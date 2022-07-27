@@ -3,7 +3,6 @@ import { getUserById, updateUser } from "../modules/userProfileManager";
 import { useParams, useNavigate} from "react-router-dom";
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
-
 export default function UserEditForm() {
     
     const navigate = useNavigate();

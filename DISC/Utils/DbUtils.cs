@@ -25,6 +25,11 @@ namespace DISC.Utils
             return reader.GetInt32(reader.GetOrdinal(column));
         }
 
+        public static decimal GetDec(SqlDataReader reader, string column)
+        {
+            return reader.GetDecimal(reader.GetOrdinal(column));
+        }
+
         ///  Get a DateTime from a data reader object. This method assumes the value is not null.
         ///  Returns the value of the given column.
         public static DateTime GetDateTime(SqlDataReader reader, string column)

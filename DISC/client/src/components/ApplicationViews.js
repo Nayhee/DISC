@@ -4,8 +4,8 @@ import DiscList from "./disc/DiscList";
 import DiscDetails from "./disc/DiscDetails";
 import DiscEditForm from "./disc/DiscEditForm";
 import DiscForm from "./disc/DiscForm";
-import UserProfileList from "./user/UserList";
-import UserEditForm from "./user/UserEditForm"
+import Admin from "./admin/Admin";
+import UserEditForm from "./admin/UserEditForm"
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Cart from "./cart/Cart";
@@ -26,8 +26,8 @@ export default function ApplicationViews({isLoggedIn, user}) {
           <Route path=":id" element={<DiscDetails user={user} />} />
           <Route path="edit/:discId" element={<DiscEditForm />} />
         </Route>
-        <Route path="users">
-          <Route index element={<UserProfileList/>} />
+        <Route path="admin">
+          <Route index element={<Admin/>} />
           <Route path="edit/:userId" element={<UserEditForm />} />
         </Route>
       </Route>

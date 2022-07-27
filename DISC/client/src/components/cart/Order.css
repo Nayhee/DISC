@@ -1,13 +1,96 @@
 .orderContainer {
     /* margin: 2% 25% 0% 25%; */
-    width: 55%;
+    width: 40%;
     margin: auto;
     margin-top: 2%;
+    border: 1px solid black;
 }
 
+.orderHeader {
+    display: flex;
+    justify-content: center;
+    margin-top: -.5vw;
+}
+
+.orderForm {
+    padding: 1.5vw;
+    width: 100%;
+}
+
+.cityStateZip {
+    display: flex;
+    width: 100%;
+}
+.shipping {
+    margin-bottom: 1vw;
+}
+
+.orderTotals {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    font-size: 1vw;
+}
+
+.orderTotals p {
+    margin-bottom: .25vw;
+}
+
+.orderTotals h5 {
+    margin-top: .25vw;
+}
+
+/* .productTotal {
+    display: flex;
+    width: 100%;
+    margin: 0vw 0% 0vw 65%;
+
+}
+.productTotal p {
+    margin: .57vw;
+    width: 25%;
+    display: flex;
+    align-items: flex-end;
+}
+.taxTotal {
+    display: flex;
+    width: 100%;
+    margin: 0vw 0% 0vw 65%;
+}
+.taxTotal p {
+    margin: .57vw;
+    width: 25%;
+}
+
+.shippingTotal {
+    display: flex;
+    width: 100%;
+    margin: 0vw 0% 0vw 65%;
+}
+.shippingTotal p {
+    margin: .57vw;
+    width: 25%;
+}
+.orderTotal {
+    display: flex;
+    width: 100%;
+    margin: 0vw 0% 0vw 65%;
+}
+.orderTotal p {
+    margin: .57vw;
+    width: 25%;
+} */
 
 
 
 .orderError {
     margin: 3vw 0vw 0vw 20vw;
+}
+
+.orderButtonContainer {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
 }

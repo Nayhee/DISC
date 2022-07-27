@@ -23,6 +23,45 @@ namespace DISC.Repositories
             }
         }
 
+        public List<Order> GetAllOrders()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT o.Id, o.CartId, o.UserProfileId, o.Total, o.OrderDate, 
+                                               up.Name 
+                                        FROM Orders o
+                                        JOIN UserProfile up ON up.Id=o.UserProfileId";
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        List<Order> orders = new List<Order>();
+                        while (reader.Read())
+                        {
+                            Order order = new Order
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                CartId = DbUtils.GetInt(reader, "CartId"),
+                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                                Total = DbUtils.GetDec(reader, "Total"),
+                                OrderDate = DbUtils.GetDateTime(reader, "OrderDate"),
+                                UserProfile = new UserProfile()
+                                {
+                                    Id = DbUtils.GetInt(reader, "UserProfileId"),
+                                    Name = DbUtils.GetString(reader, "Name"),
+                                }
+                            };
+                            orders.Add(order);
+                        }
+                        return orders;
+                    }
+                }
+            }
+        }
+
+
         public void AddOrder(Order order)
         {
             using (var conn = Connection)
@@ -30,12 +69,12 @@ namespace DISC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @" INSERT INTO Orders (UserId, CartId, Date, Total, ShippingFirstName, ShippingLastName, ShippingCountry, ShippingAddress, ShippingCity, ShippingState, ShippingZip, IsPaymentReceived )
+                    cmd.CommandText = @" INSERT INTO Orders (UserProfileId, CartId, OrderDate, Total, ShippingFirstName, ShippingLastName, ShippingCountry, ShippingAddress, ShippingCity, ShippingState, ShippingZip, IsPaymentReceived )
                                             OUTPUT INSERTED.ID                                          
-                                            VALUES (@userId, @cartId, @date, @total, @shippingFirstName, @shippingLastName, @shippingCountry, @shippingAddress, @shippingCity, @shippingZip, @isPaymentReceived)";
-                    DbUtils.AddParameter(cmd, "@userId", order.UserId);
+                                            VALUES (@userProfileId, @cartId, @orderDate, @total, @shippingFirstName, @shippingLastName, @shippingCountry, @shippingAddress, @shippingCity, @shippingState, @shippingZip, @isPaymentReceived)";
+                    DbUtils.AddParameter(cmd, "@userProfileId", order.UserProfileId);
                     DbUtils.AddParameter(cmd, "@cartId", order.CartId);
-                    DbUtils.AddParameter(cmd, "@date", order.Date);
+                    DbUtils.AddParameter(cmd, "@orderDate", order.OrderDate);
                     DbUtils.AddParameter(cmd, "@total", order.Total);
                     DbUtils.AddParameter(cmd, "@shippingAddress", order.ShippingAddress);
                     DbUtils.AddParameter(cmd, "@shippingCity", order.ShippingCity);
@@ -43,6 +82,7 @@ namespace DISC.Repositories
                     DbUtils.AddParameter(cmd, "@shippingFirstName", order.ShippingFirstName);
                     DbUtils.AddParameter(cmd, "@shippingLastName", order.ShippingLastName);
                     DbUtils.AddParameter(cmd, "@shippingCountry", order.ShippingCountry);
+                    DbUtils.AddParameter(cmd, "@shippingState", order.ShippingState);
                     DbUtils.AddParameter(cmd, "@isPaymentReceived", order.IsPaymentReceived);
 
                     int id = (int)cmd.ExecuteScalar();

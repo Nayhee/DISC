@@ -1,0 +1,19 @@
+.receiptContainer {
+    margin: 2vw 36vw;
+    min-width: 30%;
+    border: 1px solid black;
+    background-color: white;
+    padding: 1.5vw;
+}
+
+.receiptContainer h2 {
+    margin-bottom: 1vw;
+}
+
+.receiptContainer p {
+    margin: .5vw 0vw .5vw 0vw;
+}
+
+.receiptContainer Button {
+    margin-top: .5vw;
+}

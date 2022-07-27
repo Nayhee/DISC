@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getLoggedInUser } from "../modules/userProfileManager";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./Order.css";
 import { getUsersCurrentCart } from "../modules/cartManager";
 import {addOrder} from "../modules/orderManager";
@@ -15,9 +14,10 @@ export default function Checkout({user}) {
     const [cart, setCart] = useState(null);
     const [productTotal, setProductTotal] = useState(0);
     const [taxes, setTaxes] = useState(0);
+    const [orderTotal, setOrderTotal] = useState(0);
     
     const [order, setOrder] = useState({
-        userId: user.id,
+        userProfileId: user?.id,
         cartId: cartId,
         total: 0,
         shippingCountry: "",
@@ -29,40 +29,40 @@ export default function Checkout({user}) {
         shippingLastName: "",
     });
 
-    const calculateProductTotal = () => {
+    const roundToTwoDecimals = (num) => {
+        return num.toFixed(2);
+    }
+
+    const calculateProductTotal = (cart) => {
         let productTot = 0;
         cart.discs.forEach(disc => {
             productTot += disc.price;
         })
         setProductTotal(productTot);
+        return productTot;
     }
 
-    const calculateTaxes = () => {
-        let tax = (productTotal * .07);
+    const calculateTaxes = (prodTotal) => {
+        let tax = prodTotal * .07;
         setTaxes(tax);
+        return tax;
     }
     
     const getCart = () => {
-        getUsersCurrentCart(user.id).then(setCart);
+        getUsersCurrentCart(user.id)
+        .then((cart) => {
+            setCart(cart);
+            let prodTotal = calculateProductTotal(cart);
+            let tax = calculateTaxes(prodTotal);
+            setOrderTotal(prodTotal + tax + 5);
+        })
     }
 
     useEffect(() => {
-        if(user !== null && cart == null) {
+        if(user !== null) {
             getCart();
         }
     }, [])
-
-    useEffect(() => {
-        if(user !== null && cart !== null && productTotal == 0) {
-            calculateProductTotal();
-        }
-    }, [])
-
-    useEffect(() => {
-        if(productTotal !== 0) {
-            calculateTaxes();
-        }
-    }, [productTotal])
 
     const handleInputChange = (evt) => {
         const newOrder = {...order}
@@ -72,18 +72,20 @@ export default function Checkout({user}) {
     }
 
     const handleClickSaveOrder = () => {
-        addOrder(order)
+        const newOrder = {...order}
+        newOrder.total = orderTotal;
+        addOrder(newOrder)
         .then(() => navigate("/receipt"))
         .catch((err) => alert(`An error occured: ${err.message}`));
     }
 
-    if(order?.total !== 0) {
+    if(cart !== null) {
         return (
             
             <div className="orderContainer">
                 <Form className="orderForm">
-                <h3>Order</h3>
-                <h6>Shipping Address </h6>
+                <h3 className="orderHeader">Order</h3>
+                <h5 className="shipping">Shipping Address </h5>
     
                 <FormGroup>
                   <Label for="shippingFirstName">First Name</Label>
@@ -93,7 +95,6 @@ export default function Checkout({user}) {
                         name="shippingFirstName"
                         id="shippingFirstName"
                         placeholder={"First Name"}
-                        value={order.shippingFirstName}
                         onChange={handleInputChange}
                       />
                   </Col>
@@ -107,7 +108,6 @@ export default function Checkout({user}) {
                         name="shippingLastName"
                         id="shippingLastName"
                         placeholder="Last Name"
-                        value={order.shippingLastName}
                         onChange={handleInputChange}
                       />
                   </Col>
@@ -117,7 +117,6 @@ export default function Checkout({user}) {
                   <Label for="shippingCountry">Country/Region</Label>
                   <Col sm={15}>
                   <select
-                      value={order.shippingCountry}
                       name="shippingCountry"
                       id="shippingCountry"
                       onChange={handleInputChange}
@@ -136,7 +135,6 @@ export default function Checkout({user}) {
                         name="shippingAddress"
                         id="shippingAddress"
                         placeholder="Address"
-                        value={order.shippingAddress}
                         onChange={handleInputChange}
                       />
                   </Col>
@@ -151,7 +149,7 @@ export default function Checkout({user}) {
                             name="shippingCity"
                             id="shippingCity"
                             placeholder="City"
-                            value={order.shippingCity}
+    
                             onChange={handleInputChange}
                         />
                     </Col>
@@ -164,7 +162,7 @@ export default function Checkout({user}) {
                             name="shippingState"
                             id="shippingState"
                             placeholder="State"
-                            value={order.shippingState}
+    
                             onChange={handleInputChange}
                         />
                     </Col>
@@ -177,7 +175,7 @@ export default function Checkout({user}) {
                             name="shippingZip"
                             id="shippingZip"
                             placeholder="Zip Code"
-                            value={order.shippingZip}
+                     
                             onChange={handleInputChange}
                         />
                     </Col>
@@ -187,20 +185,16 @@ export default function Checkout({user}) {
     
                 <div className="orderTotals">
                     <div className="productTotal">
-                        <div>Product Total</div>
-                        <div>{productTotal}</div>
+                        <p>Product Total: ${roundToTwoDecimals(productTotal)}</p>
                     </div>
                     <div className="taxTotal">
-                        <div>{`Taxes (7%)`}</div>
-                        <div>${taxes}</div>
+                        <p>{`Taxes (7%): `}${roundToTwoDecimals(taxes)}</p>
                     </div>
                     <div className="shippingTotal">
-                        <div>Shipping - USPS Standard</div>
-                        <div>$5</div>
+                        <p>Shipping - USPS Standard: $5.00 </p>
                     </div>
                     <div className="orderTotal">
-                        <div><b>Order Total</b></div>
-                        <div><b>${productTotal + taxes}</b></div>
+                        <h5><b>Order Total: ${roundToTwoDecimals(orderTotal)}</b></h5>
                     </div>
                 </div>
       
@@ -214,11 +208,7 @@ export default function Checkout({user}) {
         )
     }
     else {
-        return (
-            <div className="orderError">
-                <h1>WHY WON'T IT WORK</h1>
-            </div>
-        )
+        return null;
     }
 
     
