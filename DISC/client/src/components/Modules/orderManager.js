@@ -1,9 +1,9 @@
 const baseUrl = '/api/Order';
 
-// export const getAllOrders = () => {
-//     return fetch(baseUrl)
-//       .then((res) => res.json())
-// };
+export const getAllOrders = () => {
+    return fetch(baseUrl)
+      .then((res) => res.json())
+};
 
 export const addOrder = (order) => {
     return fetch(baseUrl, {
