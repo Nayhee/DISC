@@ -102,11 +102,7 @@ export default function Cart({user}) {
         ) 
     }
     else {
-        return (
-            <div className="cartContainer">
-                <h2 className="cartHeader">Your Cart is Empty</h2>
-             </div>
-        )
+        return null;
     }
 
 

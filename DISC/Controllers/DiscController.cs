@@ -65,6 +65,13 @@ namespace DISC.Controllers
             return NoContent();
         }
 
+
+        [HttpGet("SearchByName")]
+        public IActionResult SearchDiscByName(string query)
+        {
+            return Ok(_discRepository.SearchDiscByName(query));
+        }
+
         [HttpGet("GetBrands")]
         public IActionResult GetBrands()
         {

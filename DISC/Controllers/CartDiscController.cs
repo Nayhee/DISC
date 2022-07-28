@@ -41,15 +41,6 @@ namespace DISC.Controllers
         }
 
 
-        //// https://localhost:5001/api/cartdisc/5
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(int id, int cartId)
-        //{
-        //    _cartRepository.RemoveDiscFromCart(cartId, id);
-        //    return NoContent();
-        //}
-
-
 
     }
 }

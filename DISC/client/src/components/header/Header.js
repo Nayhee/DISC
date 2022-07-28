@@ -64,7 +64,7 @@ export default function Header({isLoggedIn, userType}) {
 
                                 {isLoggedIn && (
                                     <li className="navbar__item">
-                                        <Link className="navbar__link" to="/cart"><i className="fa-solid fa-cart-shopping fa-xl"></i></Link>
+                                        <Link className="navbar__link" to="/cart"><i className="fa-solid fa-cart-shopping fa-xl"></i>Cart</Link>
                                     </li>
                                 )}      
                             </ul>

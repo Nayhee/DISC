@@ -238,6 +238,31 @@
 }
 
 
+#discSearch {
+    margin-bottom: .5vw;
+}
+
+.addDiscButton {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: -1vw;
+}
+
+.searchDiv {
+    display: flex;
+}
+
+.searchButton {
+    padding: 0vw 0vw 0vw .25vw;
+    display: flex;
+    align-items: center;
+    color: #FF3847;
+}
+
+.searchButton i:hover {
+    color: blue;
+}
 
 
 /* #36454f  - dark gray background behind TN Disc logo

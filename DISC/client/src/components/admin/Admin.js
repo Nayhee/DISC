@@ -4,13 +4,14 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button, Table } from "reactstrap";
 import "./Admin.css"
 import {getAllOrders} from "../modules/orderManager";
+import {splitDate} from "../Helpers";
 
 export default function Admin() {
 
     const [users, setUsers] = useState([])
     const [orders, setOrders] = useState([]);
 
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
 
     const getUsers = () => {
         getAllUsers().then(users => setUsers(users));
@@ -28,25 +29,26 @@ export default function Admin() {
 
     const handleDeleteUser = (id) => {
         deleteUser(id)
-        .then(() => Navigate("/users"))
-    }
-
-    const splitDate = (dateTime) => {
-        let newDateTime = dateTime.toString();
-        console.log(newDateTime);
-        let dates = newDateTime.split("T");
-        return dates[0];
+        .then(() => navigate("/users"))
     }
 
 
     return (
         <div className="userListContainer">
             
+            <div className="addDiscButton">
+                <Link to={`/discs/add`}>
+                    <Button color="success" type="button">
+                        Add Disc
+                    </Button>
+                </Link>
+            </div>
+
             <h4>Orders</h4>
             <Table responsive bordered striped hover>
                 <thead>
                     <tr>
-                        <th>Order #</th>
+                        <th>#</th>
                         <th>Customer</th>
                         <th>Order Date</th>
                         <th>Total</th>
@@ -83,7 +85,7 @@ export default function Admin() {
             <Table responsive bordered striped hover>
                 <thead>
                     <tr>
-                        <th>Id #</th>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>UserType</th>

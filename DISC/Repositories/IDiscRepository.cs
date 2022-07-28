@@ -11,5 +11,6 @@ namespace DISC.Repositories
         List<Disc> GetAllDiscsForSale();
         Disc GetDiscById(int id);
         void UpdateDisc(Disc disc);
+        List<Disc> SearchDiscByName(string query);
     }
 }

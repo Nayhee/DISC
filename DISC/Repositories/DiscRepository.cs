@@ -212,6 +212,76 @@ namespace DISC.Repositories
             }
         }
 
+
+        public List<Disc> SearchDiscByName(string criterion)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    var sql = @"SELECT d.*, b.Name as BrandName, t.Id as TagId, t.Name as TagName
+                                FROM Disc d 
+                                JOIN Brand b on b.Id=d.BrandId
+                                LEFT JOIN DiscTag dt on dt.DiscId=d.Id
+                                LEFT JOIN Tag t on t.Id=dt.tagId
+                                WHERE d.Name LIKE @Criterion
+                    ";
+                    cmd.CommandText = sql;
+                    DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        var discs = new List<Disc>();
+                        while (reader.Read())
+                        {
+                            var discId = DbUtils.GetInt(reader, "Id");
+
+                            var existingDisc = discs.FirstOrDefault(p => p.Id == discId);
+                            if (existingDisc == null)
+                            {
+                                existingDisc = new Disc()
+                                {
+                                    Id = DbUtils.GetInt(reader, "Id"),
+                                    Name = DbUtils.GetString(reader, "Name"),
+                                    BrandId = DbUtils.GetInt(reader, "brandId"),
+                                    Condition = DbUtils.GetString(reader, "Condition"),
+                                    Speed = DbUtils.GetInt(reader, "Speed"),
+                                    Glide = DbUtils.GetInt(reader, "Glide"),
+                                    Turn = DbUtils.GetInt(reader, "Turn"),
+                                    Fade = DbUtils.GetInt(reader, "Fade"),
+                                    Plastic = DbUtils.GetString(reader, "Plastic"),
+                                    Price = DbUtils.GetInt(reader, "Price"),
+                                    Weight = DbUtils.GetInt(reader, "Weight"),
+                                    ImageUrl = DbUtils.GetString(reader, "imageUrl"),
+                                    ForSale = DbUtils.GetBool(reader, "ForSale"),
+                                    Description = DbUtils.GetString(reader, "Description"),
+                                    Brand = new Brand()
+                                    {
+                                        Id = DbUtils.GetInt(reader, "BrandId"),
+                                        Name = DbUtils.GetString(reader, "BrandName"),
+                                    },
+                                    Tags = new List<Tag>()
+                                };
+                                discs.Add(existingDisc);
+                            }
+
+                            if (DbUtils.IsNotDbNull(reader, "TagId"))
+                            {
+                                existingDisc.Tags.Add(new Tag()
+                                {
+                                    Id = DbUtils.GetInt(reader, "TagId"),
+                                    Name = DbUtils.GetString(reader, "TagName")
+                                });
+                            }
+                        }
+                        return discs;
+                    }
+                }
+            }
+        }
+
+
         public List<Brand> GetAllBrands()
         {
             using (var conn = Connection)

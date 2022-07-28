@@ -67,7 +67,6 @@ export default function DiscForm() {
                     name="name"
                     id="name"
                     placeholder="name"
-                    value={disc.name}
                     onChange={handleInputChange}
                   />
 
@@ -81,7 +80,6 @@ export default function DiscForm() {
                   name="description"
                   id="description"
                   placeholder="description"
-                  value={disc.description}
                   onChange={handleInputChange}
                 />
 
@@ -92,7 +90,6 @@ export default function DiscForm() {
               <Label for="condition">Condition</Label>
               <Col sm={15}>
                 <select
-                  value={disc.condition}
                   name="condition"
                   id="condition"
                   onChange={handleInputChange}
@@ -109,7 +106,6 @@ export default function DiscForm() {
               <Label for="brandId">Brand</Label> <br></br>
               <Col sm={15}>
                 <select
-                  value={disc.brandId}
                   name="brandId"
                   id="brandId"
                   onChange={handleIntegerChange}
@@ -132,7 +128,6 @@ export default function DiscForm() {
                   type="text"
                   name="imageUrl"
                   id="imageUrl"
-                  value={disc.imageUrl}
                   onChange={handleInputChange}
                 />
               </Col>
@@ -146,7 +141,6 @@ export default function DiscForm() {
                   type="text"
                   name="plastic"
                   id="plastic"
-                  value={disc.plastic}
                   onChange={handleInputChange}
                 />
 
@@ -160,7 +154,6 @@ export default function DiscForm() {
                   type="text"
                   name="weight"
                   id="weight"
-                  value={disc.weight}
                   onChange={handleIntegerChange}
                 />
 
@@ -174,7 +167,6 @@ export default function DiscForm() {
                   type="text"
                   name="price"
                   id="price"
-                  value={disc.price}
                   onChange={handleIntegerChange}
                 />
 
@@ -188,7 +180,6 @@ export default function DiscForm() {
                   type="text"
                   name="speed"
                   id="speed"
-                  value={disc.speed}
                   onChange={handleIntegerChange}
                 />
 
@@ -202,7 +193,6 @@ export default function DiscForm() {
                   type="text"
                   name="glide"
                   id="glide"
-                  value={disc.glide}
                   onChange={handleIntegerChange}
                 />
 
@@ -216,7 +206,6 @@ export default function DiscForm() {
                   type="text"
                   name="turn"
                   id="turn"
-                  value={disc.turn}
                   onChange={handleIntegerChange}
                 />
 
@@ -230,7 +219,6 @@ export default function DiscForm() {
                   type="text"
                   name="fade"
                   id="fade"
-                  value={disc.fade}
                   onChange={handleIntegerChange}
                 />
 

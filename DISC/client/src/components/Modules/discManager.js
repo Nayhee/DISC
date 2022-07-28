@@ -36,6 +36,11 @@ export const updateDisc = (editedDisc) => {
     });
 };
 
+export const searchDiscByName = (query) => {
+  return fetch(`${baseUrl}/Search?q=${query}`)
+      .then((res) => res.json())
+}
+
 
 
 
