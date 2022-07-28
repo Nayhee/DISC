@@ -238,10 +238,6 @@
 }
 
 
-#discSearch {
-    margin-bottom: .5vw;
-}
-
 .addDiscButton {
     display: flex;
     justify-content: center;
@@ -253,14 +249,28 @@
     display: flex;
 }
 
+.searchDiv Input {
+    height: 100%;
+}
+
 .searchButton {
-    padding: 0vw 0vw 0vw .25vw;
     display: flex;
     align-items: center;
-    color: #FF3847;
+    color: white;
+    background-color: #FF3847;
+    width: 3vw;
+    border-radius: 4px;
+}
+
+.searchButton i {
+    margin: auto;
 }
 
 .searchButton i:hover {
+    color: #75C7FB;
+}
+
+.discsButton:hover {
     color: blue;
 }
 

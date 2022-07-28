@@ -37,7 +37,7 @@ export const updateDisc = (editedDisc) => {
 };
 
 export const searchDiscByName = (query) => {
-  return fetch(`${baseUrl}/Search?q=${query}`)
+  return fetch(`${baseUrl}/SearchByName?query=${query}`)
       .then((res) => res.json())
 }
 

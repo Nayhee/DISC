@@ -2,24 +2,34 @@ import React, { useEffect, useState } from "react";
 import "./Disc.css";
 import { useNavigate } from "react-router-dom";
 import { DiscCard } from "./DiscCard";
-import { Button } from "reactstrap";
+import { Button, Input } from "reactstrap";
 import { getAllDiscs, searchDiscByName } from "../modules/discManager";
 
 export default function DiscList({user}) {
 
     const [discs, setDiscs] = useState([])
-    
-    const navigate = useNavigate();
+    const [query, setQuery] = useState("");
 
     const getDiscs = () => {
         getAllDiscs().then(discs => setDiscs(discs));
     }
 
-    const handleDiscSearch = (event) => {
-        if(event.keyCode === 13) {
-            searchDiscByName(event.target.value)
-            .then(setDiscs);
-        }
+    const handleQueryInput = (event) => {
+        const newQuery = event.target.value;
+        setQuery(newQuery);
+    }
+
+    const handleSearchSubmit = () => {
+            searchDiscByName(query)
+            .then((searchDiscs) => {
+                if(searchDiscs.length == 0) {
+                    alert("No results matching your search");
+                    getAllDiscs();
+                }
+                else {
+                    setDiscs(searchDiscs);
+                }
+            });
     }
 
     useEffect(() => {
@@ -32,13 +42,12 @@ export default function DiscList({user}) {
             <>          
                 <div className="discListPageContainer">
                     <section className="add-disc-container"> 
-                        <h2>All Discs</h2>
+                        <h2 className="discsButton" type="button" onClick={getDiscs}>Discs</h2>
                         <div className="searchDiv">
-                            <input type="text" id="discSearch" placeholder="Search by name..." onKeyUp={handleDiscSearch} />
-                            <div className="searchButton"><i type="button" className="fa-solid fa-magnifying-glass fa-lg"></i></div>
-                            
-
+                            <Input type="text" id="discSearch" placeholder="Search by name..." onChange={handleQueryInput} />
+                            <div className="searchButton"><i type="button" onClick={handleSearchSubmit} className="fa-solid fa-magnifying-glass fa-md"></i></div>
                         </div>
+                        {/* {discs.length < initialDiscCount ? <Button type="button">All Discs</Button> : "" } */}
                     </section>
     
                     <div className="disc-list">
