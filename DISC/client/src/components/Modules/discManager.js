@@ -51,10 +51,8 @@ export const searchDiscByName = (query) => {
       .then((res) => res.json())
 }
 
-
-
-
 export const getAllBrands = () => {
   return fetch(`${baseUrl}/GetBrands`)
   .then(res => res.json())
 }
+

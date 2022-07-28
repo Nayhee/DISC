@@ -42,6 +42,7 @@ namespace DISC.Repositories
                                 Price = DbUtils.GetInt(reader, "Price"),
                                 Weight = DbUtils.GetInt(reader, "Weight"),
                                 ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                                ImageId = DbUtils.GetNullableInt(reader, "ImageId"),
                                 ForSale = DbUtils.GetBool(reader, "ForSale"),
                                 Description = DbUtils.GetString(reader, "Description"),
                                 Brand = new Brand()
@@ -97,6 +98,7 @@ namespace DISC.Repositories
                                     Price = DbUtils.GetInt(reader, "Price"),
                                     Weight = DbUtils.GetInt(reader, "Weight"),
                                     ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                                    ImageId = DbUtils.GetNullableInt(reader, "ImageId"),
                                     ForSale = DbUtils.GetBool(reader, "ForSale"),
                                     Description = DbUtils.GetString(reader, "Description"),
                                     Brand = new Brand()
@@ -130,9 +132,9 @@ namespace DISC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Disc ([Name], BrandId, Condition, Speed, Glide, Turn, Fade, Plastic, Price, [ImageURL], Weight, Description, ForSale)
+                    cmd.CommandText = @"INSERT INTO Disc ([Name], BrandId, Condition, Speed, Glide, Turn, Fade, Plastic, Price, [ImageURL], ImageId, Weight, Description, ForSale)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@name, @brandId, @condition, @speed, @glide, @turn, @fade, @plastic, @price, @imageURL, @weight, @description, @forSale)";
+                                        VALUES (@name, @brandId, @condition, @speed, @glide, @turn, @fade, @plastic, @price, @imageURL, @imageId, @weight, @description, @forSale)";
                     DbUtils.AddParameter(cmd, "@name", disc.Name);
                     DbUtils.AddParameter(cmd, "@brandId", disc.BrandId);
                     DbUtils.AddParameter(cmd, "@condition", disc.Condition);
@@ -143,6 +145,7 @@ namespace DISC.Repositories
                     DbUtils.AddParameter(cmd, "@plastic", disc.Plastic);
                     DbUtils.AddParameter(cmd, "@price", disc.Price);
                     DbUtils.AddParameter(cmd, "@imageURL", disc.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@imageId", disc.ImageId);
                     DbUtils.AddParameter(cmd, "@weight", disc.Weight);
                     DbUtils.AddParameter(cmd, "@description", disc.Description);
                     DbUtils.AddParameter(cmd, "@forSale", disc.ForSale);
@@ -173,6 +176,7 @@ namespace DISC.Repositories
                                             Plastic = @plastic,
                                             Price = @price,
                                             ImageURL = @imageURL,
+                                            ImageId = @imageId,
                                             Weight = @weight,
                                             Description = @description,
                                             ForSale = @forSale
@@ -189,6 +193,7 @@ namespace DISC.Repositories
                     DbUtils.AddParameter(cmd, "@plastic", disc.Plastic);
                     DbUtils.AddParameter(cmd, "@price", disc.Price);
                     DbUtils.AddParameter(cmd, "@imageURL", disc.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@imageId", disc.ImageId);
                     DbUtils.AddParameter(cmd, "@weight", disc.Weight);
                     DbUtils.AddParameter(cmd, "@description", disc.Description);
                     DbUtils.AddParameter(cmd, "@forSale", disc.ForSale);
@@ -246,7 +251,7 @@ namespace DISC.Repositories
                                 {
                                     Id = DbUtils.GetInt(reader, "Id"),
                                     Name = DbUtils.GetString(reader, "Name"),
-                                    BrandId = DbUtils.GetInt(reader, "brandId"),
+                                    BrandId = DbUtils.GetInt(reader, "BrandId"),
                                     Condition = DbUtils.GetString(reader, "Condition"),
                                     Speed = DbUtils.GetInt(reader, "Speed"),
                                     Glide = DbUtils.GetInt(reader, "Glide"),
@@ -255,7 +260,8 @@ namespace DISC.Repositories
                                     Plastic = DbUtils.GetString(reader, "Plastic"),
                                     Price = DbUtils.GetInt(reader, "Price"),
                                     Weight = DbUtils.GetInt(reader, "Weight"),
-                                    ImageUrl = DbUtils.GetString(reader, "imageUrl"),
+                                    ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                                    ImageId = DbUtils.GetNullableInt(reader, "ImageId"),
                                     ForSale = DbUtils.GetBool(reader, "ForSale"),
                                     Description = DbUtils.GetString(reader, "Description"),
                                     Brand = new Brand()

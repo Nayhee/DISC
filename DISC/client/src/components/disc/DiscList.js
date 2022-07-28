@@ -9,6 +9,7 @@ export default function DiscList({user}) {
 
     const [discs, setDiscs] = useState([])
     const [query, setQuery] = useState("");
+    const [isLoading, setIsLoading] = useState();
 
     const getDiscs = () => {
         getAllDiscs().then(discs => setDiscs(discs));

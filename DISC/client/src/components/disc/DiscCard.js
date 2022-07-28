@@ -1,16 +1,30 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import "./Disc.css"
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
+import { getImageById } from "../modules/imageManager";
 
 
 export const DiscCard = ({ disc }) => {
-    return (
+  
+  const [imageUrl, setImageUrl] = useState();
+
+  useEffect(() => {
+    if(disc.imageId !== null) {
+      getImageById(disc.imageId)
+      .then((url) => setImageUrl(url));
+    } 
+    else {
+      setImageUrl(disc.imageUrl);
+    }
+  }, [])
+  
+  return (
       <div className="card-disc">
         <div className="card-disc-content">
 
           <div className="image_div">
-              <img src={disc.imageUrl} alt="My Disc" />
+              <img src={imageUrl} alt="My Disc" />
           </div>
 
           <h2><span className="card-disc-name">

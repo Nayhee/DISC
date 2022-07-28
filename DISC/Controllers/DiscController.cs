@@ -4,6 +4,8 @@ using DISC.Models;
 using DISC.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace DISC.Controllers
 {
@@ -41,6 +43,7 @@ namespace DISC.Controllers
         [HttpPost]
         public IActionResult Post(Disc disc)
         {
+            disc.ImageId = 1;
             _discRepository.AddDisc(disc);
             return CreatedAtAction("Get", new { id = disc.Id }, disc);
         }
@@ -90,16 +93,5 @@ namespace DISC.Controllers
             return Ok(_discRepository.GetAllBrands());
         }
 
-
-        //public ActionResult Image(int id)
-        //{
-        //    var stream = _imageRepository.GetImageStreamById(id);
-        //    if (stream != null)
-        //    {
-        //        return File(stream, "image/png", $"image_{id}.jpg");
-        //    }
-
-        //    return NotFound();
-        //}
     }
 }

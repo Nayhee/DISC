@@ -4,6 +4,8 @@ import { getUsersCurrentCart, removeDiscFromCart, getCartDiscId } from "../modul
 import { getLoggedInUser } from "../modules/userProfileManager";
 import { Link } from "react-router-dom";
 import "./Cart.css";
+import { getImageById } from "../modules/imageManager";
+
 
 export default function Cart({user}) {
 
@@ -27,6 +29,18 @@ export default function Cart({user}) {
             getCart();
         };
     }, [])
+
+    //extra one I didn't get to work before getting off. 
+    // useEffect(() => {
+    //     if(user !== null && cart == null ) {
+    //         getCart();
+    //         cart.discs.forEach((disc) => {
+    //             disc.imageId !== null ? getImageById(disc.imageId).then((url) => disc.imageUrl = url)
+    //             :
+    //             disc.imageUrl = disc.imageUrl;
+    //         })
+    //     };
+    // }, [])
 
     useEffect(() => {
         if(user !== null && cart !== null) {

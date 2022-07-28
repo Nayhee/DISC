@@ -13,6 +13,8 @@ namespace DISC.Models
         public string Name { get; set; }
         [Required]
         public int BrandId { get; set; }
+
+        public int? ImageId { get; set; }
         [Required]
      
         public string Condition { get; set; }

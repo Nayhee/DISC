@@ -7,17 +7,26 @@ import "./Disc.css"
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { getUsersCurrentCart, addDiscToCart } from "../modules/cartManager";
+import { getImageById } from "../modules/imageManager";
 
 
 export default function DiscDetails({user}) {
       
     const [disc, setDisc] = useState();
     const [cartId, setCartId] = useState();
+    const [imageUrl, setImageUrl] = useState();
     const {id} = useParams();
+    
     const Navigate = useNavigate();
- 
+
     useEffect(() => {
-        getDiscById(id).then(setDisc);
+        getDiscById(id)
+        .then((disc) => {
+            setDisc(disc);
+            disc.imageId !== null ? getImageById(disc.imageId).then(setImageUrl)
+            :
+            setImageUrl(disc.imageUrl);
+        });
     }, [id])
         
     useEffect(() => {
@@ -55,7 +64,7 @@ export default function DiscDetails({user}) {
               
               <div className="discDetailLeft">
                     <div className="discDetailImage"> 
-                        <img src={disc.imageUrl} alt="My Disc" />
+                        <img src={imageUrl} alt="My Disc" />
                     </div>
 
                     <div className="discDetailFlightNums">

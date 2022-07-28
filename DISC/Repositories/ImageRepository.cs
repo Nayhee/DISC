@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DISC.Utils;
 
 namespace DISC.Repositories
 {
@@ -33,13 +34,13 @@ namespace DISC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "select * from Image where Id = @id";
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.CommandText = "SELECT * FROM Image WHERE Id = @id";
+                    DbUtils.AddParameter(cmd, "@id", id);
                     using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            var data = reader.GetStream(reader.GetOrdinal("Image"));
+                            var data = reader.GetStream(reader.GetOrdinal("Body"));
                             if (data.Length > 0)
                             {
                                 return data;
