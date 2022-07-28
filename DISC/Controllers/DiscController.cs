@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using DISC.Models;
 using DISC.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace DISC.Controllers
 {
@@ -54,6 +55,17 @@ namespace DISC.Controllers
             }
 
             _discRepository.UpdateDisc(disc);
+            return NoContent();
+        }
+
+        [HttpPut("UpdateOrderDiscs")]
+        public IActionResult UpdateOrderDiscs(List<Disc> discList)
+        {
+            foreach (Disc disc in discList)
+            {
+                disc.ForSale = false;
+                _discRepository.UpdateDisc(disc);
+            }
             return NoContent();
         }
 

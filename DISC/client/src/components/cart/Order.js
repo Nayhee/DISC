@@ -4,6 +4,7 @@ import "./Order.css";
 import { getUsersCurrentCart } from "../modules/cartManager";
 import {addOrder} from "../modules/orderManager";
 import { Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { updateOrderDiscs } from "../modules/discManager";
 
 
 export default function Checkout({user}) {
@@ -58,6 +59,10 @@ export default function Checkout({user}) {
         })
     }
 
+    const updateDiscsType = () => {
+        updateOrderDiscs(cart.discs);
+    }
+
     useEffect(() => {
         if(user !== null) {
             getCart();
@@ -75,6 +80,7 @@ export default function Checkout({user}) {
         const newOrder = {...order}
         newOrder.total = orderTotal;
         addOrder(newOrder)
+        .then(() => updateDiscsType())
         .then(() => navigate("/receipt"))
         .catch((err) => alert(`An error occured: ${err.message}`));
     }

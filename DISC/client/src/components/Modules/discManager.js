@@ -36,6 +36,16 @@ export const updateDisc = (editedDisc) => {
     });
 };
 
+export const updateOrderDiscs = (discList) => {
+    return fetch(`${baseUrl}/UpdateOrderDiscs`, {
+      method: "PUT",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(discList),
+  });
+}
+
 export const searchDiscByName = (query) => {
   return fetch(`${baseUrl}/SearchByName?query=${query}`)
       .then((res) => res.json())
