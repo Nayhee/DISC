@@ -94,7 +94,7 @@ export default function DiscDetails({user}) {
                   <h1 className="discDetailDiscName">{disc.brand?.name} {disc?.plasticName}</h1>
                   <p className="discDetailPrice">Price: ${formattedPrice}</p>
                   <p className="discDetailWeight">Weight: {disc.weight}g</p>
-                  {tags?.map(tag =>
+                  {tags.map(tag =>
                     <Badge color="info" key={tag.id} className="tag">{tag.name}</Badge>)}
                   <p className="discDetailDescription">{disc.description}</p>
 

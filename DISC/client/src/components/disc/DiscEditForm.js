@@ -32,7 +32,7 @@ export default function DiscEditForm() {
         .then(disc => {
             setDisc(disc);
         })
-    }, [discId])
+    }, [])
 
     useEffect(() => {
         getAllBrands()

@@ -9,7 +9,7 @@ namespace DISC.Repositories
 {
     public class DiscRepository : BaseRepository, IDiscRepository
     {
-        public DiscRepository(IConfiguration configuration) : base(configuration) { }
+        public DiscRepository(IConfiguration configuration) : base(configuration) { } //gets configuration and passed down to base!
 
         public List<Disc> GetAllDiscsForSale()
         {
@@ -152,6 +152,8 @@ namespace DISC.Repositories
 
                     int id = (int)cmd.ExecuteScalar();
                     disc.Id = id;
+
+                    AddTagsToDisc(disc.Id, disc.Tags);
                 }
             }
         }
@@ -341,6 +343,27 @@ namespace DISC.Repositories
                         return tags;
                     }
                 }
+            }
+        }
+
+        public void AddTagsToDisc(int discId, List<Tag> tags)
+        { 
+            foreach(var tag in tags)
+            {
+                using (var conn = Connection)
+                {
+                    conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                            cmd.CommandText = @" INSERT INTO DiscTag (DiscId, TagId)
+                                                  VALUES (@discId, @tagId);";
+                            DbUtils.AddParameter(cmd, "@discId", discId);
+                            DbUtils.AddParameter(cmd, "@tagId", tag.Id);
+
+                            cmd.ExecuteScalar();
+                    }
+                }
+
             }
         }
 

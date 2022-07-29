@@ -278,6 +278,10 @@
 }
 
 
+.tag {
+    margin: .1vw .3vw .1vw .3vw;
+}
+
 /* #36454f  - dark gray background behind TN Disc logo
 #FF3847 - orange/red
 #75C7FB light blue;

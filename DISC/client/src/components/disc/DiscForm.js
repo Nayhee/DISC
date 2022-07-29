@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom"
 import { addDisc, getAllBrands, getAllTags } from "../modules/discManager";
 import './Disc.css'
-import { Col, Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Col, Button, Form, FormGroup, Label, Input} from "reactstrap";
 
 export default function DiscForm() {
 
@@ -24,7 +24,6 @@ export default function DiscForm() {
 
     const [tags , setTags] = useState([]);
     const [brands, setBrands] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
 
     const navigate = useNavigate();
 
@@ -35,10 +34,17 @@ export default function DiscForm() {
         });
         getAllTags()
         .then(allTags => {
+          allTags.forEach((tag) => tag.checked = false)
           setTags(allTags)
         });
-        setIsLoading(false);
     }, [])
+
+    const handleCheckbox = (evt) => {
+      const newTags = structuredClone(tags)
+      const actualId = evt.target.id -1;
+      newTags[actualId].checked = !newTags[actualId].checked;
+      setTags(newTags);
+    }
 
     const handleInputChange = (evt) => {
         const newDisc = {...disc}
@@ -55,10 +61,14 @@ export default function DiscForm() {
     }
 
     const handleClickSaveDisc = () => {
-        addDisc(disc)
+      const newTags = structuredClone(tags);
+      let trueTags = newTags.filter(t => t.checked === true);
+      disc.tags = trueTags;
+      addDisc(disc)
         .then(() => navigate("/discs"))
         .catch((err) => alert(`An error occured: ${err.message}`));
     }
+
 
     return (
         <div className="formContainer">
@@ -87,10 +97,27 @@ export default function DiscForm() {
                   placeholder="description"
                   onChange={handleInputChange}
                 />
-
               </Col>
-
             </FormGroup>
+
+            <FormGroup>
+              <label><b>Tags</b></label>
+              <div>
+                {tags?.map((t) => (
+                    <div key={t.id}>
+                      <input className="tag"
+                      type="checkbox"
+                      name={t.name}
+                      id={t.id}
+                      value={t.name}
+                      onChange={handleCheckbox} />
+                      <label htmlFor={t.name}>{t.name}</label>
+                      <br></br>
+                    </div>
+                ))}
+              </div>
+            </FormGroup>
+
             <FormGroup>
               <Label for="condition">Condition</Label>
               <Col sm={15}>

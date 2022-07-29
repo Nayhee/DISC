@@ -5,11 +5,10 @@ import { DiscCard } from "./DiscCard";
 import { Button, Input } from "reactstrap";
 import { getAllDiscs, searchDiscByName } from "../modules/discManager";
 
-export default function DiscList({user}) {
+export default function DiscList() {
 
     const [discs, setDiscs] = useState([])
     const [query, setQuery] = useState("");
-    const [isLoading, setIsLoading] = useState();
 
     const getDiscs = () => {
         getAllDiscs().then(discs => setDiscs(discs));

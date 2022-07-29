@@ -60,3 +60,15 @@ export const getAllTags = () => {
   return fetch(`${baseUrl}/GetTags`)
   .then(res => res.json())
 }
+
+//ended up including it within the AddDisc. 
+
+// export const addTagsToDisc = (discId, tags) => {
+//   return fetch(`${baseUrl}/AddTagsToDisc/${discId}`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(discId, tags),
+//   });
+// };

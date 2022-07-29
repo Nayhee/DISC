@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using System;
 
 namespace DISC.Controllers
 {
@@ -41,7 +42,7 @@ namespace DISC.Controllers
         [HttpPost]
         public IActionResult Post(Disc disc)
         {
-            disc.ImageId = 1; //will eventually change this once admin can upload picture for new disc. 
+            disc.ImageId = 2; //will eventually change this once admin can upload picture for new disc. 
             _discRepository.AddDisc(disc);
             return CreatedAtAction("Get", new { id = disc.Id }, disc);
         }
@@ -96,6 +97,17 @@ namespace DISC.Controllers
         {
             return Ok(_discRepository.GetAllTags());
         }
+
+
+        //I ended up including it in AddDisc;
+        //[HttpPost("AddTagsToDisc/{discId}")]
+        //public IActionResult AddTagsToDisc(int discId, List<Tag> tags)
+        //{
+        //    _discRepository.AddTagsToDisc(discId, tags);
+        //    return NoContent();
+        //}
+
+
     }
 
 }

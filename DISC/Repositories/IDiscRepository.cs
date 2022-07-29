@@ -13,5 +13,7 @@ namespace DISC.Repositories
         Disc GetDiscById(int id);
         void UpdateDisc(Disc disc);
         List<Disc> SearchDiscByName(string query);
+
+        void AddTagsToDisc(int discId, List<Tag> tags);
     }
 }

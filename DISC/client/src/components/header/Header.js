@@ -4,16 +4,26 @@ import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink} fro
 import { logout } from "../modules/authManager";
 import { Link, useLocation } from "react-router-dom";
 import "./Header.css"
+import { getImageById } from "../modules/imageManager";
 
 export default function Header({isLoggedIn, userType}) {
     
     const location = useLocation();
 
+    const [imageUrl, setImagUrl] = useState();
+
+    //the logo is ID 14.
+
+    useEffect(() => {
+        getImageById(14)
+        .then((url) => setImagUrl(url)); 
+    }, [])
+
     return (
                 <>
                     <div className="headerAndNav">
                         <div className="nav_logo_container">
-                            <img className="nav_logo" src="Images/tnLOGO.png"/>
+                            <img className="nav_logo" src={imageUrl}/>
                         </div>
 
                         <div className="navFullContainer">
@@ -40,7 +50,7 @@ export default function Header({isLoggedIn, userType}) {
 
                                 {isLoggedIn && (
                                     <li className="navbar__item">
-                                        <Link className={`navbar__link ${location.pathname === '/learn' ? 'active' : ''}`} to="/learn">Learn</Link>
+                                        <Link className={`navbar__link ${location.pathname === '/learn' ? 'active' : ''}`} to="/learn">Discover</Link>
                                     </li>
                                 )}
 

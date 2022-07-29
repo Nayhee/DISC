@@ -21,7 +21,7 @@ export default function ApplicationViews({isLoggedIn, user}) {
         <Route index element={isLoggedIn ? <Home user={user}/> : <Navigate to="/login" />}
         />
         <Route path="discs">
-          <Route index element={<DiscList user={user} />} />
+          <Route index element={<DiscList />} />
           <Route path="add" element={<DiscForm />} />
           <Route path=":id" element={<DiscDetails user={user} />} />
           <Route path="edit/:discId" element={<DiscEditForm />} />
