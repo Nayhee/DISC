@@ -56,3 +56,7 @@ export const getAllBrands = () => {
   .then(res => res.json())
 }
 
+export const getAllTags = () => {
+  return fetch(`${baseUrl}/GetTags`)
+  .then(res => res.json())
+}

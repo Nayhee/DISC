@@ -317,6 +317,33 @@ namespace DISC.Repositories
             }
         }
 
+        public List<Tag> GetAllTags()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @" Select * FROM Tag";
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        List<Tag> tags = new List<Tag>();
+                        while (reader.Read())
+                        {
+                            Tag tag = new Tag
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                            };
+                            tags.Add(tag);
+                        }
+                        return tags;
+                    }
+                }
+            }
+        }
+
 
     }
 }

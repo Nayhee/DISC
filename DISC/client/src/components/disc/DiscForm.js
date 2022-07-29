@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom"
-import { addDisc, getAllBrands } from "../modules/discManager";
+import { addDisc, getAllBrands, getAllTags } from "../modules/discManager";
 import './Disc.css'
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
@@ -22,6 +22,7 @@ export default function DiscForm() {
         imageUrl: "",
     })
 
+    const [tags , setTags] = useState([]);
     const [brands, setBrands] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
@@ -31,7 +32,11 @@ export default function DiscForm() {
         getAllBrands()
         .then(allBrands => {
             setBrands(allBrands)
-        })
+        });
+        getAllTags()
+        .then(allTags => {
+          setTags(allTags)
+        });
         setIsLoading(false);
     }, [])
 

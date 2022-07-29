@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace DISC.Repositories
 {
-    public abstract class BaseRepository
+    public abstract class BaseRepository //abstract means it can only be used by inheritance. 
     {
         private readonly string _connectionString;
 

@@ -14,11 +14,9 @@ namespace DISC.Controllers
     public class DiscController : ControllerBase
     {
         private readonly IDiscRepository _discRepository;
-        private readonly IImageRepository _imageRepository;
-        public DiscController(IDiscRepository discRepository, IImageRepository imageRepository)
+        public DiscController(IDiscRepository discRepository)
         {
             _discRepository = discRepository;
-            _imageRepository = imageRepository;
         }
 
         [HttpGet]
@@ -43,7 +41,7 @@ namespace DISC.Controllers
         [HttpPost]
         public IActionResult Post(Disc disc)
         {
-            disc.ImageId = 1;
+            disc.ImageId = 1; //will eventually change this once admin can upload picture for new disc. 
             _discRepository.AddDisc(disc);
             return CreatedAtAction("Get", new { id = disc.Id }, disc);
         }
@@ -93,5 +91,11 @@ namespace DISC.Controllers
             return Ok(_discRepository.GetAllBrands());
         }
 
+        [HttpGet("GetTags")]
+        public IActionResult GetTags()
+        {
+            return Ok(_discRepository.GetAllTags());
+        }
     }
+
 }

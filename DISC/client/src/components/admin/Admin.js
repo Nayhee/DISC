@@ -19,7 +19,6 @@ export default function Admin() {
 
     const getOrders = () => {
         getAllOrders().then(setOrders);
-        //or do some linq on it to get the most recent 5 orders!
     }
 
     useEffect (() => {

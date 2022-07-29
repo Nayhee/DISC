@@ -33,7 +33,9 @@ namespace DISC.Repositories
                     cmd.CommandText = @"SELECT o.Id, o.CartId, o.UserProfileId, o.Total, o.OrderDate, 
                                                up.Name 
                                         FROM Orders o
-                                        JOIN UserProfile up ON up.Id=o.UserProfileId";
+                                        JOIN UserProfile up ON up.Id=o.UserProfileId
+                                        ORDER BY o.OrderDate desc
+                                        ";
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {

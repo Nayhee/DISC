@@ -26,7 +26,7 @@ namespace DISC.Controllers
             var stream = _imageRepository.GetImageStreamById(ImageId);
             if (stream != null)
             {
-                return File(stream, "image/png", $"image_{ImageId}.png");
+                return File(stream, "image/png", $"image_{ImageId}.png"); //will eventually adjust for more than just PNG's.
             }
             return NotFound();
         }
@@ -34,7 +34,7 @@ namespace DISC.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromForm] IFormFile data)
         {
-            Image image = new Image();
+            Image image = new();
             image.Body = data;
             using (var memoryStream = new MemoryStream())
             {
