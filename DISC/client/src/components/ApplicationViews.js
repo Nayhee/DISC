@@ -12,6 +12,7 @@ import Cart from "./cart/Cart";
 import Home from "../Home";
 import Checkout from "./cart/Order";
 import Receipt from "./cart/Receipt";
+import Learn from "./Learn";
 
 export default function ApplicationViews({isLoggedIn, user}) {
   
@@ -38,6 +39,8 @@ export default function ApplicationViews({isLoggedIn, user}) {
       </Route> 
 
       <Route path="receipt" element={<Receipt user={user} /> } />
+
+      <Route path="learn" element={<Learn /> } />
       
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />

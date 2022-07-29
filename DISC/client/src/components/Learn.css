@@ -1,0 +1,25 @@
+.learnContainer {
+    width: 75%;
+    margin: auto;
+    margin-top: 2%;
+    background-color: white;
+    border: 1px solid black;
+    padding: 1vw;
+}
+
+.learnHeader {
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+.learnHeader2 {
+    font-size: 1.2vw;
+    display: flex;
+    justify-content: center;
+}
+
+.videosContainer {
+    display: flex;
+    justify-content: space-around;
+}
