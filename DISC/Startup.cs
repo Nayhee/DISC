@@ -34,6 +34,8 @@ namespace DISC
             services.AddTransient<IImageRepository, ImageRepository>();
             services.AddTransient<ICartRepository, CartRepository>();
             services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IRoundRepository, RoundRepository>();
+
             services.AddTransient<IPaymentRepository, PaymentRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>

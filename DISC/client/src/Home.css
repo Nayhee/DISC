@@ -73,7 +73,7 @@
 
     .buttonOnPic:hover {
     color: #7BD4FF;
-    box-shadow: 0 0 .5vw white, 0 0 1vw white;
+    box-shadow: 0 0 .15vw white;
 }
 
 @keyframes rotate {
