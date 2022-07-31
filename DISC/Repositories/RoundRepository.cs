@@ -75,6 +75,19 @@ namespace DISC.Repositories
             }
         }
 
+        public void DeleteRound(int roundId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @" DELETE FROM Round WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@id", roundId);
+                }
+            }
+        }
+
         //public List<Round> GetTodaysRounds(int userProfileId) //NOT DONE YET! GOTTA ACTUALLY DO THE DATE STUFF
         //{
         //    using (var conn = Connection)

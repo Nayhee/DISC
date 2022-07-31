@@ -1,3 +1,15 @@
+.loginWrapper {
+    width: 30%;
+    margin: auto;
+    margin-top: 2%;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+}
+.loginForm {
+    padding: 1vw;
+}
+
 .form--login h1 {
     font-size: 2.2vw;
     color: #fffafa;

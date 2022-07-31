@@ -48,7 +48,7 @@ export default function Home({user}) {
                         <img className="imgHome" src="images/RickyRoomOnSide.png"/>
                         <div className="textOnPicContainer">
                             <h1 className="textOnPicHeader">Ricky<br></br>Wysocki</h1>
-                            <p className="textOnPic">Limited Edition Tour Series 3 Pack</p>
+                            <p className="textOnPic">Limited Edition Tour Series Set</p>
 
                         </div>
                         <Link to={`/discs`}>

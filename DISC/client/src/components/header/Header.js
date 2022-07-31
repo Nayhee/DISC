@@ -31,7 +31,7 @@ export default function Header({isLoggedIn, userType}) {
 
                                 {isLoggedIn && (
                                     <li className="navbar__item">
-                                        <Link className="navbar__link" to="/"><i className="fa-solid fa-house-chimney fa-xl"></i>Home</Link>
+                                        <Link className={`navbar__link ${location.pathname === '/home' ? 'active' : ''}`} to="/"><i className="fa-solid fa-house-chimney fa-xl"></i>Home</Link>
                                     </li>
                                 )}
                                
@@ -74,7 +74,7 @@ export default function Header({isLoggedIn, userType}) {
 
                                 {isLoggedIn && (
                                     <li className="navbar__item">
-                                        <Link className="navbar__link" to="/cart"><i className="fa-solid fa-cart-shopping fa-xl"></i>Cart</Link>
+                                        <Link className={`navbar__link ${location.pathname === '/cart' ? 'active' : ''}`} to="/cart"><i className="fa-solid fa-cart-shopping fa-xl"></i>Cart</Link>
                                     </li>
                                 )}      
                             </ul>

@@ -21,8 +21,6 @@ export const RoundCard = ({ round, handleDeleteRound }) => {
               <button type="button" onClick={()=> handleDeleteRound(round.id)}>Delete</button>
           </div>
 
-
-
       </div>
     );
   }

@@ -38,6 +38,13 @@ namespace DISC.Controllers
             return Ok(Rounds);
         }
 
-        
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _roundRepository.DeleteRound(id);
+            return NoContent();
+        }
+
+
     }
 }

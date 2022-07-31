@@ -11,5 +11,7 @@ namespace DISC.Repositories
         void AddRound(Round round);
 
         List<Round> GetAUsersRounds(int userProfileId);
+
+        void DeleteRound(int roundId);
     }
 }
