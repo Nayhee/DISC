@@ -17,8 +17,3 @@ export const addRound = (newRound) => {
     });
 };
 
-
-// export const getAllRounds = () => {
-//     return fetch(baseUrl)
-//     .then(res => res.json())
-// }

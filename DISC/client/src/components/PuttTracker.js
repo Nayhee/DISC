@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./PuttTracker.css";
-import { addRound } from "./modules/roundManager";
+import { addRound, getAUsersRounds } from "./modules/roundManager";
 
 
 export default function PuttTracker({user}) {
@@ -10,8 +10,71 @@ export default function PuttTracker({user}) {
     const [round, setRound ] = useState({
         userProfileId: user?.id,
     })
-    const [isLoading, setIsLoading] = useState(true)
 
+    const [totalRoundsCount, setTotalRoundsCount] = useState();
+    const [totalPutts, setTotalPutts] = useState();
+    const [puttsMade, setPuttsMade] = useState();
+    const [puttPercentage, setPuttPercentage] = useState();
+    const [distances, setDistances] = useState([]);
+    const [selectedDistance, setSelectedDistance] = useState(0);
+    const [filteredRounds, setFilteredRounds] = useState([]);
+    const [allUsersRounds, setAllUsersRounds] = useState([]);
+
+    const decimalToPercentage = (decimal) => {
+        let percent = decimal * 100;
+        return Math.round(percent);
+    }
+
+    const isolateUniqueDistances = (allRounds) => {
+        let setOfDistances = new Set()
+        allRounds.forEach(round => setOfDistances.add(round.distance));
+        //convert set Object to an Array. 
+        let distancesArray = []
+        for(const dist of setOfDistances) {
+            distancesArray.push(dist)
+        }
+        return distancesArray;        
+    }
+
+    const scorecardCalcs = (rounds) => {
+        //# of total rounds is number of objects in the fetched "AllRounds" array. Set state.  
+        let roundCount = rounds.length;
+        setTotalRoundsCount(roundCount);
+
+        //set puttCount to 0, then for each round, add that round's number of putts to the count and SET state. 
+        let puttCount = 0;
+        rounds.forEach(r => puttCount += r.puttsTaken)
+        setTotalPutts(puttCount);
+
+        //set madeCount to 0, then for each round, add that round's number of made putts to the count and SET State. 
+        let madeCount = 0;
+        rounds.forEach(r => madeCount += r.puttsMade)
+        setPuttsMade(madeCount);
+
+        let decimal = madeCount / puttCount;
+        //New Users have no rounds, which returns NaN, I solve by placing initial userFriendly placeholder on the DOM.  
+        let percentage = decimalToPercentage(decimal)
+        if(isNaN(percentage)) {
+            setPuttPercentage("-")
+        } else {
+            setPuttPercentage(`${percentage}%`)
+        }
+    }
+
+    const populateScorecard = () => {
+        scorecardCalcs(allUsersRounds)
+    }
+
+    const handleFilterChange = (event) => {
+        let distanceSelected = parseInt(event.target.value);
+        setSelectedDistance(distanceSelected);
+        setFilteredRounds(allUsersRounds.filter(round => round.distance === distanceSelected));
+        //if they picked ALL, setFilteredRounds with ALL of the users rounds.
+        if(distanceSelected === 0) {
+            setFilteredRounds(allUsersRounds)
+        }
+    }
+    
     const handleInputChange = (event) => {
         const newRound = {...round}
         let userInputValue = parseInt(event.target.value);
@@ -19,90 +82,142 @@ export default function PuttTracker({user}) {
         setRound(newRound);
     }
 
-    const handleClickSaveRound = (event) => {
+
+    const handleSubmitRound = (event) => {
         event.preventDefault();
         if(round.distance > 0 && round.puttsTaken > 0 && round.puttsMade > 0) {
-            setIsLoading(true);
             let newRound = {...round};
             newRound.distance = parseInt(round.distance);
             newRound.puttsTaken = parseInt(round.puttsTaken);
             newRound.puttsMade = parseInt(round.puttsMade);
             addRound(newRound)
-            .then(setIsLoading(false))
+            .then((alert("Round submitted successfully!")))
+            .then(() => roundFunc())
         } else {
             window.alert("Please complete each field")
         }
     }
 
+    const roundFunc = () => {
+        getAUsersRounds(user.id)
+        .then(allRounds => {
+
+            setAllUsersRounds(allRounds); // setAllUsersRounds. 
+            setFilteredRounds(allRounds) //set filteredRounds to All initially. 
+
+            let distancesToSet = isolateUniqueDistances(allRounds); 
+            setDistances(distancesToSet); //sets the distances for them to select from. 
+        })
+        .then(() => scorecardCalcs(allUsersRounds))
+    }
+
+    useEffect(() => {
+        roundFunc();
+    }, [])
+
+    useEffect(() => {
+        populateScorecard();
+    }, [selectedDistance])    //when SelectedDistance changes, run populate scorecard again. 
+
+    useEffect(() => {
+        populateScorecard();
+    }, [allUsersRounds])      //when the users rounds change, run populate scorecard again. 
+
+    useEffect(() => {
+        scorecardCalcs(filteredRounds)
+    }, [filteredRounds])      //re-run the scorecard calc when user selects different distance filter. 
+
+
     return (
-        <>
-            <main style={{ textAlign: "center" }}>
-            
-            <div className='howToPlayDiv'>
-                <h4>How It Works:</h4>
-                <ol> 
-                    <li className="howToPlayItem">Throw some putts</li>
-                    <li className="howToPlayItem">Input your results</li>
-                    <li className="howToPlayItem">Click submit round</li>
-                </ol>
+        <>  
+        <h1 className="puttTrackerHeader">Putt Tracker</h1>
+        <div className="pageWrapper">
+
+            <div className="newRoundContainer"> 
+                <form className="newRoundForm">
+                    <h3 className="newRoundFormTitle">New Round</h3>
+
+                    <div className="newRoundGridDiv">
+
+                        <div className="newRoundGroup">
+                            <label htmlFor="distance">Distance</label>
+                            <input
+                            type="text"
+                            id="distance" 
+                            className="newRoundControls"
+                            onChange={handleInputChange} 
+                            required
+                            maxLength="3"
+                            placeholder="20"
+                           />
+                        </div>
+
+                        <div className="newRoundGroup">
+                            <label htmlFor="putts"># Putts</label>
+                            <input
+                            type="text"
+                            id="puttsTaken" 
+                            className="newRoundControls"
+                            onChange={handleInputChange} 
+                            required
+                            maxLength="3"
+                            placeholder="10"
+                            />
+                        </div>
+
+                        <div className="newRoundGroup">
+                            <label htmlFor="made"># Made</label>
+                            <input
+                            type="text"
+                            id="puttsMade" 
+                            className="newRoundControls"
+                            onChange={handleInputChange} 
+                            required
+                            maxLength="3"
+                            placeholder="8"
+                            />
+                        </div>
+                    </div>
+
+                    <button 
+                        type="button"
+                        className="submitRoundButton"
+                        onClick={handleSubmitRound}>
+                        Submit Round
+                    </button>
+                </form>
             </div>
+                
+
+            <div className="scorecardContainer">
+                    
+                    <div className="userScorecard">
+                        <h3>{user?.displayName}'s Scorecard</h3>
+
+                        <div className="filterScorecard">
+                            <label htmlFor="distance">Filter by Distance </label>
+                            <select name="distance" id="distance" onChange={handleFilterChange} className="filterSelect">
+                                <option value={0}>All</option>
+                                {distances.map(d => (
+                                    <option key={d} value={d}>{d} ft</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className="wrapper">
+                            <div className="scorecardItem">Total Rounds</div>
+                            <div className="scorecardItem">{totalRoundsCount}</div>
+                            <div className="scorecardItem">Total Putts</div>
+                            <div className="scorecardItem">{totalPutts}</div>
+                            <div className="scorecardItem">Putts Made</div>
+                            <div className="scorecardItem">{puttsMade}</div>
+                            <div className="scorecardPercLabel">% Made</div>
+                            <div className="scorecardPercValue">{puttPercentage}</div>
+                        </div>
+                    </div>
+            </div>
+        </div>
             
-            <form className="newRoundForm">
-                <h1 className="newRoundFormTitle">Track New Round</h1>
-
-                <div className="newRoundGridDiv">
-
-                    <div className="newRoundGroup">
-                        <label htmlFor="distance">Distance:</label>
-                        <input
-                        type="text"
-                        id="distance" 
-                        className="newRoundControls"
-                        onChange={handleInputChange} 
-                        required
-                        maxLength="3"
-                        placeholder="20"
-                        value={round.distance} />
-                    </div>
-
-                    <div className="newRoundGroup">
-                        <label htmlFor="putts"># Putts:</label>
-                        <input
-                        type="text"
-                        id="putts" 
-                        className="newRoundControls"
-                        onChange={handleInputChange} 
-                        required
-                        maxLength="3"
-                        placeholder="10"
-                        value={round.puttsTaken} />
-                    </div>
-
-                    <div className="newRoundGroup">
-                        <label htmlFor="made"># Made:</label>
-                        <input
-                        type="text"
-                        id="made" 
-                        className="newRoundControls"
-                        onChange={handleInputChange} 
-                        required
-                        maxLength="3"
-                        placeholder="8"
-                        value={round.puttsMade} />
-                    </div>
-
-                </div>
-
-                <button 
-                type="button"
-                className="submitRoundButton"
-                disabled={isLoading}
-                onClick={handleClickSaveRound}>
-                    Submit Round
-                </button>
-
-            </form>
-        </main>
         </>
     )
 }
@@ -120,23 +235,3 @@ export default function PuttTracker({user}) {
 
 
 
-
-    {/* <div className="learnContainer">
-            <h2 className="learnHeader">New To Disc Golf?</h2>
-            <p className="learnHeader2">Checkout these instructional videos from the best players in the world</p>
-        <div className="videosContainer">
-            <div className="formVideos">
-                <h5>Improve Your Form</h5>
-                <iframe src="https://www.youtube.com/watch?v=1SddjMdLrYo">
-                </iframe>
-            </div>
-            <div className="flightNumberVideos">
-                <h5>Learn About Flight Numbers</h5>
-                <p>VIDEO HERE</p>
-            </div>
-            <div className="gripVideos">
-                <h5>Find Your Grip</h5>
-                <p>VIDEO HERE</p>
-            </div>
-        </div>
-    </div> */}

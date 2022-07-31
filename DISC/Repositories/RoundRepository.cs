@@ -32,16 +32,14 @@ namespace DISC.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @" INSERT INTO Round (UserProfileId, Date, Distance, PuttsTaken, PuttsMade)
-                                          OUTPUT INSERTED.ID
-                                          VALUES (@userProfileI, @date, @distance, @puttsTaken, @puttsMade)";
+                                          VALUES (@userProfileId, @date, @distance, @puttsTaken, @puttsMade)";
                     DbUtils.AddParameter(cmd, "@userProfileId", round.UserProfileId);
                     DbUtils.AddParameter(cmd, "@date", round.Date);
                     DbUtils.AddParameter(cmd, "@distance", round.Distance);
                     DbUtils.AddParameter(cmd, "@puttsTaken", round.PuttsTaken);
                     DbUtils.AddParameter(cmd, "@puttsMade", round.PuttsMade);
 
-                    int id = (int)cmd.ExecuteScalar();
-                    round.Id = id;
+                    cmd.ExecuteScalar();
                 }
             }
         }
