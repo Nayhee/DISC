@@ -57,11 +57,7 @@
     background-color:#0d0f21;
     border: .1vw solid #fffafa;
     border-radius: .25vw;
-    -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
-
-
 
 .newRoundGridDiv {
     display: grid;
@@ -176,7 +172,7 @@
     padding: .25vw;
     font-size: 1.2vw;
     border: 1px solid white;
-    color:#75C7FB;
+    color:lightgrey;
 }
 
 .scorecardPercValue {
@@ -185,7 +181,8 @@
     padding: .25vw;
     font-weight: bold;
     font-size: 1.3vw;
-    color: #f5f5f5;
+    color: #75C7FB;
+    /* margin-top: .5vw; */
     border: 1px solid white;
 }
 
@@ -195,7 +192,8 @@
     padding: .25vw;
     font-weight: bold;
     font-size: 1.3vw;
-    color: #f5f5f5;
+    color: #75C7FB;
+    /* margin-top: .5vw; */
     border: 1px solid white;
 }
 

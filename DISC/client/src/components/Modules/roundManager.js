@@ -17,3 +17,8 @@ export const addRound = (newRound) => {
     });
 };
 
+export const deleteRound = (id) => {
+    return fetch(`${baseUrl}/${id}`, {
+        method: "DELETE"
+    })
+};

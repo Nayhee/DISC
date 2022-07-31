@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useReducer, useState} from "react";
 import "./PuttTracker.css";
-import { addRound, getAUsersRounds } from "./modules/roundManager";
+import { addRound, getAUsersRounds, deleteRound} from "./modules/roundManager";
+import { RoundCard } from "./round/RoundCard";
 
 
 export default function PuttTracker({user}) {
@@ -98,13 +99,16 @@ export default function PuttTracker({user}) {
         }
     }
 
-    const roundFunc = () => {
-        getAUsersRounds(user.id)
-        .then(allRounds => {
+    const handleDeleteRound = (roundId) => {
+        deleteRound(roundId)
+        .then(() => roundFunc())
+    }
 
+    const roundFunc = () => {
+        getAUsersRounds(user?.id)
+        .then(allRounds => {
             setAllUsersRounds(allRounds); // setAllUsersRounds. 
             setFilteredRounds(allRounds) //set filteredRounds to All initially. 
-
             let distancesToSet = isolateUniqueDistances(allRounds); 
             setDistances(distancesToSet); //sets the distances for them to select from. 
         })
@@ -209,14 +213,44 @@ export default function PuttTracker({user}) {
                             <div className="scorecardItem">{totalRoundsCount}</div>
                             <div className="scorecardItem">Total Putts</div>
                             <div className="scorecardItem">{totalPutts}</div>
-                            <div className="scorecardItem">Putts Made</div>
+                            <div className="scorecardItem">Total Made</div>
                             <div className="scorecardItem">{puttsMade}</div>
-                            <div className="scorecardPercLabel">% Made</div>
+                            <div className="scorecardPercLabel">Putting %</div>
                             <div className="scorecardPercValue">{puttPercentage}</div>
                         </div>
                     </div>
             </div>
         </div>
+
+        <div className="roundListContainer">
+
+                <div className="roundListHeader">
+                    <h2>{user?.displayName}'s Rounds</h2>
+                </div>
+
+                <div className="roundListBody">
+                    <div className="labelsAndListContainer">
+
+                        <div className="roundListLabels">
+                            <div className="roundListLabel">Date:</div>
+                            <div className="roundListLabel">Distance:</div>
+                            <div className="roundListLabel"># Putts:</div>
+                            <div className="roundListLabel"># Made:</div>
+                            <div className="roundListLabel">% Made:</div>
+                            <div className="roundListLabel"></div>
+                        </div>
+                        <div className="roundList">
+                            {allUsersRounds?.map(round => 
+                                <RoundCard
+                                    key={round.id}
+                                    round={round}
+                                    handleDeleteRound={handleDeleteRound}
+                                />)}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             
         </>
     )

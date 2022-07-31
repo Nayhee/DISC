@@ -1,0 +1,116 @@
+.roundContainer {
+    display: grid;
+    grid-template-columns: 12% 10% 10% 10% 10% 10%;
+    font-size: 1.3vw;
+    justify-content: space-between;
+    margin: auto;
+    padding: .1vw;
+    width: 100%;
+    border-bottom: .05vw solid #fffafa;
+}
+
+.roundRow {
+    display: flex;
+    justify-content: center;
+    color:#75C7FB;
+    align-items: center;
+    width: 9vw;
+}
+
+
+.roundListContainer {
+    width: 70%;
+    padding: 1.5vw 2vw 2vw 2vw;
+    background-color: #0d0f21;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    position: relative;
+    overflow: hidden;
+    border: .5vw solid ;
+    border-image: 
+    linear-gradient(
+        #ff512f,    
+        #dd2476,
+        #1c64ff) 1;
+    animation: 
+        rotate 3s ease-in infinite;
+    border-radius: 1vw;
+    z-index: 1;
+    opacity: 98%;
+} 
+
+@keyframes rotate {
+    50%{
+        border-image:
+        linear-gradient(
+            360deg,
+            #ff512f, 
+            #dd2476,
+            #1c64ff) 1;
+    }
+}
+
+.roundListHeader {
+    display: flex;
+    margin-bottom: 1.5vw;
+}
+
+.roundListHeader h2 {
+    color: #fffafa;
+    padding: .5vw .5vw .5vw 0vw;
+    font-size: 2.2vw;
+    margin: 0vw 1.5vw 0vw 0vw;
+    width: 100%;
+}
+
+.roundListLabels {
+   color: hotpink;
+   display: grid;
+   grid-template-columns: 12% 10% 10% 10% 10% 10%;
+   font-size: 1.45vw;
+   text-decoration: underline;
+   text-decoration-thickness: .1vw;
+   text-underline-offset: .25vw;
+   margin-bottom: .1vw;
+   justify-content: space-between;
+}
+
+.roundListLabel {
+    display: flex;
+    justify-content: center;
+    padding: 0vw 0vw .2vw 0vw;
+    width: 9vw;
+}
+
+.roundDeleteButton {
+    align-items: center;
+    display: flex;
+    padding: .5vw;
+}
+
+.roundDeleteButton button {
+    border: .1vw solid #fffafa;
+    background-color: #0d0f21;
+    color:hotpink;
+    font-weight: bold;
+    border-radius: 8%;
+    height: 1.8vw;
+    width: 4vw;
+    justify-items: space-between;
+    font-size: .85vw;
+    margin: .18vw 0vw .18vw 0vw;
+    opacity: 98%;
+}
+
+.roundDeleteButton button:hover {
+    border: .1vw solid #fffafa;
+    color: #3fbdc2;
+    background-color: #0d0f21;
+    text-decoration: none;
+    box-shadow: 0 0 .25vw #3fbdc2;
+}
