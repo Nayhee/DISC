@@ -185,7 +185,7 @@ namespace DISC.Repositories
                                             JOIN Orders o on o.CartId=c.Id
                                             WHERE o.Id=@orderId
                     ";
-                    cmd.Parameters.AddWithValue("@id", orderId);
+                    cmd.Parameters.AddWithValue("@orderId", orderId);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
