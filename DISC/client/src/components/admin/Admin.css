@@ -1,3 +1,39 @@
 .userListContainer {
-    margin: 2% 25% 0% 25%;
+    margin: .05% 22% 0% 22%;
+    /* border: 2px solid black;
+    border-radius: 10px; */
+    padding: 1vw;
 }
+
+.totalOrdersWrapper {
+    display: flex;
+    margin-top: 1vw;
+}
+.totalOrdersWrapper h5 {
+    display: flex;
+    justify-content: center;
+}
+
+.totalOrderQuantity {
+    padding: .25vw;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 20%;
+    background-color: lightgray;
+    position: relative;
+    left: 3vw;
+}
+
+.totalOrderAmount {
+    padding: .25vw;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 20%;
+    background-color: lightgray;
+    position: relative;
+    left: -3vw;
+
+}
+

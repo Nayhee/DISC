@@ -10,6 +10,8 @@ export default function Admin() {
 
     const [users, setUsers] = useState([])
     const [orders, setOrders] = useState([]);
+    const [numOrders, setNumOrders] = useState(0);
+    const [totalSales, setTotalSales] = useState(0);
 
     const navigate = useNavigate();
 
@@ -18,7 +20,14 @@ export default function Admin() {
     }
 
     const getOrders = () => {
-        getAllOrders().then(setOrders);
+        getAllOrders()
+        .then((orders) => {
+            let sales = 0;
+            orders.forEach(order => sales += order.total);
+            setTotalSales(sales);
+            setNumOrders(orders.length);
+            setOrders(orders);
+        })
     }
 
     useEffect (() => {
@@ -43,8 +52,19 @@ export default function Admin() {
                 </Link>
             </div>
 
+            <div className="totalOrdersWrapper">
+                <div className="totalOrderQuantity">
+                    <h5><u>Total Orders</u></h5>
+                    <h5>{numOrders}</h5>
+                </div>
+                <div className="totalOrderAmount">
+                    <h5><u>Total Sales</u></h5>
+                    <h5>${totalSales}</h5>
+                </div>
+            </div>
+
             <h4>Orders</h4>
-            <Table responsive bordered striped hover>
+            <Table className="orderTable" responsive bordered striped hover>
                 <thead>
                     <tr>
                         <th>#</th>
