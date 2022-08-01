@@ -42,7 +42,7 @@
     
 .navbar__item {
     display: flex;
-    flex-basis: 15%;
+    flex-basis: 12%;
     list-style-type: none;
     align-items: center;
     justify-content: center;

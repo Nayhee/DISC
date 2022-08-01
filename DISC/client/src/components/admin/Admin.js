@@ -44,98 +44,104 @@ export default function Admin() {
     return (
         <div className="userListContainer">
             
-            <div className="addDiscButton">
+            {/* <div className="addDiscButton">
                 <Link to={`/discs/add`}>
                     <Button color="success" type="button">
                         Add Disc
                     </Button>
                 </Link>
-            </div>
+            </div> */}
 
             <div className="totalOrdersWrapper">
                 <div className="totalOrderQuantity">
-                    <h5><u>Total Orders</u></h5>
-                    <h5>{numOrders}</h5>
+                    <h4 style={{color: "#F0F0F0"}}>Total Orders</h4>
+                    <h4>{numOrders}</h4>
                 </div>
                 <div className="totalOrderAmount">
-                    <h5><u>Total Sales</u></h5>
-                    <h5>${totalSales}</h5>
+                    <h4 style={{color: "#F0F0F0"}}>Total Sales</h4>
+                    <h4>${totalSales}</h4>
                 </div>
             </div>
 
-            <h4>Orders</h4>
-            <Table className="orderTable" responsive bordered striped hover>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Customer</th>
-                        <th>Order Date</th>
-                        <th>Total</th>
-                        <th>Paid</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {orders?.map(order => 
-                        <tr key={order.id}>
-                            <td>{order.id}</td>
-                            <td>{order.userProfile.name}</td>
-                            <td>{splitDate(order.orderDate)}</td>
-                            <td>${order.total}</td>
-                            {order.isPaymentReceived ? 
-                                <td style={{color: "green"}}>Yes</td>
-                                :
-                                <td style={{color: "red"}}>No</td>
-                            }
-                            <td>
-                                <div className="discDetailButtons">
-                                    <div className="discDetailButton">
-                                        <Link to={`/order/edit/${order.id}`}>
-                                            <i className="fa-solid fa-pen-to-square fa-xl"></i> 
-                                        </Link>
+            <div className="orderTableWrapper">
+                <h4>Orders</h4>
+                <Table responsive bordered striped hover>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Customer</th>
+                            <th>Order Date</th>
+                            <th>Total</th>
+                            <th>Paid</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {orders?.map(order => 
+                            <tr key={order.id}>
+                                <td>{order.id}</td>
+                                <td>{order.userProfile.name}</td>
+                                <td>{splitDate(order.orderDate)}</td>
+                                <td>${order.total}</td>
+                                {order.isPaymentReceived ? 
+                                    <td style={{color: "green"}}>Yes</td>
+                                    :
+                                    <td style={{color: "red"}}>No</td>
+                                }
+                                <td>
+                                    <div className="discDetailButtons">
+                                        <div className="discDetailButton">
+                                            <Link to={`/order/edit/${order.id}`}>
+                                                <i className="fa-solid fa-pen-to-square fa-xl"></i> 
+                                            </Link>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>)}
-                </tbody>
-            </Table>
-            
-            <h4>Users</h4>
-            <Table responsive bordered striped hover>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>UserType</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users?.map(user => 
-                        <tr key={user.id}>
-                            <td>{user.id}</td>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>
-                                {user.isAdmin == true ? 'Admin' : 'User'}
-                            </td>
-                            <td>
-                                <div className="discDetailButtons">
-                                    <div className="discDetailButton">
-                                        <Link to={`/admin/edit/${user.id}`}>
-                                            <i className="fa-solid fa-pen-to-square fa-xl"></i> 
-                                        </Link>
+                                </td>
+                            </tr>)}
+                    </tbody>
+                </Table>
+            </div>
 
+            <div className="userTableWrapper">
+                <h4>Users</h4>
+                <Table responsive bordered striped hover>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>UserType</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users?.map(user => 
+                            <tr key={user.id}>
+                                <td>{user.id}</td>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                                <td>
+                                    {user.isAdmin == true ? 'Admin' : 'User'}
+                                </td>
+                                <td>
+                                    <div className="discDetailButtons">
+                                        <div className="discDetailButton">
+                                            <Link to={`/admin/edit/${user.id}`}>
+                                                <i className="fa-solid fa-pen-to-square fa-xl"></i> 
+                                            </Link>
+
+                                        </div>
+                                        <div type="button">
+                                            <i onClick={() => handleDeleteUser(user.id)} className="fa-solid fa-trash fa-xl"></i>  
+                                        </div>
                                     </div>
-                                    <div type="button">
-                                        <i onClick={() => handleDeleteUser(user.id)} className="fa-solid fa-trash fa-xl"></i>  
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>)}
-                </tbody>
-            </Table>
+                                </td>
+                            </tr>)}
+                    </tbody>
+                </Table>
+
+            </div>
+            
         </div>
         
     )

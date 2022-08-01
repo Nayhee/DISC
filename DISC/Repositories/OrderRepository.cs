@@ -77,10 +77,10 @@ namespace DISC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT * 
-                                        FROM Orders 
+                    cmd.CommandText = @"SELECT o.*, up.Name
+                                        FROM Orders o
                                         JOIN UserProfile up ON up.Id=o.UserProfileId 
-                                        WHERE Id=@orderId";
+                                        WHERE o.Id=@orderId";
                     DbUtils.AddParameter(cmd, "@orderId", orderId);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())

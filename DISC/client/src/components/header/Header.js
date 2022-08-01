@@ -13,6 +13,7 @@ export default function Header({isLoggedIn, userType}) {
     const [imageUrl, setImagUrl] = useState();
 
     //the logo is ID 14.
+    //logo 2 is 15.
 
     useEffect(() => {
         getImageById(14)
@@ -45,6 +46,12 @@ export default function Header({isLoggedIn, userType}) {
                                 {isLoggedIn && userType === true && (
                                     <li className="navbar__item">
                                         <Link className={`navbar__link ${location.pathname === '/admin' ? 'active' : ''}`} to="/admin">Admin</Link>
+                                    </li>
+                                )}
+
+                                {isLoggedIn && userType === true && (
+                                    <li className="navbar__item">
+                                        <Link className={`navbar__link ${location.pathname === '/discs/add' ? 'active' : ''}`} to="/discs/add">Add Disc</Link>
                                     </li>
                                 )}
 

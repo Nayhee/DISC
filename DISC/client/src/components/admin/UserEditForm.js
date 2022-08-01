@@ -67,7 +67,6 @@ export default function UserEditForm() {
                   id="isAdmin"
                   onChange={handleInputChange}
                 >
-                  <option value="">Select UserType</option>
                   <option key="Admin" value="true">Admin</option>
                   <option key="User" value="false">User</option>
                 </select>
