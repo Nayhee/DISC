@@ -14,7 +14,5 @@ namespace DISC.Repositories
         void UpdateOrdersPaymentStatus(Order order);
 
         List<Order> GetAllOrders();
-
-        //Order GetUsersMostRecentOrder(int userId);
     }
 }

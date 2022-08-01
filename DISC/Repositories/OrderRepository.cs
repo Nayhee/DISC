@@ -196,7 +196,6 @@ namespace DISC.Repositories
                                         SET 
                                             IsPaymentReceived = @isPaymentReceived   
                                             WHERE Id = @id";
-
                     DbUtils.AddParameter(cmd, "@id", order.Id);
                     DbUtils.AddParameter(cmd, "@isPaymentReceived", order.IsPaymentReceived);
 
@@ -258,42 +257,6 @@ namespace DISC.Repositories
                 }
             }
         }
-
-
-        //public Order GetUsersMostRecentOrder(int userId)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"SELECT TOP 1 Id, Total, OrderDate 
-        //                                FROM Orders
-        //                                WHERE UserProfileId=@userId 
-        //                                ORDER BY OrderDate DESC
-        //            ";
-        //            cmd.Parameters.AddWithValue("@userId", userId);
-
-        //            using (SqlDataReader reader = cmd.ExecuteReader())
-        //            {
-        //                if (reader.Read())
-        //                {
-        //                    Order order = new Order
-        //                    {
-        //                        Id = DbUtils.GetInt(reader, "Id"),
-        //                        Total = DbUtils.GetDec(reader, "Total"),
-        //                        OrderDate = DbUtils.GetDateTime(reader, "OrderDate"),
-        //                    };
-        //                    return order;
-        //                }
-        //                else
-        //                {
-        //                    return null;
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
 
 
     }

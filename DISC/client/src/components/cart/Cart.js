@@ -69,62 +69,50 @@ export default function Cart({user}) {
 
     if(cart !== null && cart.discs.length > 0) {
         return (
-             <div className="cartContainer">
-                 <h2 className="cartHeader">{user.displayName}'s Cart</h2>
-                 <Table responsive bordered striped hover>
-                     <thead>
-                         <tr>
-                             <th>Disc</th>
-                             <th>Name</th>
-                             <th>Plastic</th>
-                             <th>Brand</th>
-                             <th>Weight</th>
-                             <th>Condition</th>
-                             <th>Quantity</th>
-                             <th>Price</th>
-                             <th></th>
-                         </tr>
-                     </thead>
-                     <tbody>
-                         {cart.discs.map(disc => 
-                             <tr className="dataRow" key={disc.id}>
-                                 <td className="productImage">
-                                    <img src={disc.imageUrl} alt="My Disc" />
-                                 </td>
+             
+             <div className="cartWrapper">
+                <h2 className="cartHeader">Shopping Cart</h2>
+                <div className="cartDiscListWrapper">
+                    <div className="labelWrapper">
+                        <div className="labelsWrapper">
+                            <div className="productLabel">Product</div>
+                            <div className="quantityLabel">Quantity</div>
+                            <div className="totalLabel">Total</div>
+                        </div>
+                    </div>
+                    {cart.discs.map(disc => 
+                        <div className="cartRow" key={disc.id}>
+                            <div className="cartImage">
+                                <img src={disc.imageUrl} alt="My Disc" />
+                            </div>
+                            <div className="cartInfo">
+                                <p>{disc.brand.name} {disc.name} / {disc.plastic} Plastic / {disc.weight}g / {disc.condition} </p>
+                            </div>
+                            <div className="cartQuantity">
+                                <p>-</p>
+                                <p>1</p>
+                                <p>+</p>
+                            </div>
+                            <div className="cartProductTotal">${disc.price}</div>
+                            <div className="cartRemoveDiscButton" type="button">
+                                <i onClick={() => handleDeleteCartDisc(disc.id)} className="fa-solid fa-trash fa-xl"></i>  
+                            </div>
+                        </div>
+                    )}
 
-                                 <td className="discName">
-                                    {disc.name}
-                                 </td>
-
-                                 <td className="discPlastic">{disc.plastic}</td>
-
-                                 <td className="discBrand">{disc.brand.name}</td>
-
-                                 <td className="discWeight">{disc.weight}g</td>
-
-                                 <td className="discCondition">{disc.condition}</td>
-            
-                                 <td className="productQuantity">1</td>
-
-                                 <td className="productPrice">${disc.price}</td>
-
-                                 <td>
-                                    <div type="button">
-                                        <i onClick={() => handleDeleteCartDisc(disc.id)} className="fa-solid fa-trash fa-xl"></i>  
-                                    </div>
-                                 </td>
-                             </tr>
-                         )}
-                     </tbody>
-                 </Table>
-
-                 <div className="cartTotal">
-                    <h4>Total: ${total}</h4>
-                    <p className="taxNote">Taxes calculated at checkout</p>
-                    <Link className="checkoutButtonDiv" to={`./order/${cart.id}`}>
-                        {cart.discs.length > 0 ? <Button color="primary" className="DetailsButton">Checkout </Button> : ""}
-                    </Link>
-                 </div>
+                    <div className="cartTotal">
+                            <div className="subTotal">
+                                <h5 className="sub">Subtotal:   </h5>
+                                <h5 className="total">${total}</h5>
+                            </div>
+                            {/* <p className="taxNote">Taxes calculated at checkout</p> */}
+                            <div className="checkoutButtonDiv">
+                                <Link className="checkoutButton" to={`./order/${cart.id}`}>
+                                    {cart.discs.length > 0 ? <Button color="primary" className="DetailsButton">Checkout </Button> : ""}
+                                </Link>
+                            </div>
+                    </div>
+                </div>
              </div>
         ) 
     }

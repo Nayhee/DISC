@@ -54,21 +54,6 @@ namespace DISC.Controllers
         }
 
 
-        
-
-
-        //[HttpGet("GetUsersMostRecentOrder/{userId}")]
-        //public IActionResult GetUsersMostRecentOrder(int userId)
-        //{
-        //    var usersOrder = _orderRepository.GetUsersMostRecentOrder(userId);
-        //    if(usersOrder == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(usersOrder);
-        //}
-
-
 
       
     }
