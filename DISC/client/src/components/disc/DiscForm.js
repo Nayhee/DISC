@@ -257,7 +257,7 @@ export default function DiscForm() {
               </Col>
 
             </FormGroup>
-            <Button className="btn btn-primary" onClick={handleClickSaveDisc}>
+            <Button color="primary" className="btn btn-primary" onClick={handleClickSaveDisc}>
               Submit
             </Button>
           </Form>

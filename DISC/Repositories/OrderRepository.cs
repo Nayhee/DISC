@@ -77,9 +77,15 @@ namespace DISC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT o.*, up.Name
+                    cmd.CommandText = @"SELECT o.*, 
+                                        d.Id as DiscId, d.Name, d.BrandId, d.Condition, d.Speed, d.Glide, d.Turn, d.Fade, d.Plastic, d.Price, d.Weight, d.ImageUrl, d.ImageId, d.ForSale, d.Description, 
+                                        up.Name as UserName, b.Name as BrandName
                                         FROM Orders o
-                                        JOIN UserProfile up ON up.Id=o.UserProfileId 
+                                        JOIN Cart c ON c.Id=o.CartId
+                                        JOIN CartDisc cd ON cd.CartId=c.Id
+                                        JOIN Disc d ON d.Id=cd.DiscId
+                                        JOIN UserProfile up ON up.Id=o.UserProfileId
+                                        JOIN Brand b ON b.Id=d.BrandId
                                         WHERE o.Id=@orderId";
                     DbUtils.AddParameter(cmd, "@orderId", orderId);
 
@@ -102,17 +108,44 @@ namespace DISC.Repositories
                                     ShippingCity = DbUtils.GetString(reader, "ShippingCity"),
                                     ShippingZip = DbUtils.GetString(reader, "ShippingZip"),
                                     ShippingFirstName = DbUtils.GetString(reader, "ShippingFirstName"),
-                                    ShippingLastName= DbUtils.GetString(reader, "ShippingLastName"),
+                                    ShippingLastName = DbUtils.GetString(reader, "ShippingLastName"),
                                     ShippingCountry = DbUtils.GetString(reader, "ShippingCountry"),
                                     UserProfile = new UserProfile()
                                     {
                                         Id = DbUtils.GetInt(reader, "UserProfileId"),
-                                        Name = DbUtils.GetString(reader, "Name"),
-                                    }
+                                        Name = DbUtils.GetString(reader, "UserName"),
+                                    },
+                                    Discs = new List<Disc>()
                                 };
                             }
+                            if(DbUtils.IsNotDbNull(reader, "DiscId"))
+                            {
+                                order.Discs.Add(new Disc()
+                                {
+                                    Id = DbUtils.GetInt(reader, "DiscId"),
+                                    Name = DbUtils.GetString(reader, "Name"),
+                                    BrandId = DbUtils.GetInt(reader, "BrandId"),
+                                    Condition = DbUtils.GetString(reader, "Condition"),
+                                    Speed = DbUtils.GetInt(reader, "Speed"),
+                                    Glide = DbUtils.GetInt(reader, "Glide"),
+                                    Turn = DbUtils.GetInt(reader, "Turn"),
+                                    Fade = DbUtils.GetInt(reader, "Fade"),
+                                    Plastic = DbUtils.GetString(reader, "Plastic"),
+                                    Price = DbUtils.GetInt(reader, "Price"),
+                                    Weight = DbUtils.GetInt(reader, "Weight"),
+                                    ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                                    ImageId = DbUtils.GetNullableInt(reader, "ImageId"),
+                                    ForSale = DbUtils.GetBool(reader, "ForSale"),
+                                    Description = DbUtils.GetString(reader, "Description"),
+                                    Brand = new Brand()
+                                    {
+                                        Id = DbUtils.GetInt(reader, "BrandId"),
+                                        Name = DbUtils.GetString(reader, "BrandName"),
+                                    }
+
+                                });
+                            }
                         }
-                        order.Discs = GetAOrdersDiscs(orderId);
                         return order;
                     }
                 }
