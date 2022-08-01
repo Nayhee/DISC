@@ -54,7 +54,20 @@ export default function Cart({user}) {
         .then(() => getCart());
     }
 
-    if(cart !== null) {
+    if(cart !== null && cart.discs.length < 1) {
+        return (
+            <div className="emptyCartWrapper">
+                <h3>Your Cart is Empty!</h3>
+                <Link to={`/discs`}>
+                    <Button color="primary" type="button">
+                        Keep Shopping
+                    </Button>
+                </Link>
+            </div>
+        )
+    }
+
+    if(cart !== null && cart.discs.length > 0) {
         return (
              <div className="cartContainer">
                  <h2 className="cartHeader">{user.displayName}'s Cart</h2>

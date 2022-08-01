@@ -40,3 +40,16 @@
     font-size: .75vw;
     margin: -.25vw 0vw .25vw 0vw;
 }
+
+.emptyCartWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 18%;
+    margin: auto;
+    margin-top: 1vw;
+    padding: 1vw;
+}
+
+.emptyCartWrapper Button {
+    width: 100%;
+}
