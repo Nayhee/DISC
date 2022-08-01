@@ -14,3 +14,8 @@ export const addOrder = (order) => {
       body: JSON.stringify(order),
     });
 };
+
+export const getUsersMostRecentOrder = (userId) => {
+  return fetch(`${baseUrl}/GetUsersMostRecentOrder/${userId}`)
+    .then((res) => res.json())
+};

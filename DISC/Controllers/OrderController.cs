@@ -35,6 +35,17 @@ namespace DISC.Controllers
             //return CreatedAtAction("Get", new { id = order.Id }, order);
         }
 
+        [HttpGet("GetUsersMostRecentOrder/{userId}")]
+        public IActionResult GetUsersMostRecentOrder(int userId)
+        {
+            var usersOrder = _orderRepository.GetUsersMostRecentOrder(userId);
+            if(usersOrder == null)
+            {
+                return NotFound();
+            }
+            return Ok(usersOrder);
+        }
+
 
 
       

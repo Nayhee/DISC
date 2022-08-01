@@ -11,5 +11,7 @@ namespace DISC.Repositories
         void AddOrder(Order order);
 
         List<Order> GetAllOrders();
+
+        Order GetUsersMostRecentOrder(int userId);
     }
 }

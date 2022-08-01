@@ -31,7 +31,7 @@ export default function Header({isLoggedIn, userType}) {
 
                                 {isLoggedIn && (
                                     <li className="navbar__item">
-                                        <Link className={`navbar__link ${location.pathname === '/home' ? 'active' : ''}`} to="/"><i className="fa-solid fa-house-chimney fa-xl"></i>Home</Link>
+                                        <Link className={`navbar__link ${location.pathname === '/' ? 'active' : ''}`} to="/"><i className="fa-solid fa-house-chimney fa-xl"></i>Home</Link>
                                     </li>
                                 )}
                                

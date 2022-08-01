@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import './Receipt.css';
 import {Button} from "reactstrap";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { addCart } from "../modules/cartManager";
 
 
 export default function Receipt({user}) {
-    
-    const navigate = useNavigate();
 
     let createdNewCart = false;
 
@@ -26,8 +24,9 @@ export default function Receipt({user}) {
     return (
         <div className="receiptContainer">
             <h2>Order Confirmation</h2>
-            <p>Your order was placed successfully!</p> 
+            <p>Your order was placed successfully!</p>
             <p>A receipt has been sent to <b>{user.email}.</b></p>
+            <p>Your order will be shipped upon receipt of payment to @TennesseeDiscs via venmo.</p>
             <p>Thanks for shopping at TennesseeDiscs!</p>
 
             <Link to={`/discs`}>
