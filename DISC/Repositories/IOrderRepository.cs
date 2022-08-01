@@ -11,10 +11,10 @@ namespace DISC.Repositories
         void AddOrder(Order order);
         Order GetOrderById(int orderId);
 
-        void UpdateOrder(Order order);
+        void UpdateOrdersPaymentStatus(Order order);
 
         List<Order> GetAllOrders();
 
-        Order GetUsersMostRecentOrder(int userId);
+        //Order GetUsersMostRecentOrder(int userId);
     }
 }

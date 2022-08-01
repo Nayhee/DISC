@@ -153,46 +153,7 @@ namespace DISC.Repositories
                 }
             }
         }
-
-        //public Cart GetCartById(int cartId)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"SELECT c.*, u.id as UsersId, u.Name
-        //                                FROM Cart c 
-        //                                JOIN UserProfile u on u.Id=c.UserId
-        //                                WHERE c.Id=@id
-        //            ";
-        //            cmd.Parameters.AddWithValue("@id", cartId);
-
-        //            using (SqlDataReader reader = cmd.ExecuteReader())
-        //            {
-        //                if (reader.Read())
-        //                {
-        //                    Cart cart = new Cart
-        //                    {
-        //                        Id = reader.GetInt32(reader.GetOrdinal("Id")),
-        //                        UserProfileId = reader.GetInt32(reader.GetOrdinal("UserId")),
-        //                        UserProfile = new UserProfile
-        //                        {
-        //                            Id = reader.GetInt32(reader.GetOrdinal("UsersId")),
-        //                            Name = reader.GetString(reader.GetOrdinal("Name")),
-        //                        }
-        //                    };
-        //                    cart.Discs = GetACartsDiscs(cart.Id);
-        //                    return cart;
-        //                }
-        //                else
-        //                {
-        //                    return null;
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+        
 
         public void AddDiscToCart(CartDisc cartDisc)
         {
@@ -240,6 +201,46 @@ namespace DISC.Repositories
         //        {
         //            cmd.CommandText = @" DELETE FROM Cart WHERE Id = @id";
         //            cmd.Parameters.AddWithValue("@id", cartId);
+        //        }
+        //    }
+        //}
+
+        //public Cart GetCartById(int cartId)
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"SELECT c.*, u.id as UsersId, u.Name
+        //                                FROM Cart c 
+        //                                JOIN UserProfile u on u.Id=c.UserId
+        //                                WHERE c.Id=@id
+        //            ";
+        //            cmd.Parameters.AddWithValue("@id", cartId);
+
+        //            using (SqlDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                if (reader.Read())
+        //                {
+        //                    Cart cart = new Cart
+        //                    {
+        //                        Id = reader.GetInt32(reader.GetOrdinal("Id")),
+        //                        UserProfileId = reader.GetInt32(reader.GetOrdinal("UserId")),
+        //                        UserProfile = new UserProfile
+        //                        {
+        //                            Id = reader.GetInt32(reader.GetOrdinal("UsersId")),
+        //                            Name = reader.GetString(reader.GetOrdinal("Name")),
+        //                        }
+        //                    };
+        //                    cart.Discs = GetACartsDiscs(cart.Id);
+        //                    return cart;
+        //                }
+        //                else
+        //                {
+        //                    return null;
+        //                }
+        //            }
         //        }
         //    }
         //}

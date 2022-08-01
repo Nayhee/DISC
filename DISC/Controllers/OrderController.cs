@@ -49,23 +49,24 @@ namespace DISC.Controllers
         [HttpPut("{Id}")]
         public IActionResult Put(int id, Order order)
         {
-            _orderRepository.UpdateOrder(order);
+            _orderRepository.UpdateOrdersPaymentStatus(order);
             return NoContent();
         }
 
 
+        
 
 
-        [HttpGet("GetUsersMostRecentOrder/{userId}")]
-        public IActionResult GetUsersMostRecentOrder(int userId)
-        {
-            var usersOrder = _orderRepository.GetUsersMostRecentOrder(userId);
-            if(usersOrder == null)
-            {
-                return NotFound();
-            }
-            return Ok(usersOrder);
-        }
+        //[HttpGet("GetUsersMostRecentOrder/{userId}")]
+        //public IActionResult GetUsersMostRecentOrder(int userId)
+        //{
+        //    var usersOrder = _orderRepository.GetUsersMostRecentOrder(userId);
+        //    if(usersOrder == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(usersOrder);
+        //}
 
 
 

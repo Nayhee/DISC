@@ -30,12 +30,11 @@ namespace DISC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT o.Id, o.CartId, o.UserProfileId, o.IsPaymentReceived, o.Total, o.OrderDate, 
-                                               up.Name 
+                    cmd.CommandText = @"SELECT o.*, up.Name 
                                         FROM Orders o
                                         JOIN UserProfile up ON up.Id=o.UserProfileId
                                         ORDER BY o.OrderDate desc
-                                        ";
+                    ";
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -45,17 +44,24 @@ namespace DISC.Repositories
                             Order order = new Order
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
-                                CartId = DbUtils.GetInt(reader, "CartId"),
                                 UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                                CartId = DbUtils.GetInt(reader, "CartId"),
                                 Total = DbUtils.GetDec(reader, "Total"),
                                 IsPaymentReceived = DbUtils.GetBool(reader, "IsPaymentReceived"),
                                 OrderDate = DbUtils.GetDateTime(reader, "OrderDate"),
+                                ShippingAddress = DbUtils.GetString(reader, "ShippingAddress"),
+                                ShippingCity = DbUtils.GetString(reader, "ShippingCity"),
+                                ShippingZip = DbUtils.GetString(reader, "ShippingZip"),
+                                ShippingFirstName = DbUtils.GetString(reader, "ShippingFirstName"),
+                                ShippingLastName = DbUtils.GetString(reader, "ShippingLastName"),
+                                ShippingCountry = DbUtils.GetString(reader, "ShippingCountry"),
                                 UserProfile = new UserProfile()
                                 {
                                     Id = DbUtils.GetInt(reader, "UserProfileId"),
                                     Name = DbUtils.GetString(reader, "Name"),
                                 }
                             };
+                            order.Discs = GetAOrdersDiscs(order.Id);
                             orders.Add(order);
                         }
                         return orders;
@@ -71,7 +77,7 @@ namespace DISC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, Total, IsPaymentReceived FROM Orders WHERE Id=@orderId";
+                    cmd.CommandText = @"SELECT * FROM Orders WHERE Id=@orderId";
                     DbUtils.AddParameter(cmd, "@orderId", orderId);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -84,18 +90,31 @@ namespace DISC.Repositories
                                 order = new Order()
                                 {
                                     Id = DbUtils.GetInt(reader, "Id"),
+                                    UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                                    CartId = DbUtils.GetInt(reader, "CartId"),
+                                    OrderDate = DbUtils.GetDateTime(reader, "OrderDate"),
                                     Total = DbUtils.GetDec(reader, "Total"),
                                     IsPaymentReceived = DbUtils.GetBool(reader, "IsPaymentReceived"),
+                                    ShippingAddress = DbUtils.GetString(reader, "ShippingAddress"),
+                                    ShippingCity = DbUtils.GetString(reader, "ShippingCity"),
+                                    ShippingZip = DbUtils.GetString(reader, "ShippingZip"),
+                                    ShippingFirstName = DbUtils.GetString(reader, "ShippingFirstName"),
+                                    ShippingLastName= DbUtils.GetString(reader, "ShippingLastName"),
+                                    ShippingCountry = DbUtils.GetString(reader, "ShippingCountry"),
+                                    UserProfile = new UserProfile()
+                                    {
+                                        Id = DbUtils.GetInt(reader, "UserProfileId"),
+                                        Name = DbUtils.GetString(reader, "Name"),
+                                    }
                                 };
                             }
                         }
+                        order.Discs = GetAOrdersDiscs(orderId);
                         return order;
                     }
                 }
             }
         }
-
-
 
 
         public void AddOrder(Order order)
@@ -129,7 +148,7 @@ namespace DISC.Repositories
         }
 
 
-        public void UpdateOrder(Order order)
+        public void UpdateOrdersPaymentStatus(Order order)
         {
             using (var conn = Connection)
             {
@@ -151,40 +170,94 @@ namespace DISC.Repositories
         }
 
 
-        public Order GetUsersMostRecentOrder(int userId)
+        public List<Disc> GetAOrdersDiscs(int orderId)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT TOP 1 Id, Total, OrderDate 
-                                        FROM Orders
-                                        WHERE UserProfileId=@userId 
-                                        ORDER BY OrderDate DESC
+                    cmd.CommandText = @" SELECT d.*, cd.Id as CartDiscId, b.Name as BrandName
+                                            FROM Disc d 
+                                            JOIN Brand b on b.Id=d.BrandId
+                                            JOIN CartDisc cd ON cd.DiscId=d.Id
+                                            JOIN Cart c on c.Id=cd.CartId
+                                            JOIN Orders o on o.CartId=c.Id
+                                            WHERE o.Id=@orderId
                     ";
-                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.Parameters.AddWithValue("@id", orderId);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read())
+                        List<Disc> discs = new List<Disc>();
+                        while (reader.Read())
                         {
-                            Order order = new Order
+                            Disc disc = new Disc
                             {
+                                CartDiscId = DbUtils.GetInt(reader, "CartDiscId"),
                                 Id = DbUtils.GetInt(reader, "Id"),
-                                Total = DbUtils.GetDec(reader, "Total"),
-                                OrderDate = DbUtils.GetDateTime(reader, "OrderDate"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                                BrandId = DbUtils.GetInt(reader, "BrandId"),
+                                Condition = DbUtils.GetString(reader, "Condition"),
+                                Speed = DbUtils.GetInt(reader, "Speed"),
+                                Glide = DbUtils.GetInt(reader, "Glide"),
+                                Turn = DbUtils.GetInt(reader, "Turn"),
+                                Fade = DbUtils.GetInt(reader, "Fade"),
+                                Plastic = DbUtils.GetString(reader, "Plastic"),
+                                Price = DbUtils.GetInt(reader, "Price"),
+                                Weight = DbUtils.GetInt(reader, "Weight"),
+                                ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                                ForSale = DbUtils.GetBool(reader, "ForSale"),
+                                Description = DbUtils.GetString(reader, "Description"),
+                                Brand = new Brand()
+                                {
+                                    Id = DbUtils.GetInt(reader, "BrandId"),
+                                    Name = DbUtils.GetString(reader, "BrandName"),
+                                }
                             };
-                            return order;
+                            discs.Add(disc);
                         }
-                        else
-                        {
-                            return null;
-                        }
+                        return discs;
                     }
                 }
             }
         }
+
+
+        //public Order GetUsersMostRecentOrder(int userId)
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"SELECT TOP 1 Id, Total, OrderDate 
+        //                                FROM Orders
+        //                                WHERE UserProfileId=@userId 
+        //                                ORDER BY OrderDate DESC
+        //            ";
+        //            cmd.Parameters.AddWithValue("@userId", userId);
+
+        //            using (SqlDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                if (reader.Read())
+        //                {
+        //                    Order order = new Order
+        //                    {
+        //                        Id = DbUtils.GetInt(reader, "Id"),
+        //                        Total = DbUtils.GetDec(reader, "Total"),
+        //                        OrderDate = DbUtils.GetDateTime(reader, "OrderDate"),
+        //                    };
+        //                    return order;
+        //                }
+        //                else
+        //                {
+        //                    return null;
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
 
     }
