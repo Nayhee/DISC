@@ -42,17 +42,7 @@ export default function OrderEditForm() {
     return (
         <div className="formContainer">
           <Form className="orderEditForm">
-            <h3>Update Order {order?.id}</h3>
-
-            <FormGroup>
-              <Label for="orderNumber">Order #</Label>
-              <Col sm={15}><h6>{order.id}</h6></Col>
-            </FormGroup>
-            
-            <FormGroup>
-              <Label for="total">Total</Label>
-              <Col sm={15}><h6>${order.total}</h6></Col>
-            </FormGroup>
+            <h3>Update Order #{order?.id}</h3>
 
             <FormGroup>
               <Label for="isPaymentReceived">Payment Received?</Label>
@@ -63,7 +53,6 @@ export default function OrderEditForm() {
                   id="isPaymentReceived"
                   onChange={handleInputChange}
                 >
-                  <option value="">Select</option>
                   <option key="Paid" value="true">Yes</option>
                   <option key="NotPaid" value="false">No</option>
                 </select>

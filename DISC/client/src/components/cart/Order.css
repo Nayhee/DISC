@@ -94,3 +94,13 @@
     align-items: flex-end;
     flex-direction: column;
 }
+
+
+.orderEditForm {
+    margin: auto;
+    width: 50%;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 1vw;
+    background-color: white;
+}

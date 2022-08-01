@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getUserById, updateUser } from "../modules/userProfileManager";
 import { useParams, useNavigate} from "react-router-dom";
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import "./User.css"
 
 export default function UserEditForm() {
     
@@ -44,7 +45,7 @@ export default function UserEditForm() {
     return (
 
         <div className="formContainer">
-          <Form className="discForm">
+          <Form className="userEditForm">
             <h3>Update User #{user?.id}</h3>
 
             <FormGroup>
