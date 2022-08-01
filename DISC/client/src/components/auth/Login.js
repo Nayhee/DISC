@@ -23,6 +23,8 @@ export default function Login() {
     
     <div className="loginWrapper">
       <Form className="loginForm" onSubmit={loginSubmit}>
+        
+        <h2 className="loginHeader">Login</h2>
         <fieldset>
           <FormGroup>
             <Label for="email">Email</Label>

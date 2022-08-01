@@ -26,7 +26,7 @@ export default function Receipt({user}) {
             <h2>Order Confirmation</h2>
             <p>Your order was placed successfully!</p>
             <p>A receipt has been sent to <b>{user.email}.</b></p>
-            <p>Your order will be shipped upon receipt of payment to @TennesseeDiscs via venmo.</p>
+            <p>Your order will be shipped upon receipt of payment via venmo to @TennesseeDiscs.</p>
             <p>Thanks for shopping at TennesseeDiscs!</p>
 
             <Link to={`/discs`}>

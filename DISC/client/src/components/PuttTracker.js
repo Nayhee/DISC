@@ -5,8 +5,6 @@ import { RoundCard } from "./round/RoundCard";
 
 
 export default function PuttTracker({user}) {
-    
-    //Putt att the top, then user scorecard, then rounds List.
 
     const [round, setRound ] = useState({
         userProfileId: user?.id,
@@ -92,7 +90,6 @@ export default function PuttTracker({user}) {
             newRound.puttsTaken = parseInt(round.puttsTaken);
             newRound.puttsMade = parseInt(round.puttsMade);
             addRound(newRound)
-            .then((alert("Round submitted successfully!")))
             .then(() => roundFunc())
         } else {
             window.alert("Please complete each field")

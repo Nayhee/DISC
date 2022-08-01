@@ -90,7 +90,7 @@ export default function Checkout({user}) {
             
             <div className="orderContainer">
                 <Form className="orderForm">
-                <h3 className="orderHeader">Order</h3>
+                <h3 className="orderHeader">Order Form</h3>
                 <h5 className="shipping">Shipping Address </h5>
     
                 <FormGroup>
