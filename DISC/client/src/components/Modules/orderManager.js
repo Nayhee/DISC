@@ -5,6 +5,11 @@ export const getAllOrders = () => {
       .then((res) => res.json())
 };
 
+export const getOrderById = (orderId) => {
+  return fetch(`${baseUrl}/${orderId}`)
+  .then(res => res.json())
+}
+
 export const addOrder = (order) => {
     return fetch(baseUrl, {
       method: "POST",
@@ -13,6 +18,16 @@ export const addOrder = (order) => {
       },
       body: JSON.stringify(order),
     });
+};
+
+export const updateOrder = (editedOrder) => {
+  return fetch(`${baseUrl}/${editedOrder.id}`, {
+      method: "PUT",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(editedOrder),
+  });
 };
 
 export const getUsersMostRecentOrder = (userId) => {

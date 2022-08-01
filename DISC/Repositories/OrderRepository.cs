@@ -30,7 +30,7 @@ namespace DISC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT o.Id, o.CartId, o.UserProfileId, o.Total, o.OrderDate, 
+                    cmd.CommandText = @"SELECT o.Id, o.CartId, o.UserProfileId, o.IsPaymentReceived, o.Total, o.OrderDate, 
                                                up.Name 
                                         FROM Orders o
                                         JOIN UserProfile up ON up.Id=o.UserProfileId
@@ -48,6 +48,7 @@ namespace DISC.Repositories
                                 CartId = DbUtils.GetInt(reader, "CartId"),
                                 UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
                                 Total = DbUtils.GetDec(reader, "Total"),
+                                IsPaymentReceived = DbUtils.GetBool(reader, "IsPaymentReceived"),
                                 OrderDate = DbUtils.GetDateTime(reader, "OrderDate"),
                                 UserProfile = new UserProfile()
                                 {
@@ -63,40 +64,38 @@ namespace DISC.Repositories
             }
         }
 
-        public Order GetUsersMostRecentOrder(int userId)
+        public Order GetOrderById(int orderId)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT TOP 1 Id, Total, OrderDate 
-                                        FROM Orders
-                                        WHERE UserProfileId=@userId 
-                                        ORDER BY OrderDate DESC
-                    ";
-                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.CommandText = @"SELECT Id, Total, IsPaymentReceived FROM Orders WHERE Id=@orderId";
+                    DbUtils.AddParameter(cmd, "@orderId", orderId);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if(reader.Read())
+                        Order order = null;
+                        while (reader.Read())
                         {
-                            Order order = new Order
+                            if (order == null)
                             {
-                                Id = DbUtils.GetInt(reader, "Id"),
-                                Total = DbUtils.GetDec(reader, "Total"),
-                                OrderDate = DbUtils.GetDateTime(reader, "OrderDate"),
-                            };
-                            return order;
+                                order = new Order()
+                                {
+                                    Id = DbUtils.GetInt(reader, "Id"),
+                                    Total = DbUtils.GetDec(reader, "Total"),
+                                    IsPaymentReceived = DbUtils.GetBool(reader, "IsPaymentReceived"),
+                                };
+                            }
                         }
-                        else
-                        {
-                            return null;
-                        }
+                        return order;
                     }
                 }
             }
         }
+
+
 
 
         public void AddOrder(Order order)
@@ -125,6 +124,64 @@ namespace DISC.Repositories
                     int id = (int)cmd.ExecuteScalar();
                     order.Id = id;
 
+                }
+            }
+        }
+
+
+        public void UpdateOrder(Order order)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Orders
+                                        SET 
+                                            IsPaymentReceived = @isPaymentReceived   
+                                            WHERE Id = @id";
+
+                    DbUtils.AddParameter(cmd, "@id", order.Id);
+                    DbUtils.AddParameter(cmd, "@isPaymentReceived", order.IsPaymentReceived);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        public Order GetUsersMostRecentOrder(int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT TOP 1 Id, Total, OrderDate 
+                                        FROM Orders
+                                        WHERE UserProfileId=@userId 
+                                        ORDER BY OrderDate DESC
+                    ";
+                    cmd.Parameters.AddWithValue("@userId", userId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Order order = new Order
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                Total = DbUtils.GetDec(reader, "Total"),
+                                OrderDate = DbUtils.GetDateTime(reader, "OrderDate"),
+                            };
+                            return order;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
                 }
             }
         }

@@ -24,6 +24,17 @@ namespace DISC.Controllers
             return Ok(_orderRepository.GetAllOrders());
         }
 
+        [HttpGet("{orderId}")]
+        public IActionResult GetOrderById(int orderId)
+        {
+            var order = _orderRepository.GetOrderById(orderId);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            return Ok(order);
+        }
+
 
         [HttpPost]
         public IActionResult AddOrder(Order order)
@@ -34,6 +45,16 @@ namespace DISC.Controllers
             return NoContent();
             //return CreatedAtAction("Get", new { id = order.Id }, order);
         }
+
+        [HttpPut("{Id}")]
+        public IActionResult Put(int id, Order order)
+        {
+            _orderRepository.UpdateOrder(order);
+            return NoContent();
+        }
+
+
+
 
         [HttpGet("GetUsersMostRecentOrder/{userId}")]
         public IActionResult GetUsersMostRecentOrder(int userId)

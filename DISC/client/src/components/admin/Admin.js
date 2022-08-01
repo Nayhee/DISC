@@ -40,7 +40,7 @@ export default function Admin() {
         .then(() => navigate("/users"))
     }
 
-
+    console.log(orders);
     return (
         <div className="userListContainer">
             
@@ -82,15 +82,15 @@ export default function Admin() {
                             <td>{order.userProfile.name}</td>
                             <td>{splitDate(order.orderDate)}</td>
                             <td>${order.total}</td>
-                            {order.isPaymentReceived == 0 ? 
-                                <td>No</td>
+                            {order.isPaymentReceived ? 
+                                <td style={{color: "green"}}>Yes</td>
                                 :
-                                <td>Yes</td>
+                                <td style={{color: "red"}}>No</td>
                             }
                             <td>
                                 <div className="discDetailButtons">
                                     <div className="discDetailButton">
-                                        <Link to={`/orders/edit/${order.id}`}>
+                                        <Link to={`/order/edit/${order.id}`}>
                                             <i className="fa-solid fa-pen-to-square fa-xl"></i> 
                                         </Link>
                                     </div>
@@ -123,7 +123,7 @@ export default function Admin() {
                             <td>
                                 <div className="discDetailButtons">
                                     <div className="discDetailButton">
-                                        <Link to={`/users/edit/${user.id}`}>
+                                        <Link to={`/admin/edit/${user.id}`}>
                                             <i className="fa-solid fa-pen-to-square fa-xl"></i> 
                                         </Link>
 

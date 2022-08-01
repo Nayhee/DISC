@@ -37,7 +37,7 @@ export default function UserEditForm() {
 
     const handleEditUser = () => {
         updateUser(user).then(() => {
-            navigate('/users');
+            navigate('/admin');
         })
     };
 
@@ -74,7 +74,7 @@ export default function UserEditForm() {
 
             </FormGroup>
       
-            <Button className="btn btn-primary" onClick={handleEditUser}>
+            <Button color="primary" className="btn btn-primary" onClick={handleEditUser}>
               Submit
             </Button>
           </Form>

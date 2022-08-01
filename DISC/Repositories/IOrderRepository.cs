@@ -9,6 +9,9 @@ namespace DISC.Repositories
         SqlConnection Connection { get; }
 
         void AddOrder(Order order);
+        Order GetOrderById(int orderId);
+
+        void UpdateOrder(Order order);
 
         List<Order> GetAllOrders();
 
