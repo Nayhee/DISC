@@ -14,6 +14,7 @@ namespace DISC.Models
         [Required]
         public int BrandId { get; set; }
 
+        [Required]
         public int? ImageId { get; set; }
         [Required]
      
@@ -32,8 +33,6 @@ namespace DISC.Models
         public int Price { get; set; }
         [Required]
         public int Weight { get; set; }
-        [Required]
-        public string ImageUrl { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]

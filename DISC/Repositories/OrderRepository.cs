@@ -78,7 +78,7 @@ namespace DISC.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT o.*, 
-                                        d.Id as DiscId, d.Name, d.BrandId, d.Condition, d.Speed, d.Glide, d.Turn, d.Fade, d.Plastic, d.Price, d.Weight, d.ImageUrl, d.ImageId, d.ForSale, d.Description, 
+                                        d.Id as DiscId, d.Name, d.BrandId, d.Condition, d.Speed, d.Glide, d.Turn, d.Fade, d.Plastic, d.Price, d.Weight, d.ImageId, d.ForSale, d.Description, 
                                         up.Name as UserName, b.Name as BrandName
                                         FROM Orders o
                                         JOIN Cart c ON c.Id=o.CartId
@@ -133,7 +133,6 @@ namespace DISC.Repositories
                                     Plastic = DbUtils.GetString(reader, "Plastic"),
                                     Price = DbUtils.GetInt(reader, "Price"),
                                     Weight = DbUtils.GetInt(reader, "Weight"),
-                                    ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                                     ImageId = DbUtils.GetNullableInt(reader, "ImageId"),
                                     ForSale = DbUtils.GetBool(reader, "ForSale"),
                                     Description = DbUtils.GetString(reader, "Description"),
@@ -241,7 +240,7 @@ namespace DISC.Repositories
                                 Plastic = DbUtils.GetString(reader, "Plastic"),
                                 Price = DbUtils.GetInt(reader, "Price"),
                                 Weight = DbUtils.GetInt(reader, "Weight"),
-                                ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                                ImageId = DbUtils.GetNullableInt(reader, "ImageId"),
                                 ForSale = DbUtils.GetBool(reader, "ForSale"),
                                 Description = DbUtils.GetString(reader, "Description"),
                                 Brand = new Brand()

@@ -28,3 +28,9 @@ export const getImageById = (id) => {
       });
   };
   
+  export const postImage = (image) => {
+    return fetch(baseUrl, {
+      method: "POST",
+      body: image,
+    });
+  };

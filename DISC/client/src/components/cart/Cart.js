@@ -11,17 +11,34 @@ export default function Cart({user}) {
 
     const [cart, setCart] = useState(null);
     const [total, setTotal] = useState(null);
+    const [discs, setDiscs] = useState(null);
 
+    //make this get called on 2nd run afater cart is set. 
     const getCart = () => {
-        getUsersCurrentCart(user.id).then(setCart);
+        getUsersCurrentCart(user?.id)
+        .then((cart) => {
+            setCart(cart);
+            setDiscs(cart.discs);
+        });
     }
 
-    const calculateTotal = () => {
-        let cartTotal = 0;
-        cart.discs.forEach(disc => {
-            cartTotal += disc.price;
+    const getImages = () => {
+        let newCart = {...cart};
+        let newDiscs = newCart.discs;
+
+        let promises = [];
+
+        newDiscs.forEach(disc => {
+            promises.push(
+                getImageById(disc.imageId)
+                .then((url) => {
+                    disc.imageUrl = url
+                    return disc;
+                })
+            )
         })
-        setTotal(cartTotal);
+        Promise.all(promises)
+        .then(setDiscs);
     }
 
     useEffect(() => {
@@ -30,23 +47,23 @@ export default function Cart({user}) {
         };
     }, [])
 
-    //extra one I didn't get to work before getting off. 
-    // useEffect(() => {
-    //     if(user !== null && cart == null ) {
-    //         getCart();
-    //         cart.discs.forEach((disc) => {
-    //             disc.imageId !== null ? getImageById(disc.imageId).then((url) => disc.imageUrl = url)
-    //             :
-    //             disc.imageUrl = disc.imageUrl;
-    //         })
-    //     };
-    // }, [])
-
     useEffect(() => {
-        if(user !== null && cart !== null) {
+        if(cart !== null) {
             calculateTotal();
+            getImages();
         }
     }, [cart])
+
+
+    const calculateTotal = () => {
+        let cartTotal = 0;
+        let cartCopy = {...cart};
+        cartCopy.discs.forEach(disc => {
+            cartTotal += disc.price;
+        })
+        setTotal(cartTotal);
+    }
+
 
     const handleDeleteCartDisc = (discId) => {
         getCartDiscId(cart.id, discId)
@@ -54,7 +71,7 @@ export default function Cart({user}) {
         .then(() => getCart());
     }
 
-    if(cart !== null && cart.discs.length < 1) {
+    if(cart !== null && cart?.discs.length < 1) {
         return (
             <div className="emptyCartWrapper">
                 <h3>Your Cart is Empty!</h3>
@@ -68,6 +85,7 @@ export default function Cart({user}) {
     }
 
     if(cart !== null && cart.discs.length > 0) {
+        console.log(discs);
         return (
              
              <div className="cartWrapper">
@@ -80,10 +98,10 @@ export default function Cart({user}) {
                             <div className="totalLabel">Total</div>
                         </div>
                     </div>
-                    {cart.discs.map(disc => 
+                    {discs?.map(disc =>  (
                         <div className="cartRow" key={disc.id}>
                             <div className="cartImage">
-                                <img src={disc.imageUrl} alt="My Disc" />
+                                <img src={disc?.imageUrl} alt="My Poop Disc" />
                             </div>
                             <div className="cartInfo">
                                 <p>{disc.brand.name} {disc.name} / {disc.plastic} Plastic / {disc.weight}g / {disc.condition} </p>
@@ -98,7 +116,7 @@ export default function Cart({user}) {
                                 <i onClick={() => handleDeleteCartDisc(disc.id)} className="fa-solid fa-trash fa-xl"></i>  
                             </div>
                         </div>
-                    )}
+                    ))}
 
                     <div className="cartTotal">
                             <div className="subTotal">
@@ -117,6 +135,7 @@ export default function Cart({user}) {
         ) 
     }
     else {
+        console.log("first run");
         return null;
     }
 

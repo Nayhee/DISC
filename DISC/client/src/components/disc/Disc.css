@@ -15,6 +15,24 @@
     padding: 1vw;
 }
 
+.discForm h3 {
+    display: flex;
+    justify-content: center;
+}
+
+.flightNumbers {
+    display: flex;
+    width: 100%;
+}
+.nameAndPlastic {
+    display: flex;
+    width: 100%;
+}
+.weightAndPrice {
+    display: flex;
+    width: 100%;
+}
+
 .discListPageContainer {
     width: 80%;
     margin: auto;

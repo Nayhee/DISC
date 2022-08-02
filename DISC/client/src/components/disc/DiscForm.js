@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { addDisc, getAllBrands, getAllTags } from "../modules/discManager";
 import './Disc.css'
 import { Col, Button, Form, FormGroup, Label, Input} from "reactstrap";
+import { postImage } from "../modules/imageManager";
 
 export default function DiscForm() {
 
@@ -19,13 +20,23 @@ export default function DiscForm() {
         fade: 0, 
         plastic: "",
         price: 0,
-        imageUrl: "",
+        imageId: 0,
     })
 
     const [tags , setTags] = useState([]);
     const [brands, setBrands] = useState([])
 
     const navigate = useNavigate();
+
+    const [imageId, setImageId] = useState(0);
+    const [image, setImage] = useState({});
+    const imageFormData = new FormData();
+
+    const [Disabled, setDisabled] = useState(false);
+
+    const handleSelectImage = (e) => {
+      setImage(...e.target.files);
+    };
 
     useEffect(() => {
         getAllBrands()
@@ -47,10 +58,10 @@ export default function DiscForm() {
     }
 
     const handleInputChange = (evt) => {
-        const newDisc = {...disc}
-        let userInputValue = evt.target.value;
-        newDisc[evt.target.id] = userInputValue;
-        setDisc(newDisc);
+      const newDisc = {...disc}
+      let userInputValue = evt.target.value;
+      newDisc[evt.target.id] = userInputValue;
+      setDisc(newDisc);
     }
 
     const handleIntegerChange = (evt) => {
@@ -60,20 +71,53 @@ export default function DiscForm() {
         setDisc(newDisc);
     }
 
+    const handleSaveImage = (e) => {
+      e.preventDefault();
+      imageFormData.append("data", image);
+      postImage(imageFormData)
+        .then((r) => {
+          let id = parseInt(r.headers.get("location").split("Image/")[1]);
+          setImageId(id);
+          setDisabled(true);
+          alert("Image uploaded successfully");
+        });
+    };
+
     const handleClickSaveDisc = () => {
-      const newTags = structuredClone(tags);
-      let trueTags = newTags.filter(t => t.checked === true);
-      disc.tags = trueTags;
-      addDisc(disc)
-        .then(() => navigate("/discs"))
-        .catch((err) => alert(`An error occured: ${err.message}`));
+      if(imageId > 0 && disc.name !== "" && disc.description !== "" && disc.condition !== "" && disc.plastic !== "" && disc.weight !== 0 && disc.brandId !== 0 && disc.speed !== 0 && disc.glide !== 0 && disc.price !== 0 ) {
+          disc.imageId = imageId;
+          const newTags = structuredClone(tags);
+          let trueTags = newTags.filter(t => t.checked === true);
+          disc.tags = trueTags;
+          addDisc(disc)
+            .then(() => navigate("/discs"))
+            .catch((err) => alert(`An error occured: ${err.message}`));
+      } else {
+        alert("Please upload 1 image and complete all fields")
+      }
     }
 
 
     return (
         <div className="formContainer">
-          <Form className="discForm">
-            <h3>Add Disc</h3>
+          
+          <div className="discForm">
+              <h3>Add Disc</h3>
+              <Form onSubmit={handleSaveImage}>
+                <h6>Upload an Image</h6>
+                <Input type="file" id="imageToUpload" onChange={handleSelectImage} />
+                <Button style={{margin: ".5vw 0vw 1vw 0vw"}} color="success"
+                  className="btn btn-primary"
+                  id="imageSubmitButton"
+                  required
+                  type="submit"
+                  disabled={Disabled}
+                >
+                  Submit Image
+                </Button>
+          </Form>
+          
+          <Form>
             <FormGroup>
               <Label for="name">Name</Label>
               <Col sm={15}>
@@ -81,12 +125,23 @@ export default function DiscForm() {
                     type="text"
                     name="name"
                     id="name"
-                    placeholder="name"
                     onChange={handleInputChange}
                   />
-
               </Col>
             </FormGroup>
+
+            <FormGroup>
+              <Label for="plastic">Plastic</Label>
+              <Col sm={15}>
+                <Input
+                  type="text"
+                  name="plastic"
+                  id="plastic"
+                  onChange={handleInputChange}
+                />
+              </Col>
+            </FormGroup>
+
             <FormGroup>
               <Label for="description">Description</Label>
               <Col sm={15}>
@@ -94,12 +149,36 @@ export default function DiscForm() {
                   type="text"
                   name="description"
                   id="description"
-                  placeholder="description"
                   onChange={handleInputChange}
                 />
               </Col>
             </FormGroup>
+          
+            <FormGroup>
+              <Label for="weight">Weight</Label>
+              <Col sm={15}>
+                <Input
+                  type="text"
+                  name="weight"
+                  id="weight"
+                  placeholder="ex: 173"
+                  onChange={handleIntegerChange}
+                />
+              </Col>
+            </FormGroup>
 
+            <FormGroup>
+              <Label for="price">Price</Label>
+              <Col sm={15}>
+                <Input
+                  type="text"
+                  name="price"
+                  id="price"
+                  onChange={handleIntegerChange}
+                />
+              </Col>
+            </FormGroup>
+            
             <FormGroup>
               <label><b>Tags</b></label>
               <div>
@@ -131,7 +210,6 @@ export default function DiscForm() {
                   <option key="used" value="Used">Used</option>
                 </select>
               </Col>
-
             </FormGroup>
       
             <FormGroup>
@@ -150,118 +228,65 @@ export default function DiscForm() {
                   ))}
                 </select>
               </Col>
-
             </FormGroup>
       
-            <FormGroup>
-              <Label for="imageUrl">Image Url</Label>
-              <Col sm={15}>
-                <Input
-                  type="text"
-                  name="imageUrl"
-                  id="imageUrl"
-                  onChange={handleInputChange}
-                />
-              </Col>
+            <div className="flightNumbers">
 
-            </FormGroup>
-      
-            <FormGroup>
-              <Label for="plastic">Plastic</Label>
-              <Col sm={15}>
-                <Input
-                  type="text"
-                  name="plastic"
-                  id="plastic"
-                  onChange={handleInputChange}
-                />
+                <FormGroup>
+                  <Label for="speed">Speed</Label>
+                  <Col sm={15}>
+                    <Input
+                      type="text"
+                      name="speed"
+                      id="speed"
+                      onChange={handleIntegerChange}
+                    />
+                  </Col>
 
-              </Col>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="glide">Glide</Label>
+                  <Col sm={15}>
+                    <Input
+                      type="text"
+                      name="glide"
+                      id="glide"
+                      onChange={handleIntegerChange}
+                    />
+                  </Col>
 
-            </FormGroup>
-            <FormGroup>
-              <Label for="weight">Weight</Label>
-              <Col sm={15}>
-                <Input
-                  type="text"
-                  name="weight"
-                  id="weight"
-                  onChange={handleIntegerChange}
-                />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="turn">Turn</Label>
+                  <Col sm={15}>
+                    <Input
+                      type="text"
+                      name="turn"
+                      id="turn"
+                      onChange={handleIntegerChange}
+                    />
+                  </Col>
 
-              </Col>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="fade">Fade</Label>
+                  <Col sm={15}>
+                    <Input
+                      type="text"
+                      name="fade"
+                      id="fade"
+                      onChange={handleIntegerChange}
+                    />
+                  </Col>
+                </FormGroup>
+            </div>
 
-            </FormGroup>
-            <FormGroup>
-              <Label for="price">Price</Label>
-              <Col sm={15}>
-                <Input
-                  type="text"
-                  name="price"
-                  id="price"
-                  onChange={handleIntegerChange}
-                />
-
-              </Col>
-
-            </FormGroup>
-            <FormGroup>
-              <Label for="speed">Speed</Label>
-              <Col sm={15}>
-                <Input
-                  type="text"
-                  name="speed"
-                  id="speed"
-                  onChange={handleIntegerChange}
-                />
-
-              </Col>
-
-            </FormGroup>
-            <FormGroup>
-              <Label for="glide">Glide</Label>
-              <Col sm={15}>
-                <Input
-                  type="text"
-                  name="glide"
-                  id="glide"
-                  onChange={handleIntegerChange}
-                />
-
-              </Col>
-
-            </FormGroup>
-            <FormGroup>
-              <Label for="turn">Turn</Label>
-              <Col sm={15}>
-                <Input
-                  type="text"
-                  name="turn"
-                  id="turn"
-                  onChange={handleIntegerChange}
-                />
-
-              </Col>
-
-            </FormGroup>
-            <FormGroup>
-              <Label for="fade">Fade</Label>
-              <Col sm={15}>
-                <Input
-                  type="text"
-                  name="fade"
-                  id="fade"
-                  onChange={handleIntegerChange}
-                />
-
-              </Col>
-
-            </FormGroup>
             <Button color="primary" className="btn btn-primary" onClick={handleClickSaveDisc}>
               Submit
             </Button>
           </Form>
         </div>
-      );
+      </div>
+    );
 
 }

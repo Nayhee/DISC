@@ -131,7 +131,7 @@ export default function PuttTracker({user}) {
 
     return (
         <>  
-        <h1 className="puttTrackerHeader">Putt Tracker</h1>
+        <h1 className="puttTrackerHeader">Putt Tracker"</h1>
         <div className="pageWrapper">
 
             <div className="newRoundContainer"> 

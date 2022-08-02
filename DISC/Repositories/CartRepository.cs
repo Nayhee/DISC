@@ -110,7 +110,7 @@ namespace DISC.Repositories
                                 Plastic = DbUtils.GetString(reader, "Plastic"),
                                 Price = DbUtils.GetInt(reader, "Price"),
                                 Weight = DbUtils.GetInt(reader, "Weight"),
-                                ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                                ImageId = DbUtils.GetNullableInt(reader, "ImageId"),
                                 ForSale = DbUtils.GetBool(reader, "ForSale"),
                                 Description = DbUtils.GetString(reader, "Description"),
                                 Brand = new Brand()

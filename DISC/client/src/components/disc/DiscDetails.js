@@ -23,9 +23,7 @@ export default function DiscDetails({user}) {
         getDiscById(id)
         .then((disc) => {
             setDisc(disc);
-            disc.imageId !== null ? getImageById(disc.imageId).then(setImageUrl)
-            :
-            setImageUrl(disc.imageUrl);
+            getImageById(disc.imageId).then(setImageUrl);
         });
     }, [id])
         

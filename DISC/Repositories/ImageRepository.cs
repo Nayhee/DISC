@@ -52,15 +52,17 @@ namespace DISC.Repositories
             }
         }
 
-        public int CreateImage(byte[] imageData)
+        public int CreateImage(byte[] imageData, string imageName)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"insert into Image (Image) output INSERTED.Id VALUES (@data)";
-                    cmd.Parameters.AddWithValue("@data", imageData);
+                    cmd.CommandText = @"INSERT into Image (Body, Name) 
+                                        OUTPUT INSERTED.Id VALUES (@body, @name)";
+                    cmd.Parameters.AddWithValue("@body", imageData);
+                    cmd.Parameters.AddWithValue("@name", imageName);
 
                     return (int)cmd.ExecuteScalar();
                 }

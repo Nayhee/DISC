@@ -20,30 +20,34 @@ namespace DISC.Controllers
         }
 
 
-        [HttpGet("{ImageId}")]
-        public ActionResult Image(int ImageId)
+        [HttpGet("{Id}")]
+        public ActionResult GetImageById(int Id)
         {
-            var stream = _imageRepository.GetImageStreamById(ImageId);
+            var stream = _imageRepository.GetImageStreamById(Id);
             if (stream != null)
             {
-                return File(stream, "image/png", $"image_{ImageId}.png"); //will eventually adjust for more than just PNG's.
+                return File(stream, "image/png", $"image_{Id}.png"); //will eventually adjust for more than just PNG's.
             }
             return NotFound();
         }
 
         [HttpPost]
         public async Task<IActionResult> Add([FromForm] IFormFile data)
-        {
+        {   
             Image image = new();
             image.Body = data;
+            string[] words = data.FileName.Split('.');
+            image.Name = words[0];
+         
+
             using (var memoryStream = new MemoryStream())
             {
                 await image.Body.CopyToAsync(memoryStream);
 
-                image.Id = _imageRepository.CreateImage(memoryStream.ToArray());
+                image.Id = _imageRepository.CreateImage(memoryStream.ToArray(), image.Name);
 
             }
-            return Accepted(image);
+            return CreatedAtAction(nameof(GetImageById), new { Id = image.Id }, image);
         }
 
     }

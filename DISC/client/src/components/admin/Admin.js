@@ -40,17 +40,8 @@ export default function Admin() {
         .then(() => navigate("/users"))
     }
 
-    console.log(orders);
     return (
         <div className="userListContainer">
-            
-            {/* <div className="addDiscButton">
-                <Link to={`/discs/add`}>
-                    <Button color="success" type="button">
-                        Add Disc
-                    </Button>
-                </Link>
-            </div> */}
 
             <div className="totalOrdersWrapper">
                 <div className="totalOrderQuantity">

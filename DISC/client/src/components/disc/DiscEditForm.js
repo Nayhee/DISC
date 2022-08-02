@@ -19,7 +19,6 @@ export default function DiscEditForm() {
         fade: 0, 
         plastic: "",
         price: 0,
-        imageUrl: "",
     })
 
     const [brands, setBrands] = useState([]);
@@ -55,8 +54,7 @@ export default function DiscEditForm() {
     }
 
     const handleEditDisc = () => {
-        if (disc.name !== "" && disc.description !== "" && disc.condition !== "" && disc.plastic !== "" && disc.imageUrl !== "" && disc.weight !== 0 && disc.brandId !== 0 && disc.speed !== 0 && disc.glide !== 0 && disc.price !== 0) {
-            console.log(disc);
+        if (disc.name !== "" && disc.description !== "" && disc.condition !== "" && disc.plastic !== "" && disc.weight !== 0 && disc.brandId !== 0 && disc.speed !== 0 && disc.glide !== 0 && disc.price !== 0) {
             updateDisc(disc).then(() => {
                 navigate(`/discs`);
             });
@@ -132,21 +130,6 @@ export default function DiscEditForm() {
                     </option>
                   ))}
                 </select>
-              </Col>
-
-            </FormGroup>
-      
-            <FormGroup>
-              <Label for="imageUrl">Image Url</Label>
-              <Col sm={15}>
-                <Input
-                  type="text"
-                  name="imageUrl"
-                  required
-                  id="imageUrl"
-                  value={disc?.imageUrl}
-                  onChange={handleInputChange}
-                />
               </Col>
 
             </FormGroup>

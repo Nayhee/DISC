@@ -10,14 +10,14 @@ export default function Header({isLoggedIn, userType}) {
     
     const location = useLocation();
 
-    const [imageUrl, setImagUrl] = useState();
+    const [imageUrl, setImageUrl] = useState();
 
     //the logo is ID 14.
     //logo 2 is 15.
 
     useEffect(() => {
         getImageById(14)
-        .then((url) => setImagUrl(url)); 
+        .then((url) => setImageUrl(url)); 
     }, [])
 
         return (

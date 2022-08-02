@@ -42,7 +42,6 @@ namespace DISC.Controllers
         [HttpPost]
         public IActionResult Post(Disc disc)
         {
-            disc.ImageId = 2; //will eventually change this once admin can upload picture for new disc. 
             _discRepository.AddDisc(disc);
             return CreatedAtAction("Get", new { id = disc.Id }, disc);
         }
