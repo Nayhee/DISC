@@ -21,16 +21,6 @@ namespace DISC.Controllers
         [HttpPost]
         public IActionResult AddDiscToCart(CartDisc cartDisc)
         {
-            //var userCart = _cartRepository.GetUsersCurrentCart(cartDisc.UserProfileId);
-            //var discIds = new List<int>();
-            //foreach( var Disc in userCart.Discs)
-            //{
-            //    discIds.Add(Disc.Id);
-            //}
-            //if(discIds.Contains(cartDisc.DiscId))
-            //{
-            //    return NotFound();
-            //}
             _cartRepository.AddDiscToCart(cartDisc);
             return NoContent();
         }

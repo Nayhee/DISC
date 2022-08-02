@@ -22,20 +22,14 @@ export default function Home({user}) {
     useEffect(() => {
         if (user!== null && cartCreated == false && !userInStorage) {
             CreateCart();
-            // sendUserToStorage();
         }
     })
-
 
     useEffect(() => {
         if(cartCreated && !userInStorage) {
             sendUserToStorage();
         }
     })
-    
-    
-
-    // console.log(user);
 
 
     return (

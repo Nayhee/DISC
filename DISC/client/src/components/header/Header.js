@@ -9,12 +9,9 @@ import { getImageById } from "../modules/imageManager";
 export default function Header({isLoggedIn, userType}) {
     
     const location = useLocation();
-
     const [imageUrl, setImageUrl] = useState();
 
     //the logo is ID 14.
-    //logo 2 is 15.
-
     useEffect(() => {
         getImageById(14)
         .then((url) => setImageUrl(url)); 

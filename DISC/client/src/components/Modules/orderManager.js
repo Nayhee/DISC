@@ -20,13 +20,13 @@ export const addOrder = (order) => {
     });
 };
 
-export const updateOrder = (editedOrder) => {
-  return fetch(`${baseUrl}/${editedOrder.id}`, {
+export const updateOrder = (order) => {
+  return fetch(`${baseUrl}/${order.id}`, {
       method: "PUT",
       headers: {
           "Content-Type": "application/json"
       },
-      body: JSON.stringify(editedOrder),
+      body: JSON.stringify(order),
   });
 };
 

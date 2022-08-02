@@ -130,8 +130,9 @@ export default function PuttTracker({user}) {
 
 
     return (
-        <>  
-        <h1 className="puttTrackerHeader">Putt Tracker"</h1>
+        <> 
+        <h1 className="puttTrackerHeader">Putt Tracker&trade;</h1>
+        <p className="slogan">The Putting Tool for Disc Golfers</p> 
         <div className="pageWrapper">
 
             <div className="newRoundContainer"> 
@@ -237,12 +238,12 @@ export default function PuttTracker({user}) {
                             <div className="roundListLabel"></div>
                         </div>
                         <div className="roundList">
-                            {allUsersRounds?.map(round => 
+                            {allUsersRounds?.map(round => (
                                 <RoundCard
                                     key={round.id}
                                     round={round}
                                     handleDeleteRound={handleDeleteRound}
-                                />)}
+                                />))}
                         </div>
                     </div>
                 </div>

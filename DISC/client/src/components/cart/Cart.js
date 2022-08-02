@@ -85,7 +85,6 @@ export default function Cart({user}) {
     }
 
     if(cart !== null && cart.discs.length > 0) {
-        console.log(discs);
         return (
              
              <div className="cartWrapper">
@@ -123,7 +122,6 @@ export default function Cart({user}) {
                                 <h5 className="sub">Subtotal:   </h5>
                                 <h5 className="total">${total}</h5>
                             </div>
-                            {/* <p className="taxNote">Taxes calculated at checkout</p> */}
                             <div className="checkoutButtonDiv">
                                 <Link className="checkoutButton" to={`./order/${cart.id}`}>
                                     {cart.discs.length > 0 ? <Button color="primary" className="DetailsButton">Checkout </Button> : ""}
@@ -135,7 +133,6 @@ export default function Cart({user}) {
         ) 
     }
     else {
-        console.log("first run");
         return null;
     }
 

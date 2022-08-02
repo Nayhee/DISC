@@ -34,7 +34,9 @@ export default function OrderEditForm() {
 
     const handleEditOrder = () => {
         console.log(order);
-        updateOrder(order).then(() => {
+        let newOrder = {...order};
+        delete newOrder.userProfile
+        updateOrder(newOrder).then(() => {
             navigate('/admin');
         })
     };

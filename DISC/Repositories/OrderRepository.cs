@@ -105,6 +105,7 @@ namespace DISC.Repositories
                                     Total = DbUtils.GetDec(reader, "Total"),
                                     IsPaymentReceived = DbUtils.GetBool(reader, "IsPaymentReceived"),
                                     ShippingAddress = DbUtils.GetString(reader, "ShippingAddress"),
+                                    ShippingState = DbUtils.GetString(reader, "ShippingState"),
                                     ShippingCity = DbUtils.GetString(reader, "ShippingCity"),
                                     ShippingZip = DbUtils.GetString(reader, "ShippingZip"),
                                     ShippingFirstName = DbUtils.GetString(reader, "ShippingFirstName"),

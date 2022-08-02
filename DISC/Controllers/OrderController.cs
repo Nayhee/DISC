@@ -46,7 +46,7 @@ namespace DISC.Controllers
             //return CreatedAtAction("Get", new { id = order.Id }, order);
         }
 
-        [HttpPut("{Id}")]
+        [HttpPut("{id}")]
         public IActionResult Put(int id, Order order)
         {
             _orderRepository.UpdateOrdersPaymentStatus(order);

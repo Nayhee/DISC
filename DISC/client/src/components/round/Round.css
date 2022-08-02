@@ -1,7 +1,7 @@
 .roundContainer {
     display: grid;
     grid-template-columns: 12% 10% 10% 10% 10% 10%;
-    font-size: 1.3vw;
+    font-size: 1.4vw;
     justify-content: space-between;
     margin: auto;
     padding: .1vw;
@@ -19,7 +19,7 @@
 
 
 .roundListContainer {
-    width: 70%;
+    width: 65%;
     padding: 1.5vw 2vw 2vw 2vw;
     background-color: #0d0f21;
     display: flex;
@@ -29,8 +29,6 @@
     margin: auto;
     margin-top: 1vw;
     margin-bottom: 1vw;
-    position: relative;
-    overflow: hidden;
     border: .5vw solid ;
     border-image: 
     linear-gradient(
@@ -72,7 +70,7 @@
    color: hotpink;
    display: grid;
    grid-template-columns: 12% 10% 10% 10% 10% 10%;
-   font-size: 1.45vw;
+   font-size: 1.4vw;
    text-decoration: underline;
    text-decoration-thickness: .1vw;
    text-underline-offset: .25vw;

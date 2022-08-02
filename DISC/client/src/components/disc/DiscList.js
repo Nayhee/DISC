@@ -47,7 +47,6 @@ export default function DiscList() {
                             <Input type="text" id="discSearch" placeholder="Search by name..." onChange={handleQueryInput} />
                             <div className="searchButton"><i type="button" onClick={handleSearchSubmit} className="fa-solid fa-magnifying-glass fa-md"></i></div>
                         </div>
-                        {/* {discs.length < initialDiscCount ? <Button type="button">All Discs</Button> : "" } */}
                     </section>
     
                     <div className="disc-list">
