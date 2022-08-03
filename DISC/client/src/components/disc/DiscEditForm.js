@@ -239,7 +239,7 @@ export default function DiscEditForm() {
               </Col>
 
             </FormGroup>
-            <Button className="btn btn-primary" onClick={handleEditDisc}>
+            <Button color="primary" className="btn btn-primary" onClick={handleEditDisc}>
               Submit
             </Button>
           </Form>
