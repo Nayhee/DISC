@@ -46,16 +46,16 @@ export default function UserEditForm() {
 
         <div className="formContainer">
           <Form className="userEditForm">
-            <h3>Update User #{user?.id}</h3>
+            <h3 className="updateUserHeader">Update User #{user?.id}</h3>
 
             <FormGroup>
               <Label for="name">Name</Label>
-              <Col sm={15}><h6>{user.name}</h6></Col>
+              <Col sm={15}><p>{user.name}</p></Col>
             </FormGroup>
 
             <FormGroup>
               <Label for="email">Email</Label>
-              <Col sm={15}><h6>{user.email}</h6></Col>
+              <Col sm={15}><p>{user.email}</p></Col>
             </FormGroup>
 
             <FormGroup>

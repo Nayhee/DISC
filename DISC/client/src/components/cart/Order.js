@@ -91,60 +91,66 @@ export default function Checkout({user}) {
             <div className="orderContainer">
                 <Form className="orderForm">
                 <h3 className="orderHeader">Order Form</h3>
-                <h5 className="shipping">Shipping Address </h5>
+                <h6 className="shipping">Shipping Address </h6>
     
-                <FormGroup>
-                  <Label for="shippingFirstName">First Name</Label>
-                  <Col sm={15}>
-                      <Input
-                        type="text"
-                        name="shippingFirstName"
-                        id="shippingFirstName"
-                        placeholder={"First Name"}
+                <div className="firstAndLastNames">
+                    <FormGroup>
+                    <Label for="shippingFirstName">First Name</Label>
+                    <Col >
+                        <Input
+                            type="text"
+                            name="shippingFirstName"
+                            id="shippingFirstName"
+                            placeholder={"First Name"}
+                            onChange={handleInputChange}
+                        />
+                    </Col>
+                    </FormGroup>
+        
+                    <FormGroup>
+                    <Label for="shippingLastName">Last Name</Label>
+                    <Col >
+                        <Input
+                            type="text"
+                            name="shippingLastName"
+                            id="shippingLastName"
+                            placeholder="Last Name"
+                            onChange={handleInputChange}
+                        />
+                    </Col>
+                    </FormGroup>
+
+                </div>
+    
+                <div className="countryAndAddress">
+                    <FormGroup>
+                    <Label for="shippingCountry">Country/Region</Label>
+                    <Col sm={15}>
+                    <select
+                        name="shippingCountry"
+                        id="shippingCountry"
                         onChange={handleInputChange}
-                      />
-                  </Col>
-                </FormGroup>
-    
-                <FormGroup>
-                  <Label for="shippingLastName">Last Name</Label>
-                  <Col sm={15}>
-                      <Input
-                        type="text"
-                        name="shippingLastName"
-                        id="shippingLastName"
-                        placeholder="Last Name"
-                        onChange={handleInputChange}
-                      />
-                  </Col>
-                </FormGroup>
-    
-                <FormGroup>
-                  <Label for="shippingCountry">Country/Region</Label>
-                  <Col sm={15}>
-                  <select
-                      name="shippingCountry"
-                      id="shippingCountry"
-                      onChange={handleInputChange}
-                    >
-                      <option value="">Select Country</option>
-                      <option key="USA" value="United States">United States</option>
-                    </select>
-                  </Col>
-                </FormGroup>
-    
-                <FormGroup>
-                  <Label for="shippingAddress">Address</Label>
-                  <Col sm={15}>
-                      <Input
-                        type="text"
-                        name="shippingAddress"
-                        id="shippingAddress"
-                        placeholder="Address"
-                        onChange={handleInputChange}
-                      />
-                  </Col>
-                </FormGroup>
+                        >
+                        <option value="">Select Country</option>
+                        <option key="USA" value="United States">United States</option>
+                        </select>
+                    </Col>
+                    </FormGroup>
+        
+                    <FormGroup>
+                    <Label for="shippingAddress">Address</Label>
+                    <Col sm={15}>
+                        <Input
+                            type="text"
+                            name="shippingAddress"
+                            id="shippingAddress"
+                            placeholder="Address"
+                            onChange={handleInputChange}
+                        />
+                    </Col>
+                    </FormGroup>
+
+                </div>
     
                 <div className="cityStateZip">
                     <FormGroup>

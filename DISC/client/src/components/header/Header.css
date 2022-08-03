@@ -49,14 +49,14 @@
 }
 
 .navbar__link {
-    color: black;
+    color: #233142;
     text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
     height: .9vw;
     width: 8vw;
-    font-size: 1vw;
+    font-size: 1.1vw;
     padding: .7vw;
     font-weight: bold;
 }

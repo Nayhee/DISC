@@ -4,7 +4,7 @@
     font-size: 1.4vw;
     justify-content: space-between;
     margin: auto;
-    padding: .1vw;
+    padding: .05vw;
     width: 100%;
     border-bottom: .05vw solid #fffafa;
 }
@@ -19,7 +19,7 @@
 
 
 .roundListContainer {
-    width: 65%;
+    width: 64%;
     padding: 1.5vw 2vw 2vw 2vw;
     background-color: #0d0f21;
     display: flex;
@@ -28,7 +28,7 @@
     align-items: center;
     margin: auto;
     margin-top: 1vw;
-    margin-bottom: 1vw;
+    margin-bottom: 0vw;
     border: .5vw solid ;
     border-image: 
     linear-gradient(

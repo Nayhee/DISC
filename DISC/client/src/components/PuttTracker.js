@@ -14,9 +14,11 @@ export default function PuttTracker({user}) {
     const [totalPutts, setTotalPutts] = useState();
     const [puttsMade, setPuttsMade] = useState();
     const [puttPercentage, setPuttPercentage] = useState();
+
     const [distances, setDistances] = useState([]);
     const [selectedDistance, setSelectedDistance] = useState(0);
     const [filteredRounds, setFilteredRounds] = useState([]);
+    
     const [allUsersRounds, setAllUsersRounds] = useState([]);
 
     const decimalToPercentage = (decimal) => {
@@ -68,8 +70,7 @@ export default function PuttTracker({user}) {
         let distanceSelected = parseInt(event.target.value);
         setSelectedDistance(distanceSelected);
         setFilteredRounds(allUsersRounds.filter(round => round.distance === distanceSelected));
-        //if they picked ALL, setFilteredRounds with ALL of the users rounds.
-        if(distanceSelected === 0) {
+        if(distanceSelected === 0) {  //if they picked ALL, setFilteredRounds with ALL of the users rounds.
             setFilteredRounds(allUsersRounds)
         }
     }
@@ -80,7 +81,6 @@ export default function PuttTracker({user}) {
         newRound[event.target.id] = userInputValue;
         setRound(newRound);
     }
-
 
     const handleSubmitRound = (event) => {
         event.preventDefault();
@@ -131,124 +131,127 @@ export default function PuttTracker({user}) {
 
     return (
         <> 
-        <h1 className="puttTrackerHeader">Putt Tracker&trade;</h1>
-        <p className="slogan">The Putting Tool for Disc Golfers</p> 
-        <div className="pageWrapper">
+        <div className="pageContainer">
+            <h1 className="puttTrackerHeader">Putt Tracker&trade;</h1>
+            <p className="slogan">The Putting Tool for Disc Golfers</p> 
+            <div className="pageWrapper">
 
-            <div className="newRoundContainer"> 
-                <form className="newRoundForm">
-                    <h3 className="newRoundFormTitle">New Round</h3>
+                <div className="newRoundContainer"> 
+                    <form className="newRoundForm">
+                        <h3 className="newRoundFormTitle">New Round</h3>
 
-                    <div className="newRoundGridDiv">
+                        <div className="newRoundGridDiv">
 
-                        <div className="newRoundGroup">
-                            <label htmlFor="distance">Distance</label>
-                            <input
-                            type="text"
-                            id="distance" 
-                            className="newRoundControls"
-                            onChange={handleInputChange} 
-                            required
-                            maxLength="3"
-                            placeholder="20"
-                           />
-                        </div>
-
-                        <div className="newRoundGroup">
-                            <label htmlFor="putts"># Putts</label>
-                            <input
-                            type="text"
-                            id="puttsTaken" 
-                            className="newRoundControls"
-                            onChange={handleInputChange} 
-                            required
-                            maxLength="3"
-                            placeholder="10"
+                            <div className="newRoundGroup">
+                                <label htmlFor="distance">Distance</label>
+                                <input
+                                type="text"
+                                id="distance" 
+                                className="newRoundControls"
+                                onChange={handleInputChange} 
+                                required
+                                maxLength="3"
+                                placeholder="20"
                             />
+                            </div>
+
+                            <div className="newRoundGroup">
+                                <label htmlFor="putts"># Putts</label>
+                                <input
+                                type="text"
+                                id="puttsTaken" 
+                                className="newRoundControls"
+                                onChange={handleInputChange} 
+                                required
+                                maxLength="3"
+                                placeholder="10"
+                                />
+                            </div>
+
+                            <div className="newRoundGroup">
+                                <label htmlFor="made"># Made</label>
+                                <input
+                                type="text"
+                                id="puttsMade" 
+                                className="newRoundControls"
+                                onChange={handleInputChange} 
+                                required
+                                maxLength="3"
+                                placeholder="8"
+                                />
+                            </div>
                         </div>
 
-                        <div className="newRoundGroup">
-                            <label htmlFor="made"># Made</label>
-                            <input
-                            type="text"
-                            id="puttsMade" 
-                            className="newRoundControls"
-                            onChange={handleInputChange} 
-                            required
-                            maxLength="3"
-                            placeholder="8"
-                            />
-                        </div>
-                    </div>
-
-                    <button 
-                        type="button"
-                        className="submitRoundButton"
-                        onClick={handleSubmitRound}>
-                        Submit Round
-                    </button>
-                </form>
-            </div>
-                
-
-            <div className="scorecardContainer">
+                        <button 
+                            type="button"
+                            className="submitRoundButton"
+                            onClick={handleSubmitRound}>
+                            Submit Round
+                        </button>
+                    </form>
+                </div>
                     
-                    <div className="userScorecard">
-                        <h3>{user?.displayName}'s Scorecard</h3>
 
-                        <div className="filterScorecard">
-                            <label htmlFor="distance">Filter by Distance </label>
-                            <select name="distance" id="distance" onChange={handleFilterChange} className="filterSelect">
-                                <option value={0}>All</option>
-                                {distances.map(d => (
-                                    <option key={d} value={d}>{d} ft</option>
-                                ))}
-                            </select>
+                <div className="scorecardContainer">
+                        
+                        <div className="userScorecard">
+                            <h3>{user?.displayName}'s Scorecard</h3>
+
+                            <div className="filterScorecard">
+                                <label htmlFor="distance">Filter by Distance </label>
+                                <select name="distance" id="distance" onChange={handleFilterChange} className="filterSelect">
+                                    <option value={0}>All</option>
+                                    {distances.map(d => (
+                                        <option key={d} value={d}>{d} ft</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div className="wrapper">
+                                <div className="scorecardItem">Total Rounds</div>
+                                <div className="scorecardItem">{totalRoundsCount}</div>
+                                <div className="scorecardItem">Total Putts</div>
+                                <div className="scorecardItem">{totalPutts}</div>
+                                <div className="scorecardItem">Total Made</div>
+                                <div className="scorecardItem">{puttsMade}</div>
+                                <div className="scorecardPercLabel">Putting %</div>
+                                <div className="scorecardPercValue">{puttPercentage}</div>
+                            </div>
                         </div>
+                </div>
+            </div>
 
-                        <div className="wrapper">
-                            <div className="scorecardItem">Total Rounds</div>
-                            <div className="scorecardItem">{totalRoundsCount}</div>
-                            <div className="scorecardItem">Total Putts</div>
-                            <div className="scorecardItem">{totalPutts}</div>
-                            <div className="scorecardItem">Total Made</div>
-                            <div className="scorecardItem">{puttsMade}</div>
-                            <div className="scorecardPercLabel">Putting %</div>
-                            <div className="scorecardPercValue">{puttPercentage}</div>
+            <div className="roundListContainer">
+
+                    <div className="roundListHeader">
+                        <h2>{user?.displayName}'s Rounds</h2>
+                    </div>
+
+                    <div className="roundListBody">
+                        <div className="labelsAndListContainer">
+
+                            <div className="roundListLabels">
+                                <div className="roundListLabel">Date:</div>
+                                <div className="roundListLabel">Distance:</div>
+                                <div className="roundListLabel"># Putts:</div>
+                                <div className="roundListLabel"># Made:</div>
+                                <div className="roundListLabel">% Made:</div>
+                                <div className="roundListLabel"></div>
+                            </div>
+                            <div className="roundList">
+                                {allUsersRounds?.map(round => (
+                                    <RoundCard
+                                        key={round.id}
+                                        round={round}
+                                        handleDeleteRound={handleDeleteRound}
+                                    />))}
+                            </div>
                         </div>
                     </div>
-            </div>
+
+                </div>
+
         </div>
-
-        <div className="roundListContainer">
-
-                <div className="roundListHeader">
-                    <h2>{user?.displayName}'s Rounds</h2>
-                </div>
-
-                <div className="roundListBody">
-                    <div className="labelsAndListContainer">
-
-                        <div className="roundListLabels">
-                            <div className="roundListLabel">Date:</div>
-                            <div className="roundListLabel">Distance:</div>
-                            <div className="roundListLabel"># Putts:</div>
-                            <div className="roundListLabel"># Made:</div>
-                            <div className="roundListLabel">% Made:</div>
-                            <div className="roundListLabel"></div>
-                        </div>
-                        <div className="roundList">
-                            {allUsersRounds?.map(round => (
-                                <RoundCard
-                                    key={round.id}
-                                    round={round}
-                                    handleDeleteRound={handleDeleteRound}
-                                />))}
-                        </div>
-                    </div>
-                </div>
-
-            </div>
             
         </>
     )

@@ -56,7 +56,7 @@ export default function DiscEditForm() {
     const handleEditDisc = () => {
         if (disc.name !== "" && disc.description !== "" && disc.condition !== "" && disc.plastic !== "" && disc.weight !== 0 && disc.brandId !== 0 && disc.speed !== 0 && disc.glide !== 0 && disc.price !== 0) {
             updateDisc(disc).then(() => {
-                navigate(`/discs`);
+                navigate(`/discs/${discId}`);
             });
         } else {
         alert("Please enter all required disc info");

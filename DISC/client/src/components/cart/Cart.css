@@ -1,8 +1,8 @@
 .cartWrapper {
     /* margin: 2% 25% 0% 25%; */
-    width: 50%;
+    width: 60%;
     margin: auto;
-    margin-top: 2%;
+    margin-top: 1.5%;
 }
 .cartHeader {
     margin: 0vw 0vw 1vw 0vw;
@@ -21,7 +21,7 @@
 
 .labelsWrapper {
     display: flex;
-    font-size: 1.1vw;
+    font-size: 1.25vw;
     width: 95%;
 }
 .productLabel {
@@ -41,8 +41,7 @@
 .cartRow {
     display: flex;
     align-items: center;
-    font-weight: bold;
-    font-size: 1vw;
+    font-size: 1.25vw;
     margin-top: 1vw;
     margin-bottom: 1vw;
     border-bottom: 1px solid grey;
@@ -55,6 +54,7 @@
 
 .cartImage img {
     width: 100%;
+    margin-bottom: 1vw;
 }
 
 .cartInfo {
@@ -90,10 +90,13 @@
     display: flex;
     width: 91%;
     justify-content: flex-end;
-    /* justify-content: center; */
+}
+.sub {
+    font-weight: bold;
 }
 .total {
     margin-left: .5vw;
+    font-weight: bold;
 }
 
 
@@ -106,7 +109,7 @@
 }
 
 .checkoutButton {
-    width: 65%;
+    width: 50%;
     display: flex;
     justify-content: flex-end;
 }
@@ -125,21 +128,6 @@
     width: 100%;
 }
 
-
-
-
 .detailsButton {
     width: 100%;
 }
-
-
-
-
-
-/* .taxNote {
-    font-size: .9vw;
-    width: 84%;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: .5vw;
-} */

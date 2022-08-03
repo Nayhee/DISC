@@ -5,11 +5,13 @@ import { Button, Table } from "reactstrap";
 import "./Admin.css"
 import {getAllOrders} from "../modules/orderManager";
 import {splitDate} from "../Helpers";
+import {getAllPayments} from "../modules/paymentManager";
 
 export default function Admin() {
 
     const [users, setUsers] = useState([])
     const [orders, setOrders] = useState([]);
+    const [payments, setPayments] = useState([])
     const [numOrders, setNumOrders] = useState(0);
     const [totalSales, setTotalSales] = useState(0);
 
@@ -30,9 +32,14 @@ export default function Admin() {
         })
     }
 
+    const getPayments = () => {
+        getAllPayments().then(payments => setPayments(payments));
+    }
+
     useEffect (() => {
-        getUsers();
         getOrders();
+        getPayments();
+        getUsers();
     }, [])
 
     const handleDeleteUser = (id) => {
@@ -93,6 +100,44 @@ export default function Admin() {
                 </Table>
             </div>
 
+
+            <div className="paymentTableWrapper">
+                <h4>Payments</h4>
+                <Table responsive bordered striped hover>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Order #</th>
+                            <th>Payment Date</th>
+                            <th>User Name</th>
+                            <th>Amount</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {payments?.map(p => 
+                            <tr key={p.id}>
+                                <td>{p.id}</td>
+                                <td>{p.orderId}</td>
+                                <td>{splitDate(p.paymentDate)}</td>
+                                <td>{p.userProfile.name}</td>
+                                <td>${p.amount}</td>
+                                <td>
+                                    <div className="discDetailButtons">
+                                        <div className="discDetailButton">
+                                            <Link to={`/payment/edit/${p.id}`}>
+                                                <i className="fa-solid fa-pen-to-square fa-xl"></i> 
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>)}
+                    </tbody>
+                </Table>
+
+            </div>
+
+
             <div className="userTableWrapper">
                 <h4>Users</h4>
                 <Table responsive bordered striped hover>
@@ -117,7 +162,7 @@ export default function Admin() {
                                 <td>
                                     <div className="discDetailButtons">
                                         <div className="discDetailButton">
-                                            <Link to={`/admin/edit/${user.id}`}>
+                                            <Link to={`/user/edit/${user.id}`}>
                                                 <i className="fa-solid fa-pen-to-square fa-xl"></i> 
                                             </Link>
 

@@ -107,7 +107,6 @@ export default function DiscForm() {
                 <h6>Upload an Image</h6>
                 <Input type="file" id="imageToUpload" onChange={handleSelectImage} />
                 <Button style={{margin: ".5vw 0vw 1vw 0vw"}} color="success"
-                  className="btn btn-primary"
                   id="imageSubmitButton"
                   required
                   type="submit"
@@ -180,7 +179,7 @@ export default function DiscForm() {
             </FormGroup>
             
             <FormGroup>
-              <label><b>Tags</b></label>
+              <Label>Tags</Label>
               <div>
                 {tags?.map((t) => (
                     <div key={t.id}>
@@ -190,8 +189,7 @@ export default function DiscForm() {
                       id={t.id}
                       value={t.name}
                       onChange={handleCheckbox} />
-                      <label htmlFor={t.name}>{t.name}</label>
-                      <br></br>
+                      <label style={{fontWeight: "normal"}} htmlFor={t.name}>{t.name}</label>
                     </div>
                 ))}
               </div>

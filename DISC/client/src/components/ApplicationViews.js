@@ -14,6 +14,7 @@ import Checkout from "./cart/Order";
 import Receipt from "./cart/Receipt";
 import PuttTracker from "./PuttTracker";
 import OrderEditForm from "./cart/OrderEditForm";
+import PaymentEditForm from "./admin/PaymentEditForm";
 
 export default function ApplicationViews({isLoggedIn, user}) {
   
@@ -30,7 +31,6 @@ export default function ApplicationViews({isLoggedIn, user}) {
         </Route>
         <Route path="admin">
           <Route index element={<Admin/>} />
-          <Route path="edit/:userId" element={<UserEditForm />} />
         </Route>
       </Route>
 
@@ -40,6 +40,8 @@ export default function ApplicationViews({isLoggedIn, user}) {
       </Route> 
 
       <Route path="order/edit/:orderId" element={<OrderEditForm user={user} />} />
+      <Route path="user/edit/:userId" element={<UserEditForm />} />
+      <Route path="payment/edit/:paymentId" element={<PaymentEditForm user={user} />} />
 
       <Route path="receipt" element={<Receipt user={user} /> } />
 

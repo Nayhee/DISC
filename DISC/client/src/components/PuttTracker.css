@@ -10,12 +10,14 @@
 
 .pageContainer {
     width: 100%;
+    background-color: #233142;
 }
-
 .puttTrackerHeader {
     display: flex;
     justify-content: center;
-    margin-top: 1vw;
+    /* margin-top: 1vw; */
+    color: #75C7FB;
+    padding-top: 1.25vw;
 }
 
 .slogan {
@@ -25,7 +27,7 @@
     margin-top: -.2vw;
     font-size: 1.3vw;
     font-style: italic;
-    color: #36454f;
+    color: lightgrey;
 }
 
 .fieldsetDiv {

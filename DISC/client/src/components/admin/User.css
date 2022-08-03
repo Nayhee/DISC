@@ -1,8 +1,21 @@
 .userEditForm {
     margin: auto;
-    width: 50%;
+    width: 70%;
     border: 1px solid black;
     border-radius: 10px;
     padding: 1vw;
     background-color: white;
+}
+
+.updateUserHeader {
+    display: flex;
+    justify-content: center;
+}
+
+.userEditForm Label {
+    font-weight: bold;
+}
+
+.formContainer Button {
+    width: 100%;
 }

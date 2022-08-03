@@ -1,5 +1,4 @@
 .orderContainer {
-    /* margin: 2% 25% 0% 25%; */
     width: 40%;
     margin: auto;
     margin-top: 1%;
@@ -13,8 +12,29 @@
 }
 
 .orderForm {
-    padding: 1.5vw;
+    padding: 1.5vw 1.5vw 1vw 1.5vw;
     width: 100%;
+}
+
+.firstAndLastNames {
+    display: flex;
+    width: 100%;
+}
+.firstAndLastNames Input{
+    margin-right: 5vw;
+}
+.countryAndAddress {
+    display: flex;
+    width: 100%;
+}
+.countryAndAddress select {
+    margin-right: 5vw;
+    width: 100%;
+    height: 2.3vw;
+}
+.countryAndAddress Input {
+    margin-left: .25vw;
+    width: 170%;
 }
 
 .cityStateZip {
@@ -41,47 +61,10 @@
     margin-top: .25vw;
 }
 
-/* .productTotal {
-    display: flex;
-    width: 100%;
-    margin: 0vw 0% 0vw 65%;
-
+.orderTotal h5 {
+    border-top: 1px solid grey;
+    border-bottom: 3px double grey;
 }
-.productTotal p {
-    margin: .57vw;
-    width: 25%;
-    display: flex;
-    align-items: flex-end;
-}
-.taxTotal {
-    display: flex;
-    width: 100%;
-    margin: 0vw 0% 0vw 65%;
-}
-.taxTotal p {
-    margin: .57vw;
-    width: 25%;
-}
-
-.shippingTotal {
-    display: flex;
-    width: 100%;
-    margin: 0vw 0% 0vw 65%;
-}
-.shippingTotal p {
-    margin: .57vw;
-    width: 25%;
-}
-.orderTotal {
-    display: flex;
-    width: 100%;
-    margin: 0vw 0% 0vw 65%;
-}
-.orderTotal p {
-    margin: .57vw;
-    width: 25%;
-} */
-
 
 
 .orderError {
@@ -98,9 +81,23 @@
 
 .orderEditForm {
     margin: auto;
-    width: 50%;
+    width: 70%;
     border: 1px solid black;
     border-radius: 10px;
     padding: 1vw;
     background-color: white;
+}
+.orderEditForm Label {
+    font-weight: bold;
+}
+
+.updateOrderHeader {
+    display: flex;
+    justify-content: center;
+}
+.customer {
+    margin-top: -.5vw;
+    margin-bottom: 1vw;
+    display: flex;
+    justify-content: center;
 }
