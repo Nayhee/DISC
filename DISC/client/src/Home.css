@@ -60,14 +60,13 @@
     color: white;
     padding: .35vw;
     font-weight: bold;
-    border: .15vw solid white;
+    border: .15vw solid #75C7FB;
     border-radius: 10px;
 }
     
     
 .buttonOnPic:hover {
     color: #75C7FB;
-    border-color: #75C7FB;
 }
 
 @keyframes rotate {
