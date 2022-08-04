@@ -26,16 +26,19 @@
 }
 .productLabel {
     width: 76%;
+    font-weight: bold;
 }
 .quantityLabel {
     width: 12%;
     display: flex;
     justify-content: center;
+    font-weight: bold;
 }
 .totalLabel {
     width: 12%;
     display: flex;
     justify-content: center;
+    font-weight: bold;
 }
 
 .cartRow {
@@ -78,7 +81,6 @@
 .cartRemoveDiscButton {
     width: 5%;
 }
-
 
 
 .cartTotal {

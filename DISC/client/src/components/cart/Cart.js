@@ -103,7 +103,7 @@ export default function Cart({user}) {
                                 <img src={disc?.imageUrl} alt="My Poop Disc" />
                             </div>
                             <div className="cartInfo">
-                                <p><b>{disc.brand.name} {disc.name} / {disc.plastic} Plastic / {disc.weight}g / {disc.condition}</b></p>
+                                <p>{disc.brand.name} {disc.name} / {disc.plastic} Plastic / {disc.weight}g / {disc.condition}</p>
                             </div>
                             <div className="cartQuantity">
                                 <p>-</p>
