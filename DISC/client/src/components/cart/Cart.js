@@ -112,7 +112,7 @@ export default function Cart({user}) {
                             </div>
                             <div className="cartProductTotal">${disc.price}</div>
                             <div className="cartRemoveDiscButton" type="button">
-                                <i onClick={() => handleDeleteCartDisc(disc.id)} className="fa-solid fa-trash fa-xl"></i>  
+                                <i onClick={() => handleDeleteCartDisc(disc.id)} className="bggray2 text-danger star fa-solid fa-trash fa-xl"></i>  
                             </div>
                         </div>
                     ))}
