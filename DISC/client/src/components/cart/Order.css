@@ -16,27 +16,6 @@
     width: 100%;
 }
 
-.firstAndLastNames {
-    display: flex;
-    width: 100%;
-}
-.firstAndLastNames Input{
-    margin-right: 5vw;
-}
-.countryAndAddress {
-    display: flex;
-    width: 100%;
-}
-.countryAndAddress select {
-    margin-right: 5vw;
-    width: 100%;
-    height: 2.3vw;
-}
-.countryAndAddress Input {
-    margin-left: .25vw;
-    width: 170%;
-}
-
 .cityStateZip {
     display: flex;
     width: 100%;
@@ -100,4 +79,10 @@
     margin-bottom: 1vw;
     display: flex;
     justify-content: center;
+}
+
+
+.forBorder {
+    width: 100%;
+    border-bottom: 1px solid grey;
 }

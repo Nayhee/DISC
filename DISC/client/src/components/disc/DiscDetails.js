@@ -1,10 +1,9 @@
-import { Navigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { getDiscById, deleteDisc, addDisc} from "../modules/discManager";
-import { Button, Badge } from "reactstrap";
+import { Button, Badge,  Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import {FormatPrice} from "../Helpers";
 import "./Disc.css"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { getUsersCurrentCart, addDiscToCart } from "../modules/cartManager";
 import { getImageById } from "../modules/imageManager";
@@ -16,7 +15,10 @@ export default function DiscDetails({user}) {
     const [cartId, setCartId] = useState();
     const [imageUrl, setImageUrl] = useState();
     const {id} = useParams();
-    
+
+    const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
+
     const Navigate = useNavigate();
 
     useEffect(() => {
@@ -44,7 +46,7 @@ export default function DiscDetails({user}) {
                 discId: id,
                 userProfileId: user.id
             };
-            addDiscToCart(cartDisc).then(alert("Successfully Added to Cart!"));
+            addDiscToCart(cartDisc).then(toggle());
         }
     }
       
@@ -58,6 +60,7 @@ export default function DiscDetails({user}) {
     let tags = disc?.tags;
 
     return (
+          <>
           <div className="discDetailContainer">
               
               <div className="discDetailLeft">
@@ -110,7 +113,7 @@ export default function DiscDetails({user}) {
                             : ""
                             }
                         {user?.isAdmin ? 
-                            <div type="button">
+                            <div type="button" className="bggray2 text-danger star">
                                 <i onClick={() => handleDeleteDisc(id)} className="fa-solid fa-trash fa-xl"></i>  
                             </div>
                             : ""
@@ -121,6 +124,28 @@ export default function DiscDetails({user}) {
               </div>
 
           </div>
+
+            <Modal
+                isOpen={modal}
+                toggle={toggle}
+                >
+                <ModalHeader toggle={toggle}>Added to Cart!</ModalHeader>
+                <ModalBody>
+                    The {disc.brand.name} {disc.name} was successfully added to your cart.
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="primary" onClick={() => {Navigate("/cart")}}>
+                        View Cart
+                    </Button>{' '}
+                    <Button color="secondary" onClick={() => {Navigate("/discs")}}>
+                        Keep Shopping
+                    </Button>
+                </ModalFooter>
+            </Modal>
+
+            </>
+
+
       )
 
 

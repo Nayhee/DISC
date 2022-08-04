@@ -2,6 +2,7 @@ import React, {useEffect, useReducer, useState} from "react";
 import "./PuttTracker.css";
 import { addRound, getAUsersRounds, deleteRound} from "./modules/roundManager";
 import { RoundCard } from "./round/RoundCard";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 
 export default function PuttTracker({user}) {
@@ -20,6 +21,9 @@ export default function PuttTracker({user}) {
     const [filteredRounds, setFilteredRounds] = useState([]);
     
     const [allUsersRounds, setAllUsersRounds] = useState([]);
+
+    const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
 
     const decimalToPercentage = (decimal) => {
         let percent = decimal * 100;
@@ -90,6 +94,7 @@ export default function PuttTracker({user}) {
             newRound.puttsTaken = parseInt(round.puttsTaken);
             newRound.puttsMade = parseInt(round.puttsMade);
             addRound(newRound)
+            .then(toggle())
             .then(() => roundFunc())
         } else {
             window.alert("Please complete each field")
@@ -252,6 +257,15 @@ export default function PuttTracker({user}) {
                 </div>
 
         </div>
+
+        <Modal
+                isOpen={modal}
+                toggle={toggle}
+                >
+                <ModalHeader toggle={toggle}>Round submitted successfully!</ModalHeader>
+            </Modal>
+
+
             
         </>
     )

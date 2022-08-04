@@ -66,7 +66,7 @@ export default function Admin() {
                 <Table responsive bordered striped hover>
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>Id</th>
                             <th>Customer</th>
                             <th>Order Date</th>
                             <th>Total</th>
@@ -106,8 +106,8 @@ export default function Admin() {
                 <Table responsive bordered striped hover>
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Order #</th>
+                            <th>Id</th>
+                            <th>Order Id</th>
                             <th>Payment Date</th>
                             <th>User Name</th>
                             <th>Amount</th>
@@ -143,7 +143,7 @@ export default function Admin() {
                 <Table responsive bordered striped hover>
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>Id</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>UserType</th>
@@ -167,7 +167,7 @@ export default function Admin() {
                                             </Link>
 
                                         </div>
-                                        <div type="button">
+                                        <div type="button" className="bggray2 text-danger star">
                                             <i onClick={() => handleDeleteUser(user.id)} className="fa-solid fa-trash fa-xl"></i>  
                                         </div>
                                     </div>

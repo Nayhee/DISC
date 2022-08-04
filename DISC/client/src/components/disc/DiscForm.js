@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom"
 import { addDisc, getAllBrands, getAllTags } from "../modules/discManager";
 import './Disc.css'
-import { Col, Button, Form, FormGroup, Label, Input} from "reactstrap";
+import { Col, Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { postImage } from "../modules/imageManager";
 
 export default function DiscForm() {
@@ -26,7 +26,10 @@ export default function DiscForm() {
     const [tags , setTags] = useState([]);
     const [brands, setBrands] = useState([])
 
-    const navigate = useNavigate();
+    const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
+
+    const Navigate = useNavigate();
 
     const [imageId, setImageId] = useState(0);
     const [image, setImage] = useState({});
@@ -79,7 +82,8 @@ export default function DiscForm() {
           let id = parseInt(r.headers.get("location").split("Image/")[1]);
           setImageId(id);
           setDisabled(true);
-          alert("Image uploaded successfully");
+          toggle();
+          // alert("Image uploaded successfully");
         });
     };
 
@@ -90,7 +94,7 @@ export default function DiscForm() {
           let trueTags = newTags.filter(t => t.checked === true);
           disc.tags = trueTags;
           addDisc(disc)
-            .then(() => navigate("/discs"))
+            .then(() => Navigate("/discs"))
             .catch((err) => alert(`An error occured: ${err.message}`));
       } else {
         alert("Please upload 1 image and complete all fields")
@@ -99,6 +103,9 @@ export default function DiscForm() {
 
 
     return (
+        
+        <>
+       
         <div className="formContainer">
           
           <div className="discForm">
@@ -285,6 +292,16 @@ export default function DiscForm() {
           </Form>
         </div>
       </div>
+
+      <Modal
+          isOpen={modal}
+          toggle={toggle}
+          >
+          <ModalHeader toggle={toggle}>Image Uploaded Successfully!</ModalHeader>
+      </Modal>
+
+      </>
+
     );
 
 }

@@ -93,7 +93,6 @@ export default function Checkout({user}) {
                 <h3 className="orderHeader">Order Form</h3>
                 <h6 className="shipping">Shipping Address </h6>
     
-                <div className="firstAndLastNames">
                     <FormGroup>
                     <Label for="shippingFirstName">First Name</Label>
                     <Col >
@@ -119,10 +118,7 @@ export default function Checkout({user}) {
                         />
                     </Col>
                     </FormGroup>
-
-                </div>
     
-                <div className="countryAndAddress">
                     <FormGroup>
                     <Label for="shippingCountry">Country/Region</Label>
                     <Col sm={15}>
@@ -149,8 +145,6 @@ export default function Checkout({user}) {
                         />
                     </Col>
                     </FormGroup>
-
-                </div>
     
                 <div className="cityStateZip">
                     <FormGroup>
@@ -194,7 +188,8 @@ export default function Checkout({user}) {
                     </FormGroup>
                 </div>
     
-    
+                <p className="forBorder"></p>
+                
                 <div className="orderTotals">
                     <div className="productTotal">
                         <p>Product Total: ${roundToTwoDecimals(productTotal)}</p>
