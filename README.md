@@ -2,8 +2,11 @@
 Tennessee Discs is a full stack e-commerce web application for a disc golf company to sell discs and view and manage their orders. I built the back-end Web API using C# / ASP.Net, and I built the front-end using React. 
 
 ![Project Image](https://github.com/Nayhee/DISC/blob/main/DISC/client/public/images/Homepage.png)
+---
 ![Project Image](https://github.com/Nayhee/DISC/blob/main/DISC/client/public/images/DiscList.png)
+---
 ![Project Image](https://github.com/Nayhee/DISC/blob/main/DISC/client/public/images/discDetail.png)
+---
 ![Project Image](https://github.com/Nayhee/DISC/blob/main/DISC/client/public/images/Cart.png)
 
 ### Table of Contents
