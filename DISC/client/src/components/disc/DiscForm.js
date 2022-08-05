@@ -83,7 +83,6 @@ export default function DiscForm() {
           setImageId(id);
           setDisabled(true);
           toggle();
-          // alert("Image uploaded successfully");
         });
     };
 
@@ -119,7 +118,7 @@ export default function DiscForm() {
                   type="submit"
                   disabled={Disabled}
                 >
-                  Submit Image
+                  Add Image
                 </Button>
           </Form>
           
