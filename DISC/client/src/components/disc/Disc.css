@@ -41,8 +41,8 @@
 .discListPageContainer {
     width: 80%;
     margin: auto;
-    /* animation: 
-        flyIn .6s ease-out; */
+    animation: 
+        flyIn .7s ease-out;
 }
 
 @keyframes flyIn {

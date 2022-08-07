@@ -97,16 +97,6 @@ namespace DISC.Controllers
             return Ok(_discRepository.GetAllTags());
         }
 
-
-        //I ended up including it in AddDisc;
-        //[HttpPost("AddTagsToDisc/{discId}")]
-        //public IActionResult AddTagsToDisc(int discId, List<Tag> tags)
-        //{
-        //    _discRepository.AddTagsToDisc(discId, tags);
-        //    return NoContent();
-        //}
-
-
     }
 
 }
