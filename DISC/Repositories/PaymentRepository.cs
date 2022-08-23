@@ -34,6 +34,7 @@ namespace DISC.Repositories
                     cmd.CommandText = @"  SELECT p.*, up.Name
                                             FROM Payment p
                                             JOIN UserProfile up ON up.Id=p.UserProfileId
+                                            ORDER BY p.PaymentDate desc
                     ";
 
                     using (SqlDataReader reader = cmd.ExecuteReader())

@@ -18,7 +18,7 @@ export const RoundCard = ({ round, handleDeleteRound }) => {
           <div className="roundRow">{round.puttsMade} </div>
           <div className="roundRow"><b>{puttPercentage}%</b></div>
           <div className="roundDeleteButton">
-              <button type="button" onClick={()=> handleDeleteRound(round.id)}>Delete</button>
+              <button type="button" onClick={() => handleDeleteRound(round.id)}>Delete</button>
           </div>
 
       </div>

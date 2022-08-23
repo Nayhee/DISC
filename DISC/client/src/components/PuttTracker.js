@@ -1,8 +1,8 @@
-import React, {useEffect, useReducer, useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./PuttTracker.css";
 import { addRound, getAUsersRounds, deleteRound} from "./modules/roundManager";
 import { RoundCard } from "./round/RoundCard";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalHeader } from "reactstrap";
 
 
 export default function PuttTracker({user}) {
